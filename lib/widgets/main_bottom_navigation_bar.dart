@@ -8,42 +8,23 @@ import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen
 class MainBottomNavigationBar extends StatelessWidget {
   const MainBottomNavigationBar({Key? key}) : super(key: key);
 
+  static const _routes = [
+    HomeScreen.routeName,
+    OrderOverviewScreen.routeName,
+    StockSearchScreen.routeName,
+    ProfileScreen.routeName,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex:
+          (_routes.indexOf(ModalRoute.of(context)?.settings.name ?? "")).abs(),
       onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.pushReplacementNamed(
-              context,
-              HomeScreen.routeName,
-            );
-            break;
-          case 1:
-            Navigator.pushReplacementNamed(
-              context,
-              OrderOverviewScreen.routeName,
-            );
-            break;
-          case 2:
-            Navigator.pushReplacementNamed(
-              context,
-              StockSearchScreen.routeName,
-            );
-            break;
-          case 3:
-            Navigator.pushReplacementNamed(
-              context,
-              ProfileScreen.routeName,
-            );
-            break;
-          default:
-            Navigator.pushReplacementNamed(
-              context,
-              CrashScreen.routeName,
-            );
-            break;
-        }
+        Navigator.pushReplacementNamed(
+          context,
+          _routes[index],
+        );
       },
       items: [
         BottomNavigationBarItem(
