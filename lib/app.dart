@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PetConnect',
       theme: UiTheme.lightTheme,
-      darkTheme: UiTheme.darkTheme,
+      darkTheme: UiTheme.lightTheme, // disable dark theme
       home: Builder(
         builder: (context) {
           WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
