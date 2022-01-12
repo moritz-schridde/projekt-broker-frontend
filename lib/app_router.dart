@@ -4,6 +4,9 @@ import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
+import 'package:projekt_broker_frontend/screens/order_overview/order_overview_screen.dart';
+import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
+import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
 
 abstract class AppRouter {
@@ -18,6 +21,8 @@ abstract class AppRouter {
             return AuthScreen();
           case LoadingScreen.routeName:
             return LoadingScreen();
+          case CrashScreen.routeName:
+            return CrashScreen();
         }
 
         // read Providers here
@@ -35,6 +40,12 @@ abstract class AppRouter {
                 return HomeScreen();
               },
             );
+          case OrderOverviewScreen.routeName:
+            return OrderOverviewScreen();
+          case StockSearchScreen.routeName:
+            return StockSearchScreen();
+          case ProfileScreen.routeName:
+            return ProfileScreen();
 
           default:
             return const CrashScreen();
