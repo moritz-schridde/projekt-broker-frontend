@@ -18,16 +18,8 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const Text('Home'),
-            OutlinedButton(
-              onPressed: () => Navigator.of(context)
-                  .push<Widget>(MaterialPageRoute(builder: (context) {
-                return Scaffold(
-                  body: StockDetailPage(),
-                );
-              })),
-              child: Text("Stock Detail"),
-            ),
+            // const Text('Home'),
+            PortfolioOverviewCard(),
             OutlinedButton(
               onPressed: context.read<FirebaseAuthService>().signOut,
               child: const Text('Sign out'),
