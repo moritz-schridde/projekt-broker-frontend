@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'dart:html';
-
 import 'firebase_auth_service.dart';
 
 class BackendService with ChangeNotifier {
