@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/order_overview_screen.dart';
@@ -18,6 +19,8 @@ class MainBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      unselectedItemColor: Colors.grey,
+      selectedItemColor: UiTheme.lightTheme.primaryColor,
       currentIndex:
           (_routes.indexOf(ModalRoute.of(context)?.settings.name ?? "")).abs(),
       onTap: (index) {

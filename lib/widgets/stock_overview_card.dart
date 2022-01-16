@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
 class StockOverviewCard extends StatelessWidget {
   const StockOverviewCard({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class StockOverviewCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.symmetric(
             horizontal: BorderSide(
-              color: Color.fromARGB(255, 182, 137, 223).withOpacity(0.5),
+              color: UiTheme.lightTheme.secondaryHeaderColor,
             ),
           ),
         ),
@@ -26,16 +27,16 @@ class StockOverviewCard extends StatelessWidget {
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 182, 137, 223).withOpacity(0.2),
+                color: UiTheme.lightTheme.secondaryHeaderColor,
               ),
               child: Icon(
                 Icons.euro_symbol,
-                color: Color.fromARGB(255, 138, 43, 226),
+                color: UiTheme.lightTheme.primaryColor,
               ),
             ),
             Column(
               children: [
-                Text("APL"),
+                Text("APL", style: UiTheme.textTheme.headline6),
                 Text(
                   "+1,6%",
                   style: TextStyle(color: Colors.green),
@@ -45,11 +46,11 @@ class StockOverviewCard extends StatelessWidget {
             Icon(
               Icons.show_chart_outlined,
               size: 40,
-              color: Color.fromARGB(255, 138, 43, 226),
+              color: UiTheme.lightTheme.primaryColor,
             ),
             Column(
               children: [
-                Text("29.850,15€"),
+                Text("29.850,15€", style: UiTheme.textTheme.headline6),
                 Text("2,3"),
               ],
               crossAxisAlignment: CrossAxisAlignment.end,
