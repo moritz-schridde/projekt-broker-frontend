@@ -40,6 +40,7 @@ dependencies:
   flutterfire_ui: ^0.3.1
   subscribed_stream: ^0.0.2
   provider: ^6.0.2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
