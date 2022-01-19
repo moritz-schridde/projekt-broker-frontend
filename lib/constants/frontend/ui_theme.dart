@@ -31,7 +31,7 @@ class UiTheme {
     headline5: TextStyle(
       color: Colors.black,
       fontSize: 24.0,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w500,
     ),
     headline6: TextStyle(
       color: Colors.black,

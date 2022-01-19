@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
 class PortfolioOverviewCard extends StatelessWidget {
@@ -9,6 +10,7 @@ class PortfolioOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final percent = 9.77;
     return Container(
       height: 250,
       child: Stack(
@@ -50,7 +52,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                   children: [
                     Text(
                       'Portfolio',
-                      style: theme.textTheme.headline6
+                      style: theme.textTheme.headline5
                           ?.copyWith(color: Colors.white),
                     ),
                     const SizedBox(
@@ -67,65 +69,83 @@ class PortfolioOverviewCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '2.500€',
-                          style: theme.textTheme.headline6
+                          NumberFormat.currency(
+                                  locale: 'de',
+                                  name: 'euro',
+                                  symbol: '€',
+                                  decimalDigits: 2)
+                              .format(3600.89),
+                          style: theme.textTheme.headline5
                               ?.copyWith(color: Colors.white),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         Text(
-                          '+9,77%',
+                          '+${percent}%',
                           style: theme.textTheme.bodyText2
-                              ?.copyWith(color: Colors.white, fontSize: 12),
+                              ?.copyWith(color: Colors.white),
                         ),
                       ],
                     ),
                     const SizedBox(
                       height: 7,
                     ),
-                    SizedBox(
-                      height: 35,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Investiert',
-                                style: theme.textTheme.bodyText2
-                                    ?.copyWith(color: Colors.white),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Investiert',
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                      locale: 'de',
+                                      name: 'euro',
+                                      symbol: '€',
+                                      decimalDigits: 2)
+                                  .format(2600.75),
+                              style: theme.textTheme.bodyText1
+                                  ?.copyWith(color: Colors.white, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              left: BorderSide(
+                                color: Colors.white,
+                                width: 2,
                               ),
-                              Text(
-                                '1.600,75€',
-                                style: theme.textTheme.bodyText1
-                                    ?.copyWith(color: Colors.white),
-                              ),
-                            ],
+                            ),
                           ),
-                          const VerticalDivider(
-                            color: Colors.white,
-                            indent: 0,
-                            endIndent: 0,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Guthaben',
-                                style: theme.textTheme.bodyText2
-                                    ?.copyWith(color: Colors.white),
-                              ),
-                              Text(
-                                '1.600,75€',
-                                style: theme.textTheme.bodyText1
-                                    ?.copyWith(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Guthaben',
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                      locale: 'de',
+                                      name: 'euro',
+                                      symbol: '€',
+                                      decimalDigits: 2)
+                                  .format(1600.75),
+                              style: theme.textTheme.bodyText1
+                                  ?.copyWith(color: Colors.white, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -175,12 +195,6 @@ class PortfolioOverviewCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // VerticalDivider(
-                    //   color: UiTheme.primaryColorScheme.primary,
-                    //   indent: 10,
-                    //   endIndent: 10,
-                    //   thickness: 1,
-                    // ),
                     TextButton(
                       onPressed: () {},
                       child: Column(
