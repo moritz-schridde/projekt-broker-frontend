@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UiTheme {
-  static final _primaryColor = Colors.purple;
-  static final _secondaryColor = Colors.purpleAccent;
-  static final _primaryColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: _primaryColor);
+  static final primaryColor = Colors.purple;
+  static final secondaryColor = Colors.purpleAccent;
+  static final primaryColorScheme =
+      ColorScheme.fromSwatch(primarySwatch: primaryColor);
 
   static final textTheme = TextTheme(
     headline1: TextStyle(
@@ -67,15 +67,15 @@ class UiTheme {
 
   static final lightTheme = ThemeData.from(
     colorScheme: ColorScheme.light(
-      primary: _primaryColor,
-      secondary: _secondaryColor,
+      primary: primaryColor,
+      secondary: secondaryColor,
     ),
   );
 
   static final darkTheme = ThemeData.from(
     colorScheme: ColorScheme.dark(
-      primary: _primaryColor,
-      secondary: _secondaryColor,
+      primary: primaryColor,
+      secondary: secondaryColor,
     ),
   );
 }

@@ -20,11 +20,9 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            // const Text('Home'),
             PortfolioOverviewCard(),
-            OutlinedButton(
-              onPressed: context.read<FirebaseAuthService>().signOut,
-              child: const Text('Sign out'),
+            SizedBox(
+              height: 15,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
