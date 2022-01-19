@@ -16,7 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'PetConnect',
+      title: 'WertpapierHändl\'',
       theme: UiTheme.lightTheme,
       darkTheme: UiTheme.lightTheme, // disable dark theme
       home: Builder(
