@@ -17,33 +17,33 @@ class UiTheme {
 
   static final textTheme = TextTheme(
     headline1: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 40.0,
       fontWeight: FontWeight.w900,
       letterSpacing: 3,
     ),
     headline2: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 36.0,
       fontWeight: FontWeight.w700,
     ),
     headline3: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 34.0,
       fontWeight: FontWeight.w500,
     ),
     headline4: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 34.0,
       fontWeight: FontWeight.w300,
     ),
     headline5: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 24.0,
       fontWeight: FontWeight.w500,
     ),
     headline6: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 20.0,
       fontWeight: FontWeight.w500,
     ),
@@ -56,7 +56,7 @@ class UiTheme {
       fontWeight: FontWeight.w500,
     ),
     subtitle1: TextStyle(
-      color: Colors.black,
+      color: textColorBlack,
       fontSize: 16.0,
       fontWeight: FontWeight.w500,
       letterSpacing: 1,

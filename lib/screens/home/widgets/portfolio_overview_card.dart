@@ -177,12 +177,30 @@ class PortfolioOverviewCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton(
-                      onPressed: () {},
                       child: Column(
                         children: [
                           Icon(Icons.file_upload_outlined),
                           Text("Einzahlen"),
                         ],
+                      ),
+                      // TODO Einzahlen
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Einzahlen'),
+                          content: const Text(
+                              'Sie möchten gerne Geld einzahlen, dies ist zur Zeit noch nicht möglich'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -197,14 +215,32 @@ class PortfolioOverviewCard extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
                       child: Column(
                         children: [
                           Icon(Icons.file_download_outlined),
                           Text("Auszahlen"),
                         ],
                       ),
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Auszahlen'),
+                          content: const Text(
+                              'Sie möchten ihr Geld auszahlen, dies ist zur Zeit noch nicht möglich'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                    
                   ],
                 ),
               ),
