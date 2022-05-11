@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
 class UiTheme {
-  static final primaryColor = Colors.purple;
-  static final secondaryColor = Colors.purpleAccent;
+  static final primaryColor = Color(0xFF8A2BE2);
+  static final secondaryColor = Color(0xFF6C757D);
+  static final textColorBlack = Color(0xFF212529);
+  static final textColorWhite = Color(0xFFFFFFFF);
+  static final primarySuccess = Color.fromRGBO(10, 180, 68, 0.75);
+  static final primaryFailure = Color.fromRGBO(250, 18, 18, 0.75);
+  static final primaryGradientStart = Color(0xFFB689DF);
+  static final primaryGradientEnd = Color(0xFF8A2BE2);
+  static final secondaryGradientStart = Color.fromRGBO(236, 251, 246, 0);
+  static final secondaryGradientEnd = Color.fromRGBO(138, 43, 226, 0.7);
+
   static final primaryColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: primaryColor);
+      ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
   static final textTheme = TextTheme(
     headline1: TextStyle(
