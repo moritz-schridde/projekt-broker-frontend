@@ -8,6 +8,7 @@ class OrderOverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String status = "erfolgreich";
     return Card(
       elevation: 0,
       child: Container(
@@ -61,10 +62,22 @@ class OrderOverviewCard extends StatelessWidget {
                   "30. Dezember, 10:56",
                   style: UiTheme.textTheme.bodyText2,
                 ),
-                Text(
-                  "Order in Ausführung",
-                  style: UiTheme.textTheme.bodyText2,
-                ),
+                (status == "in Ausführung")
+                    ? Text(
+                        "Order in Ausführung",
+                        style: UiTheme.textTheme.bodyText2,
+                      )
+                    : (status == "erfolgreich")
+                        ? Text(
+                            "Order erfolgreich ausgeführt",
+                            style: UiTheme.textTheme.bodyText2!
+                                .copyWith(color: UiTheme.primarySuccess),
+                          )
+                        : Text(
+                            "Order fehlgeschlagen",
+                            style: UiTheme.textTheme.bodyText2!
+                                .copyWith(color: UiTheme.primaryFailure),
+                          ),
               ],
               crossAxisAlignment: CrossAxisAlignment.end,
             ),
