@@ -12,8 +12,7 @@ class UiTheme {
   static final secondaryGradientStart = Color.fromRGBO(236, 251, 246, 0);
   static final secondaryGradientEnd = Color.fromRGBO(138, 43, 226, 0.7);
 
-  static final primaryColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.purple);
+  static final primaryColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
   static final textTheme = TextTheme(
     headline1: TextStyle(

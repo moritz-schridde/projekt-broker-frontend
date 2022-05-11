@@ -11,6 +11,7 @@ import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen
 import 'package:provider/provider.dart';
 
 import 'pages/stock_detail/stock_detail_page.dart';
+import 'screens/register/register_screen.dart';
 
 abstract class AppRouter {
   static MaterialPageRoute generateRoute(RouteSettings routeSettings) {
@@ -51,6 +52,8 @@ abstract class AppRouter {
             return ProfileScreen();
           case StockDetailPage.routeName:
             return StockDetailPage();
+          case RegisterScreen.routeName:
+            return RegisterScreen();
 
           default:
             return const CrashScreen();

@@ -7,6 +7,8 @@ import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart'
 import 'package:projekt_broker_frontend/widgets/stock_overview_card.dart';
 import 'package:provider/src/provider.dart';
 
+import '../register/register_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
   const HomeScreen({Key? key}) : super(key: key);
@@ -43,6 +45,11 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
+            TextButton(
+              child: const Text("registrieren"),
+              onPressed: () => Navigator.pushNamed(context, RegisterScreen.routeName),
+              // eigentliche Routing wie in app.dart 25-30
+            )
           ],
         ),
       ),

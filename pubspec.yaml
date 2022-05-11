@@ -41,6 +41,7 @@ dependencies:
   subscribed_stream: ^0.0.2
   provider: ^6.0.2
   intl: ^0.17.0
+  intl_phone_number_input: ^0.7.0+2
 
 dev_dependencies:
   flutter_test:
