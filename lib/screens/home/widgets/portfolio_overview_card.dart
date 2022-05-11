@@ -116,6 +116,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                         ),
                         Container(
                           height: 30,
+                          margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             border: Border(
                               left: BorderSide(
