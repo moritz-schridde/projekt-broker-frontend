@@ -25,98 +25,104 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(
         title: const Text('Registrieren'),
       ),
-      body: Stepper(
-        currentStep: _index,
-        onStepCancel: () {
-          if (_index > 0) {
+      body: SingleChildScrollView(
+        child: Stepper(
+          currentStep: _index,
+          onStepCancel: () {
+            if (_index > 0) {
+              setState(() {
+                _index -= 1;
+              });
+            }
+          },
+          onStepContinue: () {
+            if (_index <= 0) {
+              setState(() {
+                _index += 1;
+              });
+            }
+          },
+          onStepTapped: (int index) {
             setState(() {
-              _index -= 1;
+              _index = index;
             });
-          }
-        },
-        onStepContinue: () {
-          if (_index <= 0) {
-            setState(() {
-              _index += 1;
-            });
-          }
-        },
-        onStepTapped: (int index) {
-          setState(() {
-            _index = index;
-          });
-        },
-        steps: <Step>[
-          Step(
-            title: const Text('Persönliches'),
-            content: Column(children: [
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Vorname',
-                ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nachname',
-                ),
-              ),
-              InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  print(number.phoneNumber);
-                },
-                onInputValidated: (bool value) {
-                  print(value);
-                },
-                selectorConfig: SelectorConfig(
-                  selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                ),
-                ignoreBlank: false,
-                autoValidateMode: AutovalidateMode.disabled,
-                selectorTextStyle: TextStyle(color: Colors.black),
-                formatInput: false,
-                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-                inputBorder: OutlineInputBorder(),
-                onSaved: (PhoneNumber number) {
-                  print('On Saved: $number');
-                },
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Straße + Hausnr.',
-                ),
-              ),
-              Row(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'PLZ',
-                    ),
+          },
+          steps: <Step>[
+            Step(
+              title: const Text('Persönliches'),
+              content: Column(children: [
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Vorname',
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Ort',
-                    ),
-                  ),
-                ],
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Land',
                 ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nachname',
+                  ),
+                ),
+                InternationalPhoneNumberInput(
+                  onInputChanged: (PhoneNumber number) {
+                    print(number.phoneNumber);
+                  },
+                  onInputValidated: (bool value) {
+                    print(value);
+                  },
+                  selectorConfig: SelectorConfig(
+                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                  ),
+                  ignoreBlank: false,
+                  autoValidateMode: AutovalidateMode.disabled,
+                  selectorTextStyle: TextStyle(color: Colors.black),
+                  formatInput: false,
+                  keyboardType: TextInputType.numberWithOptions(
+                      signed: true, decimal: true),
+                  inputBorder: OutlineInputBorder(),
+                  onSaved: (PhoneNumber number) {
+                    print('On Saved: $number');
+                  },
+                  initialValue: PhoneNumber(dialCode: "+49"),
+                ),
+                //   TextField(
+                //     decoration: InputDecoration(
+                //       border: OutlineInputBorder(),
+                //       labelText: 'Straße + Hausnr.',
+                //     ),
+                //   ),
+                //   Row(
+                //     children: [
+                //       TextField(
+                //         decoration: InputDecoration(
+                //           border: OutlineInputBorder(),
+                //           labelText: 'PLZ',
+                //         ),
+                //       ),
+                //       TextField(
+                //         decoration: InputDecoration(
+                //           border: OutlineInputBorder(),
+                //           labelText: 'Ort',
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                //   TextField(
+                //     decoration: InputDecoration(
+                //       border: OutlineInputBorder(),
+                //       labelText: 'Land',
+                //     ),
+                //   ),
+              ]),
+            ),
+            Step(
+              title: Text('Bankverbindung'),
+              content: Column(
+                children: [],
               ),
-            ]),
-          ),
-          const Step(
-            title: Text('Step 2 title'),
-            content: Text('Content for Step 2'),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: MainBottomNavigationBar(),
     );
