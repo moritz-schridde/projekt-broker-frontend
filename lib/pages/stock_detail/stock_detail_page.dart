@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/widgets/personal_information_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
+import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
 class StockDetailPage extends StatelessWidget {
   static const routeName = "/stock_detail";
@@ -10,6 +12,7 @@ class StockDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -25,35 +28,28 @@ class StockDetailPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // TODO: Refactor Buttons
-                ElevatedButton(
+                RoundedButton(
                   onPressed: () =>
                       Navigator.of(context).pushNamed(BuyStockScreen.routeName),
-                  child: Padding(
-                    child: const Text("Kaufen"),
-                    padding: EdgeInsets.all(8),
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
+                  label: Text(
+                    "Kaufen",
+                    style: theme.textTheme.headline6?.copyWith(
+                      fontSize: 18,
+                      color: UiTheme.textColorWhite,
                     ),
                   ),
+                  width: 150,
                 ),
-                ElevatedButton(
+                RoundedButton(
                   onPressed: () {},
-                  child: Padding(
-                    child: const Text("Verkaufen"),
-                    padding: EdgeInsets.all(8),
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ),
+                  label: Text(
+                    "Verkaufen",
+                    style: theme.textTheme.headline6?.copyWith(
+                      fontSize: 18,
+                      color: UiTheme.textColorWhite,
                     ),
                   ),
+                  width: 150,
                 ),
               ],
             ),
