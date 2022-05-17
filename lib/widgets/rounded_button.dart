@@ -21,7 +21,7 @@ class RoundedButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18.0),
+        borderRadius: BorderRadius.circular(22.0),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

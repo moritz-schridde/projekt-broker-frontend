@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
 class BuyStockScreen extends StatelessWidget {
   static const routeName = "/buy_stock";
@@ -17,8 +18,17 @@ class BuyStockScreen extends StatelessWidget {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Gib den gewünschten Kaufbetrag ein:"),
+            const SizedBox(
+              height: 50,
+            ),
+            const Text(
+              "Gib den gewünschten Kaufbetrag ein:",
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -42,12 +52,8 @@ class BuyStockScreen extends StatelessWidget {
                       ),
                     ),
                     constraints: const BoxConstraints(
-                      minWidth: 75,
-                      maxWidth: 150,
-                    ),
-                    suffixIconConstraints: const BoxConstraints(
-                      minWidth: 10,
-                      maxWidth: 20,
+                      minWidth: 100,
+                      maxWidth: 160,
                     ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(2.0),
@@ -72,8 +78,8 @@ class BuyStockScreen extends StatelessWidget {
                       ),
                     ),
                     constraints: const BoxConstraints(
-                      minWidth: 75,
-                      maxWidth: 150,
+                      minWidth: 100,
+                      maxWidth: 160,
                     ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.all(2.0),
@@ -81,19 +87,112 @@ class BuyStockScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 15,
+            ),
             //TODO get Guthaben from backend
             Text("Verfügbares Guthaben: 10000€"),
+            const SizedBox(
+              height: 25,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 OutlinedButton(
-                  child: Text("10%"),
+                  child: Text("0%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
                   onPressed: () {},
-                )
+                ),
+                OutlinedButton(
+                  child: Text("10%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+                OutlinedButton(
+                  child: Text("25%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+                OutlinedButton(
+                  child: Text("50%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+                OutlinedButton(
+                  child: Text("75%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+                OutlinedButton(
+                  child: Text("100%"),
+                  style: OutlinedButton.styleFrom(
+                    primary: UiTheme.textColorBlack,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Kaufübersicht"),
+            const SizedBox(
+              height: 25,
+            ),
+            Container(
+              margin: EdgeInsets.all(15),
+              child: RoundedButton(
+                onPressed: () {},
+                label: Text(
+                  "Kaufübersicht",
+                  style: theme.textTheme.headline5?.copyWith(
+                    color: UiTheme.textColorWhite,
+                  ),
+                ),
+                width: double.infinity,
+              ),
             ),
           ],
         ),
