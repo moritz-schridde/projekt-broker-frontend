@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';

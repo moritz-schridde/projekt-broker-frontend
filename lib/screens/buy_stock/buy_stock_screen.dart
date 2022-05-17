@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
 class BuyStockScreen extends StatelessWidget {
@@ -184,7 +185,16 @@ class BuyStockScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.all(15),
               child: RoundedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    barrierColor: Colors.black45,
+                    builder: (context) {
+                      return DraggableOverview();
+                    },
+                  );
+                },
                 label: Text(
                   "Kaufübersicht",
                   style: theme.textTheme.headline5?.copyWith(
