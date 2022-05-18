@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 class MockProvider with ChangeNotifier {
   bool initialized = false;
 
+  double portfolioBudget = 10000;
+
   MockProvider() {
     loadMockData();
   }

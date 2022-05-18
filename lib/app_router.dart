@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
@@ -16,6 +17,12 @@ import 'pages/stock_detail/stock_detail_page.dart';
 
 abstract class AppRouter {
   static MaterialPageRoute generateRoute(RouteSettings routeSettings) {
+    late final Map<String, dynamic> arguments;
+    try {
+      arguments = routeSettings.arguments as Map<String, dynamic>;
+    } catch (e) {
+      arguments = {};
+    }
     print("Navigating to ${routeSettings.name}");
     return MaterialPageRoute(
       settings: routeSettings,
@@ -54,7 +61,10 @@ abstract class AppRouter {
           case StockDetailPage.routeName:
             return StockDetailPage();
           case BuyStockScreen.routeName:
-            return BuyStockScreen();
+            return ChangeNotifierProvider(
+              create: (context) => BuyStockProvider(mode: arguments["mode"]),
+              child: BuyStockScreen(),
+            );
 
           default:
             return const CrashScreen();

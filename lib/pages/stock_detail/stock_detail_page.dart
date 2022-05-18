@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/widgets/personal_information_detail_page.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
@@ -29,8 +30,10 @@ class StockDetailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RoundedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(BuyStockScreen.routeName),
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    BuyStockScreen.routeName,
+                    arguments: {"mode": BuyStockMode.buy},
+                  ),
                   label: Text(
                     "Kaufen",
                     style: theme.textTheme.headline6?.copyWith(
@@ -41,7 +44,10 @@ class StockDetailPage extends StatelessWidget {
                   width: 150,
                 ),
                 RoundedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    BuyStockScreen.routeName,
+                    arguments: {"mode": BuyStockMode.sell},
+                  ),
                   label: Text(
                     "Verkaufen",
                     style: theme.textTheme.headline6?.copyWith(
