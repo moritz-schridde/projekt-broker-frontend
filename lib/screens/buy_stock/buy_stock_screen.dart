@@ -102,86 +102,23 @@ class BuyStockScreen extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OutlinedButton(
-                    child: Text("0%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
+                children: [0.1, 0.25, 0.5, 0.75]
+                    .map(
+                      (percentage) => OutlinedButton(
+                        child: Text("${percentage * 100}%"),
+                        style: OutlinedButton.styleFrom(
+                          primary: UiTheme.textColorBlack,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 2,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                        onPressed: () {},
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  OutlinedButton(
-                    child: Text("10%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  OutlinedButton(
-                    child: Text("25%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  OutlinedButton(
-                    child: Text("50%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  OutlinedButton(
-                    child: Text("75%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  OutlinedButton(
-                    child: Text("100%"),
-                    style: OutlinedButton.styleFrom(
-                      primary: UiTheme.textColorBlack,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 2,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
+                    )
+                    .toList(),
               ),
               const SizedBox(
                 height: 25,
