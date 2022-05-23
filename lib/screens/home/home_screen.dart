@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_card.dart';
-import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/stock_overview_card.dart';
 import 'package:provider/src/provider.dart';

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
-
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'app_router.dart';
 import 'constants/frontend/ui_theme.dart';
@@ -21,12 +20,10 @@ class App extends StatelessWidget {
       darkTheme: UiTheme.lightTheme, // disable dark theme
       home: Builder(
         builder: (context) {
-          WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
             Navigator.pushReplacementNamed(
               context,
-              context.read<User?>() != null
-                  ? HomeScreen.routeName
-                  : AuthScreen.routeName,
+              context.read<User?>() != null ? HomeScreen.routeName : AuthScreen.routeName,
             );
           });
           return LoadingScreen();

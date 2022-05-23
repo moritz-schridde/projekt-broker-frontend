@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
@@ -52,16 +50,14 @@ class PortfolioOverviewCard extends StatelessWidget {
                   children: [
                     Text(
                       'Portfolio',
-                      style: theme.textTheme.headline5
-                          ?.copyWith(color: Colors.white),
+                      style: theme.textTheme.headline5?.copyWith(color: Colors.white),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Text(
                       'Gesamtwert',
-                      style: theme.textTheme.bodyText2
-                          ?.copyWith(color: Colors.white),
+                      style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -70,21 +66,16 @@ class PortfolioOverviewCard extends StatelessWidget {
                       children: [
                         Text(
                           NumberFormat.currency(
-                                  locale: 'de',
-                                  name: 'euro',
-                                  symbol: '€',
-                                  decimalDigits: 2)
+                                  locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
                               .format(3600.89),
-                          style: theme.textTheme.headline5
-                              ?.copyWith(color: Colors.white),
+                          style: theme.textTheme.headline5?.copyWith(color: Colors.white),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         Text(
-                          '+${percent}%',
-                          style: theme.textTheme.bodyText2
-                              ?.copyWith(color: Colors.white),
+                          '+$percent%',
+                          style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
                         ),
                       ],
                     ),
@@ -99,15 +90,11 @@ class PortfolioOverviewCard extends StatelessWidget {
                           children: [
                             Text(
                               'Investiert',
-                              style: theme.textTheme.bodyText2
-                                  ?.copyWith(color: Colors.white),
+                              style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
                             ),
                             Text(
                               NumberFormat.currency(
-                                      locale: 'de',
-                                      name: 'euro',
-                                      symbol: '€',
-                                      decimalDigits: 2)
+                                      locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
                                   .format(2600.75),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
@@ -131,15 +118,11 @@ class PortfolioOverviewCard extends StatelessWidget {
                           children: [
                             Text(
                               'Guthaben',
-                              style: theme.textTheme.bodyText2
-                                  ?.copyWith(color: Colors.white),
+                              style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
                             ),
                             Text(
                               NumberFormat.currency(
-                                      locale: 'de',
-                                      name: 'euro',
-                                      symbol: '€',
-                                      decimalDigits: 2)
+                                      locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
                                   .format(1600.75),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
@@ -240,7 +223,6 @@ class PortfolioOverviewCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
