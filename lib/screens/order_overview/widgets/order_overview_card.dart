@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 

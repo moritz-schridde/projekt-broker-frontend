@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
