@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
+import 'package:res_builder/responsive.dart';
 
 class BuyStockScreen extends StatelessWidget {
   static const routeName = "/buy_stock";
@@ -35,61 +37,105 @@ class BuyStockScreen extends StatelessWidget {
                 height: 15,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //TODO Refector widgets
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    style: theme.textTheme.headline3,
-                    cursorColor: UiTheme.textColorBlack,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[0-9]'),
-                      ),
-                    ],
-                    decoration: InputDecoration(
-                      //TODO empty text when focus (FocusNode)
-                      hintText: "7657",
-                      suffixIcon: Text(
-                        "€",
-                        style: theme.textTheme.headline3?.copyWith(
-                          color: UiTheme.primaryColor,
+                  Expanded(
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: Responsive.value<int>(
+                      context: context,
+                      onMobile: 4,
+                      onTablet: 2,
+                      onDesktop: 1,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //TODO Refector widgets
+                        TextField(
+                          controller: buyStockProvider.textEditControllerMoney,
+                          keyboardType:
+                              TextInputType.numberWithOptions(decimal: true),
+                          style: theme.textTheme.headline3,
+                          cursorColor: UiTheme.textColorBlack,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              RegExp(r'^(\d+)?\.?\d{0,2}'),
+                            ),
+                          ],
+                          decoration: InputDecoration(
+                            //TODO empty text when focus (FocusNode)
+                            hintText: "Betrag",
+                            hintStyle: theme.textTheme.headline4?.copyWith(
+                              color: UiTheme.secondaryColor,
+                            ),
+                            suffixIcon: Text(
+                              "€",
+                              style: theme.textTheme.headline3?.copyWith(
+                                color: UiTheme.primaryColor,
+                              ),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 100,
+                              // maxWidth: 160,
+                            ),
+                            suffixIconConstraints: const BoxConstraints(
+                              minWidth: 80,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.all(2.0),
+                          ),
+                          onSubmitted: (value) {
+                            buyStockProvider.setStockCount(
+                              money: double.tryParse(value) ?? 0,
+                            );
+                          },
                         ),
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 100,
-                        maxWidth: 160,
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.all(2.0),
+                        TextField(
+                          controller: buyStockProvider.textEditControllerStock,
+                          keyboardType: TextInputType.number,
+                          style: theme.textTheme.headline3,
+                          cursorColor: UiTheme.textColorBlack,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                              RegExp(r'[0-9]'),
+                            ),
+                          ],
+                          decoration: InputDecoration(
+                            //TODO empty text when focus (FocusNode)
+
+                            hintText: "Anzahl",
+                            hintStyle: theme.textTheme.headline4?.copyWith(
+                              color: UiTheme.secondaryColor,
+                            ),
+                            suffixIcon: Text(
+                              buyStockProvider.stock.shortName,
+                              style: theme.textTheme.headline3?.copyWith(
+                                color: UiTheme.primaryColor,
+                              ),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 100,
+                              // maxWidth: 160,
+                            ),
+                            suffixIconConstraints: const BoxConstraints(
+                              minWidth: 80,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.all(2.0),
+                          ),
+                          onSubmitted: (value) {
+                            buyStockProvider.setMoneyCount(
+                              stockCount: int.tryParse(value) ?? 0,
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    style: theme.textTheme.headline3,
-                    cursorColor: UiTheme.textColorBlack,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[0-9]'),
-                      ),
-                    ],
-                    decoration: InputDecoration(
-                      //TODO empty text when focus (FocusNode)
-                      hintText: "76",
-                      suffixIcon: Text(
-                        "APL",
-                        style: theme.textTheme.headline3?.copyWith(
-                          color: UiTheme.primaryColor,
-                        ),
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 100,
-                        maxWidth: 160,
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.all(2.0),
-                    ),
-                  ),
+                  Expanded(child: Container()),
                 ],
               ),
               const SizedBox(
@@ -115,7 +161,10 @@ class BuyStockScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => buyStockProvider.setStockCount(
+                          money:
+                              ((portfolioProvider.budget ?? 0.0) * percentage),
+                        ),
                       ),
                     )
                     .toList(),

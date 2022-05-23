@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
+import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
@@ -13,7 +13,8 @@ import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/stock_detail/stock_detail_page.dart';
+import 'screens/stock_detail/stock_detail_screen.dart';
+import 'screens/stock_detail/stock_detail_screen_provider.dart';
 
 abstract class AppRouter {
   static MaterialPageRoute generateRoute(RouteSettings routeSettings) {
@@ -58,11 +59,21 @@ abstract class AppRouter {
             return StockSearchScreen();
           case ProfileScreen.routeName:
             return ProfileScreen();
-          case StockDetailPage.routeName:
-            return StockDetailPage();
+          case StockDetailScreen.routeName:
+            return ChangeNotifierProvider(
+              create: (context) => StockDetailScreenProvider(
+                stock: context
+                    .read<MockProvider>()
+                    .dummyStock, // TODO remove stock
+              ),
+              child: StockDetailScreen(),
+            );
           case BuyStockScreen.routeName:
             return ChangeNotifierProvider(
-              create: (context) => BuyStockProvider(mode: arguments["mode"]),
+              create: (context) => BuyStockProvider(
+                mode: arguments["mode"],
+                stock: arguments["stock"], // TODO remove mock
+              ),
               child: BuyStockScreen(),
             );
 

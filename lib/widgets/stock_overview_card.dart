@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
-import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
+
+import '../screens/stock_detail/stock_detail_screen.dart';
 
 class StockOverviewCard extends StatelessWidget {
   const StockOverviewCard({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class StockOverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () =>
-          Navigator.pushReplacementNamed(context, StockDetailPage.routeName),
+          Navigator.pushReplacementNamed(context, StockDetailScreen.routeName),
       child: Card(
         elevation: 0,
         child: Container(
