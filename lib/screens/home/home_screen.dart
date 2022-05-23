@@ -4,7 +4,6 @@ import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/stock_overview_card.dart';
 import 'package:provider/src/provider.dart';
-import '../register/register_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
