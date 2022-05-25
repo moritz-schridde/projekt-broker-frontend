@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
 class RoundedButton extends StatelessWidget {
-  late Function() onPressed;
-  late Widget label;
-  late double? width;
-  late double? height;
+  final Function() onPressed;
+  final Widget label;
+  final double? width;
+  final double? height;
   RoundedButton({
     Key? key,
     required this.onPressed,

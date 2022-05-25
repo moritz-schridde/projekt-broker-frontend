@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_text_field.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,6 @@ class BuyStockScreen extends StatelessWidget {
     return Consumer2<BuyStockProvider, PortfolioProvider>(
       builder: (context, buyStockProvider, portfolioProvider, _) => Scaffold(
         appBar: AppBar(
-          //TODO add Aktienname
           title: Text(
               "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})"),
         ),
@@ -54,79 +54,30 @@ class BuyStockScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        //TODO Refector widgets
-                        TextField(
+                        BuyStockTextField(
+                          suffixIcon: "€",
                           controller: buyStockProvider.textEditControllerMoney,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          style: theme.textTheme.headline3,
-                          cursorColor: UiTheme.textColorBlack,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                               RegExp(r'^(\d+)?\.?\d{0,2}'),
                             ),
                           ],
-                          decoration: InputDecoration(
-                            //TODO empty text when focus (FocusNode)
-                            hintText: "Betrag",
-                            hintStyle: theme.textTheme.headline4?.copyWith(
-                              color: UiTheme.secondaryColor,
-                            ),
-                            suffixIcon: Text(
-                              "€",
-                              style: theme.textTheme.headline3?.copyWith(
-                                color: UiTheme.primaryColor,
-                              ),
-                            ),
-                            constraints: const BoxConstraints(
-                              minWidth: 100,
-                              // maxWidth: 160,
-                            ),
-                            suffixIconConstraints: const BoxConstraints(
-                              minWidth: 80,
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.all(2.0),
-                          ),
+                          hintText: "Betrag",
                           onSubmitted: (value) {
                             buyStockProvider.setStockCount(
                               money: double.tryParse(value) ?? 0,
                             );
                           },
                         ),
-                        TextField(
+                        BuyStockTextField(
+                          suffixIcon: buyStockProvider.stock.shortName,
                           controller: buyStockProvider.textEditControllerStock,
-                          keyboardType: TextInputType.number,
-                          style: theme.textTheme.headline3,
-                          cursorColor: UiTheme.textColorBlack,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                               RegExp(r'[0-9]'),
                             ),
                           ],
-                          decoration: InputDecoration(
-                            //TODO empty text when focus (FocusNode)
-
-                            hintText: "Anzahl",
-                            hintStyle: theme.textTheme.headline4?.copyWith(
-                              color: UiTheme.secondaryColor,
-                            ),
-                            suffixIcon: Text(
-                              buyStockProvider.stock.shortName,
-                              style: theme.textTheme.headline3?.copyWith(
-                                color: UiTheme.primaryColor,
-                              ),
-                            ),
-                            constraints: const BoxConstraints(
-                              minWidth: 100,
-                              // maxWidth: 160,
-                            ),
-                            suffixIconConstraints: const BoxConstraints(
-                              minWidth: 80,
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.all(2.0),
-                          ),
+                          hintText: "Anzahl",
                           onSubmitted: (value) {
                             buyStockProvider.setMoneyCount(
                               stockCount: int.tryParse(value) ?? 0,
@@ -192,7 +143,9 @@ class BuyStockScreen extends StatelessWidget {
                       isScrollControlled: true,
                       barrierColor: Colors.black45,
                       builder: (context) {
-                        return DraggableOverview();
+                        return DraggableOverview(
+                          child: Text("TESTING"),
+                        );
                       },
                     );
                   },
