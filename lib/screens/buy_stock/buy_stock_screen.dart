@@ -20,7 +20,8 @@ class BuyStockScreen extends StatelessWidget {
       builder: (context, buyStockProvider, portfolioProvider, _) => Scaffold(
         appBar: AppBar(
           //TODO add Aktienname
-          title: Text("Aktien kaufen (Aktienname)"),
+          title: Text(
+              "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})"),
         ),
         body: Center(
           child: Column(
@@ -142,7 +143,9 @@ class BuyStockScreen extends StatelessWidget {
                 height: 15,
               ),
               //TODO get Guthaben from backend
-              Text("Verfügbares Guthaben: ${portfolioProvider.budget}€"),
+              Text(
+                "${buyStockProvider.mode == BuyStockMode.buy ? 'Verfügbares Guthaben: ${portfolioProvider.budget}€' : 'Verfügbare Aktien: ${portfolioProvider.stockCount}'}",
+              ),
               const SizedBox(
                 height: 25,
               ),
@@ -161,10 +164,18 @@ class BuyStockScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        onPressed: () => buyStockProvider.setStockCount(
-                          money:
-                              ((portfolioProvider.budget ?? 0.0) * percentage),
-                        ),
+                        onPressed: () =>
+                            buyStockProvider.mode == BuyStockMode.buy
+                                ? buyStockProvider.setStockCount(
+                                    money: ((portfolioProvider.budget ?? 0.0) *
+                                        percentage),
+                                  )
+                                : buyStockProvider.setStockCount(
+                                    money:
+                                        ((portfolioProvider.stockCount ?? 0) *
+                                                percentage) *
+                                            buyStockProvider.stock.price,
+                                  ),
                       ),
                     )
                     .toList(),

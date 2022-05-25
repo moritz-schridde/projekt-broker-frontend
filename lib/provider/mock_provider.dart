@@ -5,6 +5,7 @@ class MockProvider with ChangeNotifier {
   bool initialized = false;
 
   double portfolioBudget = 10000;
+  int portfolioStockCount = 211;
 
   Stock dummyStock = Stock(
     longName: "Tesla",
