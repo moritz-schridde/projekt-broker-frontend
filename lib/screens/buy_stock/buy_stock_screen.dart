@@ -6,6 +6,7 @@ import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_text_field.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/overview_content.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 import 'package:res_builder/responsive.dart';
@@ -144,7 +145,7 @@ class BuyStockScreen extends StatelessWidget {
                       barrierColor: Colors.black45,
                       builder: (context) {
                         return DraggableOverview(
-                          child: Text("TESTING"),
+                          child: OverviewContent(),
                         );
                       },
                     );

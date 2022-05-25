@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DraggableOverview extends StatelessWidget {
-  const DraggableOverview({Key? key}) : super(key: key);
+  final Widget child;
+
+  DraggableOverview({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: (325 / MediaQuery.of(context).size.height),
-      maxChildSize: 0.9,
+      initialChildSize: (550 / MediaQuery.of(context).size.height),
+      maxChildSize: (550 / MediaQuery.of(context).size.height),
       minChildSize: 0.3,
       expand: false,
       builder: (context, controller) {
@@ -21,28 +26,22 @@ class DraggableOverview extends StatelessWidget {
             color: Colors.white,
             child: SingleChildScrollView(
               controller: controller,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 18.0,
-                  right: 18.0,
-                ),
-                // content of the scrollableSheet
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // line on top of the Sheet
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: 40,
-                          color: Colors.grey[400],
-                          height: 2,
-                        ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // line on top of the Sheet
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        width: 40,
+                        color: Colors.grey[400],
+                        height: 2,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  child,
+                ],
               ),
             ),
           ),
