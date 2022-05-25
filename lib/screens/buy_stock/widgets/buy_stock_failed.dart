@@ -37,8 +37,8 @@ class BuyStockFailed extends StatelessWidget {
                 color: UiTheme.textColorWhite,
               ),
             ),
-            onPressed: () {},
             width: double.infinity,
+            onPressed: () {},
           ),
           TextButton(
             child: Text("Zurück zur Startseite"),
