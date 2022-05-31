@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               child: Container(
                 child: Text(
                   "Meine Aktien",
-                  style: UiTheme.textTheme.headline3,
+                  style: theme.textTheme.headline3,
                 ),
                 alignment: Alignment.centerLeft,
               ),

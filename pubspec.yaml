@@ -44,6 +44,7 @@ dependencies:
   json_annotation: ^4.4.0
   copy_with_extension: ^4.0.0
   res_builder: ^1.1.2
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

@@ -9,13 +9,14 @@ class OrderOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Meine Orders",
-            style: UiTheme.textTheme.headline2!
+            style: theme.textTheme.headline2!
                 .copyWith(color: UiTheme.lightTheme.primaryColor),
           ),
           Expanded(
