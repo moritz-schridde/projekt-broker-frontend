@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 
 class PortfolioOverviewCard extends StatelessWidget {
   const PortfolioOverviewCard({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class PortfolioOverviewCard extends StatelessWidget {
     final theme = Theme.of(context);
     final percent = 9.77;
     return Container(
-      height: 250,
+      height: 260,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -50,14 +51,16 @@ class PortfolioOverviewCard extends StatelessWidget {
                   children: [
                     Text(
                       'Portfolio',
-                      style: theme.textTheme.headline5?.copyWith(color: Colors.white),
+                      style: theme.textTheme.headline5
+                          ?.copyWith(color: Colors.white),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Text(
                       'Gesamtwert',
-                      style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
+                      style: theme.textTheme.bodyText2
+                          ?.copyWith(color: Colors.white),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -66,16 +69,21 @@ class PortfolioOverviewCard extends StatelessWidget {
                       children: [
                         Text(
                           NumberFormat.currency(
-                                  locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
+                                  locale: 'de',
+                                  name: 'euro',
+                                  symbol: '€',
+                                  decimalDigits: 2)
                               .format(3600.89),
-                          style: theme.textTheme.headline5?.copyWith(color: Colors.white),
+                          style: theme.textTheme.headline5
+                              ?.copyWith(color: Colors.white),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         Text(
                           '+$percent%',
-                          style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
+                          style: theme.textTheme.bodyText2
+                              ?.copyWith(color: Colors.white),
                         ),
                       ],
                     ),
@@ -90,11 +98,15 @@ class PortfolioOverviewCard extends StatelessWidget {
                           children: [
                             Text(
                               'Investiert',
-                              style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
                             ),
                             Text(
                               NumberFormat.currency(
-                                      locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
+                                      locale: 'de',
+                                      name: 'euro',
+                                      symbol: '€',
+                                      decimalDigits: 2)
                                   .format(2600.75),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
@@ -118,11 +130,15 @@ class PortfolioOverviewCard extends StatelessWidget {
                           children: [
                             Text(
                               'Guthaben',
-                              style: theme.textTheme.bodyText2?.copyWith(color: Colors.white),
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
                             ),
                             Text(
                               NumberFormat.currency(
-                                      locale: 'de', name: 'euro', symbol: '€', decimalDigits: 2)
+                                      locale: 'de',
+                                      name: 'euro',
+                                      symbol: '€',
+                                      decimalDigits: 2)
                                   .format(1600.75),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
@@ -167,23 +183,19 @@ class PortfolioOverviewCard extends StatelessWidget {
                         ],
                       ),
                       // TODO Einzahlen
-                      onPressed: () => showDialog<String>(
+                      onPressed: () => showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Einzahlen'),
-                          content: const Text(
-                              'Sie möchten gerne Geld einzahlen, dies ist zur Zeit noch nicht möglich'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                        isScrollControlled: true,
+                        barrierColor: Colors.black45,
+                        builder: (context) {
+                          return DraggableOverview(
+                            //TODO change child
+                            child: Container(),
+                            header: "Einzahlen",
+                            inizialSize:
+                                (400 / MediaQuery.of(context).size.height),
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -204,23 +216,19 @@ class PortfolioOverviewCard extends StatelessWidget {
                           Text("Auszahlen"),
                         ],
                       ),
-                      onPressed: () => showDialog<String>(
+                      onPressed: () => showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Auszahlen'),
-                          content: const Text(
-                              'Sie möchten ihr Geld auszahlen, dies ist zur Zeit noch nicht möglich'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                        isScrollControlled: true,
+                        barrierColor: Colors.black45,
+                        builder: (context) {
+                          return DraggableOverview(
+                            //TODO change child
+                            child: Container(),
+                            header: "Auszahlen",
+                            inizialSize:
+                                (400 / MediaQuery.of(context).size.height),
+                          );
+                        },
                       ),
                     ),
                   ],

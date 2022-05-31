@@ -14,38 +14,6 @@ class OverviewContent extends StatelessWidget {
     return Consumer<PortfolioProvider>(
       builder: (context, portfolioProvider, _) => Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 18.0,
-              left: 18.0,
-              right: 18.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Kaufübersicht",
-                  style: theme.textTheme.headline5,
-                ),
-                InkWell(
-                  child: Icon(
-                    Icons.close,
-                  ),
-                  onTap: () => Navigator.pop(context),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10.0,
-            ),
-            child: Divider(
-              color: UiTheme.primaryGradientStart,
-              height: 3,
-              thickness: 2,
-            ),
-          ),
           // POC
           //TODO save Stock estate in stock or somewhere else
           //TODO save amount of money from input

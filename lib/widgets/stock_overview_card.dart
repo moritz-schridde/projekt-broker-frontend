@@ -10,9 +10,9 @@ class StockOverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushReplacementNamed(context, StockDetailScreen.routeName),
+      onTap: () => Navigator.pushNamed(context, StockDetailScreen.routeName),
       child: Card(
         elevation: 0,
         child: Container(
@@ -41,7 +41,7 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("APL", style: UiTheme.textTheme.headline6),
+                  Text("APL", style: theme.textTheme.headline6),
                   Text(
                     "+1,6%",
                     style: TextStyle(color: Colors.green),
@@ -55,7 +55,7 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("29.850,15€", style: UiTheme.textTheme.headline6),
+                  Text("29.850,15€", style: theme.textTheme.headline6),
                   Text("2,3"),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.end,

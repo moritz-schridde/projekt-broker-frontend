@@ -4,6 +4,7 @@ import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dar
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_detail/stock_detail_screen_provider.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
+import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,10 @@ class StockDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Scaffold(
+      appBar: PreferredSize(
+        child: MainTopNavigationBar(title: "Trading"),
+        preferredSize: Size.fromHeight(40),
+      ),
       body: Consumer<StockDetailScreenProvider>(
         builder: (context, stockDetailScreenProvider, _) => Center(
           child: Column(

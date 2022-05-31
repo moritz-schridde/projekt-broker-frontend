@@ -5,9 +5,10 @@ import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_text_field.dart';
-import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
+import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/overview_content.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
+import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 import 'package:res_builder/responsive.dart';
@@ -21,9 +22,12 @@ class BuyStockScreen extends StatelessWidget {
     var theme = Theme.of(context);
     return Consumer2<BuyStockProvider, PortfolioProvider>(
       builder: (context, buyStockProvider, portfolioProvider, _) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-              "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})"),
+        appBar: PreferredSize(
+          child: MainTopNavigationBar(
+            title:
+                "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})",
+          ),
+          preferredSize: Size.fromHeight(40),
         ),
         body: Center(
           child: Column(
@@ -139,18 +143,20 @@ class BuyStockScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(15),
                 child: RoundedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      barrierColor: Colors.black45,
-                      builder: (context) {
-                        return DraggableOverview(
-                          child: OverviewContent(),
-                        );
-                      },
-                    );
-                  },
+                  onPressed: () => showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    barrierColor: Colors.black45,
+                    builder: (context) {
+                      return DraggableOverview(
+                        child: OverviewContent(),
+                        header: buyStockProvider.mode == BuyStockMode.buy
+                            ? "Kaufübersicht"
+                            : "Verkaufsübersicht",
+                        inizialSize: (550 / MediaQuery.of(context).size.height),
+                      );
+                    },
+                  ),
                   label: Text(
                     buyStockProvider.mode == BuyStockMode.buy
                         ? "Kaufübersicht"
