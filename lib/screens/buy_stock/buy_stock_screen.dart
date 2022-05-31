@@ -5,7 +5,7 @@ import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_text_field.dart';
-import 'package:projekt_broker_frontend/screens/buy_stock/widgets/draggable_overview.dart';
+import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/overview_content.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
@@ -147,6 +147,9 @@ class BuyStockScreen extends StatelessWidget {
                       builder: (context) {
                         return DraggableOverview(
                           child: OverviewContent(),
+                          header: buyStockProvider.mode == BuyStockMode.buy
+                              ? "Kaufübersicht"
+                              : "Verkaufsübersicht",
                         );
                       },
                     );

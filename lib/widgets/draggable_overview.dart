@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class DraggableOverview extends StatelessWidget {
   final Widget child;
+  final String header;
 
   DraggableOverview({
     Key? key,
     required this.child,
+    required this.header,
   }) : super(key: key);
 
   @override
@@ -38,6 +40,28 @@ class DraggableOverview extends StatelessWidget {
                         color: Colors.grey[400],
                         height: 2,
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 18.0,
+                      left: 18.0,
+                      right: 18.0,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          header,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        InkWell(
+                          child: Icon(
+                            Icons.close,
+                          ),
+                          onTap: () => Navigator.pop(context),
+                        )
+                      ],
                     ),
                   ),
                   child,
