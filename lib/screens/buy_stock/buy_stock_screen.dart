@@ -139,21 +139,20 @@ class BuyStockScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(15),
                 child: RoundedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      barrierColor: Colors.black45,
-                      builder: (context) {
-                        return DraggableOverview(
-                          child: OverviewContent(),
-                          header: buyStockProvider.mode == BuyStockMode.buy
-                              ? "Kaufübersicht"
-                              : "Verkaufsübersicht",
-                        );
-                      },
-                    );
-                  },
+                  onPressed: () => showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    barrierColor: Colors.black45,
+                    builder: (context) {
+                      return DraggableOverview(
+                        child: OverviewContent(),
+                        header: buyStockProvider.mode == BuyStockMode.buy
+                            ? "Kaufübersicht"
+                            : "Verkaufsübersicht",
+                        inizialSize: (550 / MediaQuery.of(context).size.height),
+                      );
+                    },
+                  ),
                   label: Text(
                     buyStockProvider.mode == BuyStockMode.buy
                         ? "Kaufübersicht"

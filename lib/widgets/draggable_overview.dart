@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
 class DraggableOverview extends StatelessWidget {
   final Widget child;
   final String header;
+  final double inizialSize;
 
   DraggableOverview({
     Key? key,
     required this.child,
     required this.header,
+    required this.inizialSize,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: (550 / MediaQuery.of(context).size.height),
-      maxChildSize: (550 / MediaQuery.of(context).size.height),
+      initialChildSize: inizialSize,
+      maxChildSize: inizialSize,
       minChildSize: 0.3,
       expand: false,
       builder: (context, controller) {
@@ -62,6 +65,16 @@ class DraggableOverview extends StatelessWidget {
                           onTap: () => Navigator.pop(context),
                         )
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
+                    child: Divider(
+                      color: UiTheme.primaryGradientStart,
+                      height: 3,
+                      thickness: 2,
                     ),
                   ),
                   child,
