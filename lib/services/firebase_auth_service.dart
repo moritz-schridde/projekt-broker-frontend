@@ -8,20 +8,21 @@ import 'package:subscribed_stream/subscribed_stream.dart';
 ///
 /// Provides a [User] Stream to the MaterialApp, which holds the currently logged in User.
 class FirebaseAuthService with ChangeNotifier {
-  // @Deprecated("use DefaultFirebaseOptions.currentPlatform instead")
-  // static const firebaseOptions = FirebaseOptions(
-  //   apiKey: "AIzaSyA9QsR0KtSgZ7HpDurFxjAtnJ4Kz9djg6A",
-  //   authDomain: "projekt-wertpapierhandel.firebaseapp.com",
-  //   projectId: "projekt-wertpapierhandel",
-  //   storageBucket: "projekt-wertpapierhandel.appspot.com",
-  //   messagingSenderId: "783713235828",
-  //   appId: "1:783713235828:web:3edd85505bbdb9a943b221",
-  // );
+  @Deprecated("use DefaultFirebaseOptions.currentPlatform instead")
+  static const firebaseOptions = FirebaseOptions(
+    apiKey: "AIzaSyA9QsR0KtSgZ7HpDurFxjAtnJ4Kz9djg6A",
+    authDomain: "projekt-wertpapierhandel.firebaseapp.com",
+    projectId: "projekt-wertpapierhandel",
+    storageBucket: "projekt-wertpapierhandel.appspot.com",
+    messagingSenderId: "783713235828",
+    appId: "1:783713235828:web:3edd85505bbdb9a943b221",
+  );
 
   static const providerConfigurations = [
     EmailProviderConfiguration(),
     GoogleProviderConfiguration(
       clientId:
+          // "783713235828-1s02fmno1tg37v2i3ur36lu2r3qor3cv.apps.googleusercontent.com",
           "783713235828-1s02fmno1tg37v2i3ur36lu2r3qor3cv.apps.googleusercontent.com",
     ),
   ];

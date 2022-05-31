@@ -37,7 +37,7 @@ dependencies:
   cloud_firestore: ^3.1.6
   firebase_auth: ^3.3.5
   cloud_functions: ^3.2.5
-  flutterfire_ui: ^0.3.1
+  flutterfire_ui: ^0.4.1+2
   subscribed_stream: ^0.0.2
   provider: ^6.0.2
   intl: ^0.17.0
@@ -57,7 +57,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
