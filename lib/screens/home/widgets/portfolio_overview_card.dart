@@ -11,7 +11,7 @@ class PortfolioOverviewCard extends StatelessWidget {
     final theme = Theme.of(context);
     final percent = 9.77;
     return Container(
-      height: 250,
+      height: 260,
       child: Stack(
         fit: StackFit.expand,
         children: [
