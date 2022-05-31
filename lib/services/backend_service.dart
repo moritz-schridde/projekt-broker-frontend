@@ -14,11 +14,10 @@ enum RequestType {
 }
 
 class BackendService with ChangeNotifier {
-  // TODO update
   static final baseUrl = Uri(
     scheme: "http",
-    host: "petconnect-env.eba-mm7ehn6g.eu-central-1.elasticbeanstalk.com",
-    port: 80,
+    host: "api.trade-empire.karottenkameraden.de",
+    port: 8080,
     path: "",
   );
 
