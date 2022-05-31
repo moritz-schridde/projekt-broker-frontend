@@ -12,8 +12,7 @@ class StockOverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushReplacementNamed(context, StockDetailScreen.routeName),
+      onTap: () => Navigator.pushNamed(context, StockDetailScreen.routeName),
       child: Card(
         elevation: 0,
         child: Container(
