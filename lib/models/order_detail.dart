@@ -19,5 +19,5 @@ class OrderDetail {
   factory OrderDetail.fromJson(Map<String, dynamic> json) =>
       _$OrderDetailFromJson(json);
 
-  get toJson => _$OrderDetailAccountToJson(this);
+  get toJson => _$OrderDetailToJson(this);
 }
