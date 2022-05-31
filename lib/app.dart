@@ -23,7 +23,9 @@ class App extends StatelessWidget {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
             Navigator.pushReplacementNamed(
               context,
-              context.read<User?>() != null ? HomeScreen.routeName : AuthScreen.routeName,
+              context.read<User?>() != null
+                  ? HomeScreen.routeName
+                  : AuthScreen.routeName,
             );
           });
           return LoadingScreen();

@@ -8,14 +8,15 @@ import 'package:subscribed_stream/subscribed_stream.dart';
 ///
 /// Provides a [User] Stream to the MaterialApp, which holds the currently logged in User.
 class FirebaseAuthService with ChangeNotifier {
-  static const firebaseOptions = FirebaseOptions(
-    apiKey: "AIzaSyA9QsR0KtSgZ7HpDurFxjAtnJ4Kz9djg6A",
-    authDomain: "projekt-wertpapierhandel.firebaseapp.com",
-    projectId: "projekt-wertpapierhandel",
-    storageBucket: "projekt-wertpapierhandel.appspot.com",
-    messagingSenderId: "783713235828",
-    appId: "1:783713235828:web:3edd85505bbdb9a943b221",
-  );
+  // @Deprecated("use DefaultFirebaseOptions.currentPlatform instead")
+  // static const firebaseOptions = FirebaseOptions(
+  //   apiKey: "AIzaSyA9QsR0KtSgZ7HpDurFxjAtnJ4Kz9djg6A",
+  //   authDomain: "projekt-wertpapierhandel.firebaseapp.com",
+  //   projectId: "projekt-wertpapierhandel",
+  //   storageBucket: "projekt-wertpapierhandel.appspot.com",
+  //   messagingSenderId: "783713235828",
+  //   appId: "1:783713235828:web:3edd85505bbdb9a943b221",
+  // );
 
   static const providerConfigurations = [
     EmailProviderConfiguration(),
