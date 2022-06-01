@@ -2,11 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/models/owned_stock.dart';
 
 import '../screens/stock_detail/stock_detail_screen.dart';
 
 class StockOverviewCard extends StatelessWidget {
-  const StockOverviewCard({Key? key}) : super(key: key);
+  OwnedStock ownedStock;
+  StockOverviewCard({
+    Key? key,
+    required this.ownedStock,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
