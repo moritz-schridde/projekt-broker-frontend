@@ -1,7 +1,8 @@
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:iban_form_field/iban_form_field.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
@@ -26,11 +27,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   int _index = 0;
   bool ischeckedGeschaeftsbed = false;
   bool ischeckedNotification = false;
+  String countryValue = "";
+
   var maskFormatterIBAN = new MaskTextInputFormatter(
-      // mask: "#### #### #### #### #### ##",
-      // filter: {"X": RegExp('^[A-Z]'), "#": RegExp(r'[0-9]')},
-      );
-  // Iban? _iban;
+    mask: "XX## #### #### #### #### ##",
+    filter: {"#": RegExp(r'[0-9]'), "X": RegExp(r'[A-Z]')},
+  );
+  var maskFormatterSteuerId = new MaskTextInputFormatter(
+    mask: "## ### ### ###",
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,99 +75,123 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              content: Column(children: [
-                TextFormFieldRegister(
-                  labelText: "Vorname",
-                ),
-                TextFormFieldRegister(
-                  labelText: "Nachname",
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: DateTimePicker(
-                    initialValue: '',
-                    decoration: InputDecoration(
+              content: Column(
+                children: [
+                  TextFormFieldRegister(
+                    labelText: "Vorname",
+                  ),
+                  TextFormFieldRegister(
+                    labelText: "Nachname",
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: DateTimePicker(
+                      initialValue: '',
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Geburtsdatum'),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime.now(),
+                      locale: const Locale('de', 'DE'),
+                      dateLabelText: 'Geburtsdatum',
+                      dateMask: 'dd.MM.yyyy',
+                      onChanged: (val) => {
+                        print(val),
+                      },
+                      validator: (date) {
+                        if (date == null) {
+                          return 'Please choose a date';
+                        }
+                        return null;
+                      },
+                      onSaved: (val) => print(val),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: InternationalPhoneNumberInput(
+                      onInputChanged: (PhoneNumber number) {
+                        print(number.phoneNumber);
+                      },
+                      onInputValidated: (bool value) {
+                        print(value);
+                      },
+                      selectorConfig: SelectorConfig(
+                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                      ),
+                      ignoreBlank: false,
+                      hintText: "Telefonnummer",
+                      autoValidateMode: AutovalidateMode.disabled,
+                      selectorTextStyle: TextStyle(color: Colors.black),
+                      formatInput: false,
+                      keyboardType: TextInputType.numberWithOptions(
+                          signed: true, decimal: true),
+                      inputBorder: OutlineInputBorder(),
+                      onSaved: (PhoneNumber number) {
+                        print('On Saved: $number');
+                      },
+                      validator: (val) {
+                        if (val != null) {
+                          return "Bitte ergänzen Sie eine Telefonnummer";
+                        }
+                        ;
+                        return null;
+                      },
+                      initialValue: PhoneNumber(isoCode: 'DE'),
+                    ),
+                  ),
+                  TextFormFieldRegister(labelText: "Straße + Hausnr."),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    child: TextFormField(
+                      validator: (value) {
+                        RegExp regExp = new RegExp('\d{5}');
+                        if (value == null) {
+                          return 'Please enter some text';
+                        } else if (!regExp.hasMatch(value)) {
+                          return 'Please enter a valid PLZ';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Geburtsdatum'),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                    locale: const Locale('de', 'DE'),
-                    dateLabelText: 'Geburtsdatum',
-                    dateMask: 'dd.MM.yyyy',
-                    onChanged: (val) => {
-                      print(val),
-                    },
-                    validator: (date) {
-                      if (date == null) {
-                        return 'Please choose a date';
-                      }
-                      return null;
-                    },
-                    onSaved: (val) => print(val),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: InternationalPhoneNumberInput(
-                    onInputChanged: (PhoneNumber number) {
-                      print(number.phoneNumber);
-                    },
-                    onInputValidated: (bool value) {
-                      print(value);
-                    },
-                    selectorConfig: SelectorConfig(
-                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                        labelText: 'PLZ',
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(5),
+                      ], // Only numbers can be entered
                     ),
-                    ignoreBlank: false,
-                    autoValidateMode: AutovalidateMode.disabled,
-                    selectorTextStyle: TextStyle(color: Colors.black),
-                    formatInput: false,
-                    keyboardType: TextInputType.numberWithOptions(
-                        signed: true, decimal: true),
-                    inputBorder: OutlineInputBorder(),
-                    onSaved: (PhoneNumber number) {
-                      print('On Saved: $number');
-                    },
-                    validator: (val) {
-                      if (val != null) {
-                        return "Bitte ergänzen Sie eine Telefonnummer";
-                      }
-                      ;
-                      return null;
-                    },
-                    initialValue: PhoneNumber(isoCode: 'DE'),
                   ),
-                ),
-                TextFormFieldRegister(labelText: "Straße + Hausnr."),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: TextFormField(
-                    validator: (value) {
-                      RegExp regExp = new RegExp('\d{5}');
-                      if (value == null) {
-                        return 'Please enter some text';
-                      } else if (!regExp.hasMatch(value)) {
-                        return 'Please enter a valid PLZ';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'PLZ',
+                  TextFormFieldRegister(labelText: "Ort"),
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(4)),
+                    child: CountryCodePicker(
+                      onChanged: print,
+                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                      initialSelection: 'DE',
+                      favorite: ['+49', 'DE'],
+                      // optional. Shows only country name and flag
+                      showCountryOnly: true,
+                      // optional. Shows only country name and flag when popup is closed.
+                      showOnlyCountryWhenClosed: true,
+                      // optional. aligns the flag and the Text left
+                      alignLeft: true,
                     ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(5),
-                    ], // Only numbers can be entered
                   ),
-                ),
-                TextFormFieldRegister(labelText: "Ort"),
-                TextFormFieldRegister(labelText: "Land"),
-              ]),
+                ],
+              ),
             ),
             Step(
               title: Text(
@@ -182,7 +213,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextFormFieldRegister(labelText: "Vorname"),
                   TextFormFieldRegister(labelText: "Nachname"),
                   TextFormFieldRegister(
-                      labelText: "Steueridentifikationsnummer"),
+                    labelText: "Steueridentifikationsnummer",
+                    inputFormatter: maskFormatterSteuerId,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(
