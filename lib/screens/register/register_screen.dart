@@ -37,6 +37,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrieren'),
@@ -197,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.all(8),
                     child: Text(
                       "Kontoinhaber",
-                      style: UiTheme.textTheme.bodyText1,
+                      style: theme.textTheme.bodyText1,
                     ),
                   ),
                   TextFormFieldRegister(labelText: "Vorname"),
@@ -210,7 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.all(8),
                     child: Text(
                       "Bankverbindung",
-                      style: UiTheme.textTheme.bodyText1,
+                      style: theme.textTheme.bodyText1,
                     ),
                   ),
                   TextFormFieldRegister(labelText: "IBAN", inputFormatter: maskFormatterIBAN),
