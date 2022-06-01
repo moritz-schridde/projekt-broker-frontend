@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
@@ -9,6 +7,7 @@ class OrderOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String status = "erfolgreich";
+    final theme = Theme.of(context);
     return Card(
       elevation: 0,
       child: Container(
@@ -39,15 +38,15 @@ class OrderOverviewCard extends StatelessWidget {
               children: [
                 Text(
                   "APL",
-                  style: UiTheme.textTheme.headline6,
+                  style: theme.textTheme.headline6,
                 ),
                 Text(
                   "Menge: 13",
-                  style: UiTheme.textTheme.bodyText2,
+                  style: theme.textTheme.bodyText2,
                 ),
                 Text(
                   "Preis: 168,54€",
-                  style: UiTheme.textTheme.bodyText2,
+                  style: theme.textTheme.bodyText2,
                 ),
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,26 +55,26 @@ class OrderOverviewCard extends StatelessWidget {
               children: [
                 Text(
                   "Orderwert: 795,10€",
-                  style: UiTheme.textTheme.headline6,
+                  style: theme.textTheme.headline6,
                 ),
                 Text(
                   "30. Dezember, 10:56",
-                  style: UiTheme.textTheme.bodyText2,
+                  style: theme.textTheme.bodyText2,
                 ),
                 (status == "in Ausführung")
                     ? Text(
                         "Order in Ausführung",
-                        style: UiTheme.textTheme.bodyText2,
+                        style: theme.textTheme.bodyText2,
                       )
                     : (status == "erfolgreich")
                         ? Text(
                             "Order erfolgreich ausgeführt",
-                            style: UiTheme.textTheme.bodyText2!
+                            style: theme.textTheme.bodyText2!
                                 .copyWith(color: UiTheme.primarySuccess),
                           )
                         : Text(
                             "Order fehlgeschlagen",
-                            style: UiTheme.textTheme.bodyText2!
+                            style: theme.textTheme.bodyText2!
                                 .copyWith(color: UiTheme.primaryFailure),
                           ),
               ],

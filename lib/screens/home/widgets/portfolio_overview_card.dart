@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 
 class PortfolioOverviewCard extends StatelessWidget {
   const PortfolioOverviewCard({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class PortfolioOverviewCard extends StatelessWidget {
     final theme = Theme.of(context);
     final percent = 9.77;
     return Container(
-      height: 250,
+      height: 260,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -82,7 +81,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                           width: 10,
                         ),
                         Text(
-                          '+${percent}%',
+                          '+$percent%',
                           style: theme.textTheme.bodyText2
                               ?.copyWith(color: Colors.white),
                         ),
@@ -184,23 +183,19 @@ class PortfolioOverviewCard extends StatelessWidget {
                         ],
                       ),
                       // TODO Einzahlen
-                      onPressed: () => showDialog<String>(
+                      onPressed: () => showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Einzahlen'),
-                          content: const Text(
-                              'Sie möchten gerne Geld einzahlen, dies ist zur Zeit noch nicht möglich'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                        isScrollControlled: true,
+                        barrierColor: Colors.black45,
+                        builder: (context) {
+                          return DraggableOverview(
+                            //TODO change child
+                            child: Container(),
+                            header: "Einzahlen",
+                            inizialSize:
+                                (400 / MediaQuery.of(context).size.height),
+                          );
+                        },
                       ),
                     ),
                     Container(
@@ -221,26 +216,21 @@ class PortfolioOverviewCard extends StatelessWidget {
                           Text("Auszahlen"),
                         ],
                       ),
-                      onPressed: () => showDialog<String>(
+                      onPressed: () => showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Auszahlen'),
-                          content: const Text(
-                              'Sie möchten ihr Geld auszahlen, dies ist zur Zeit noch nicht möglich'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                        isScrollControlled: true,
+                        barrierColor: Colors.black45,
+                        builder: (context) {
+                          return DraggableOverview(
+                            //TODO change child
+                            child: Container(),
+                            header: "Auszahlen",
+                            inizialSize:
+                                (400 / MediaQuery.of(context).size.height),
+                          );
+                        },
                       ),
                     ),
-                    
                   ],
                 ),
               ),

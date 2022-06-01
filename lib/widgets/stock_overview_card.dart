@@ -2,16 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
-import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
+
+import '../screens/stock_detail/stock_detail_screen.dart';
 
 class StockOverviewCard extends StatelessWidget {
   const StockOverviewCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushReplacementNamed(context, StockDetailPage.routeName),
+      onTap: () => Navigator.pushNamed(context, StockDetailScreen.routeName),
       child: Card(
         elevation: 0,
         child: Container(
@@ -40,7 +41,7 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("APL", style: UiTheme.textTheme.headline6),
+                  Text("APL", style: theme.textTheme.headline6),
                   Text(
                     "+1,6%",
                     style: TextStyle(color: Colors.green),
@@ -54,7 +55,7 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("29.850,15€", style: UiTheme.textTheme.headline6),
+                  Text("29.850,15€", style: theme.textTheme.headline6),
                   Text("2,3"),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.end,

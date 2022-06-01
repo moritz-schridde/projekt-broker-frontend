@@ -6,6 +6,7 @@ class PersonalInformationDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -23,11 +24,11 @@ class PersonalInformationDetail extends StatelessWidget {
               children: [
                 Text(
                   "Performance",
-                  style: UiTheme.textTheme.headline6,
+                  style: theme.textTheme.headline6,
                 ),
                 Text(
                   "+0,031%",
-                  style: UiTheme.textTheme.bodyText2,
+                  style: theme.textTheme.bodyText2,
                 ),
               ],
             ),
@@ -35,11 +36,11 @@ class PersonalInformationDetail extends StatelessWidget {
               children: [
                 Text(
                   "Im Besitz",
-                  style: UiTheme.textTheme.headline6,
+                  style: theme.textTheme.headline6,
                 ),
                 Text(
                   "2,3",
-                  style: UiTheme.textTheme.bodyText2,
+                  style: theme.textTheme.bodyText2,
                 ),
               ],
             ),

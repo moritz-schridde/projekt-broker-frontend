@@ -1,8 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
-import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_card.dart';
-import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/stock_overview_card.dart';
 import 'package:provider/src/provider.dart';
@@ -15,10 +14,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
       body: Center(
         child: Column(
           children: [
@@ -31,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               child: Container(
                 child: Text(
                   "Meine Aktien",
-                  style: UiTheme.textTheme.headline3,
+                  style: theme.textTheme.headline3,
                 ),
                 alignment: Alignment.centerLeft,
               ),

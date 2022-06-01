@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
+import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
 import 'package:projekt_broker_frontend/services/backend_service.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
@@ -33,6 +35,9 @@ class Root extends StatelessWidget {
         ChangeNotifierProvider<MockProvider>(
           create: (_) => MockProvider(),
         ),
+        ChangeNotifierProvider<NavigationProvider>(
+          create: (_) => NavigationProvider(),
+        ),
       ],
       builder: (context, _) {
         if (!context.watch<MockProvider>().initialized) {
@@ -53,6 +58,10 @@ class Root extends StatelessWidget {
               return MultiProvider(
                 providers: [
                   Provider.value(value: false), // dummy provider
+                  ChangeNotifierProvider(
+                    create: (context) =>
+                        PortfolioProvider(mockProvider: _mockProvider),
+                  )
                 ],
                 child: app!,
               );

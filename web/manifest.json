@@ -1,6 +1,6 @@
 {
-    "name": "broker_frontend",
-    "short_name": "broker_frontend",
+    "name": "projekt_broker_frontend",
+    "short_name": "projekt_broker_frontend",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

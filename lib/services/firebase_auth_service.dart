@@ -8,6 +8,7 @@ import 'package:subscribed_stream/subscribed_stream.dart';
 ///
 /// Provides a [User] Stream to the MaterialApp, which holds the currently logged in User.
 class FirebaseAuthService with ChangeNotifier {
+  @Deprecated("use DefaultFirebaseOptions.currentPlatform instead")
   static const firebaseOptions = FirebaseOptions(
     apiKey: "AIzaSyA9QsR0KtSgZ7HpDurFxjAtnJ4Kz9djg6A",
     authDomain: "projekt-wertpapierhandel.firebaseapp.com",
@@ -21,6 +22,7 @@ class FirebaseAuthService with ChangeNotifier {
     EmailProviderConfiguration(),
     GoogleProviderConfiguration(
       clientId:
+          // "783713235828-1s02fmno1tg37v2i3ur36lu2r3qor3cv.apps.googleusercontent.com",
           "783713235828-1s02fmno1tg37v2i3ur36lu2r3qor3cv.apps.googleusercontent.com",
     ),
   ];
