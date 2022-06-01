@@ -84,13 +84,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     labelText: "Nachname",
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: DateTimePicker(
                       initialValue: '',
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Geburtsdatum'),
+                      decoration:
+                          InputDecoration(border: OutlineInputBorder(), labelText: 'Geburtsdatum'),
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now(),
                       locale: const Locale('de', 'DE'),
@@ -109,8 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: InternationalPhoneNumberInput(
                       onInputChanged: (PhoneNumber number) {
                         print(number.phoneNumber);
@@ -126,8 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       autoValidateMode: AutovalidateMode.disabled,
                       selectorTextStyle: TextStyle(color: Colors.black),
                       formatInput: false,
-                      keyboardType: TextInputType.numberWithOptions(
-                          signed: true, decimal: true),
+                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                       inputBorder: OutlineInputBorder(),
                       onSaved: (PhoneNumber number) {
                         print('On Saved: $number');
@@ -143,8 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextFormFieldRegister(labelText: "Straße + Hausnr."),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: TextFormField(
                       validator: (value) {
                         RegExp regExp = new RegExp('\d{5}');
@@ -168,8 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextFormFieldRegister(labelText: "Ort"),
                   Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     padding: EdgeInsets.symmetric(vertical: 4),
                     decoration: BoxDecoration(
                         border: Border.all(
@@ -222,8 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: UiTheme.textTheme.bodyText1,
                     ),
                   ),
-                  TextFormFieldRegister(
-                      labelText: "IBAN", inputFormatter: maskFormatterIBAN),
+                  TextFormFieldRegister(labelText: "IBAN", inputFormatter: maskFormatterIBAN),
                   TextFormFieldRegister(labelText: "BIC"),
                 ],
               ),
@@ -239,8 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 content: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                       child: CheckboxListTile(
                         value: ischeckedGeschaeftsbed,
                         activeColor: UiTheme.primaryColor,
@@ -254,12 +246,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                       child: CheckboxListTile(
                         value: ischeckedNotification,
-                        title: Text(
-                            "Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
+                        title: Text("Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
                         onChanged: (bool? value) {
                           setState(() {
                             ischeckedNotification = value!;

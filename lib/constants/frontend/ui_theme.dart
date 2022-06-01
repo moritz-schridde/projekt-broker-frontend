@@ -15,7 +15,7 @@ class UiTheme {
 
   static final primaryColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
-  static final _textTheme = GoogleFonts.abelTextTheme(
+  static final textTheme = GoogleFonts.abelTextTheme(
     TextTheme(
       headline1: TextStyle(
         color: textColorBlack,
@@ -81,6 +81,6 @@ class UiTheme {
       primary: primaryColor,
       secondary: secondaryColor,
     ),
-    textTheme: _textTheme,
+    textTheme: textTheme,
   );
 }
