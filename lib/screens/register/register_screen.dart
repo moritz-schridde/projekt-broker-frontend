@@ -6,11 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
-import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
-import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_card.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
-import 'package:projekt_broker_frontend/widgets/stock_overview_card.dart';
 import 'package:provider/src/provider.dart';
 
 import 'widgets/TextFormFieldRegister.dart';
