@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/stock_detail_page.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
@@ -54,6 +55,8 @@ abstract class AppRouter {
             return StockDetailPage();
           case RegisterScreen.routeName:
             return RegisterScreen();
+          case BuyStockScreen.routeName:
+            return BuyStockScreen();
 
           default:
             return const CrashScreen();

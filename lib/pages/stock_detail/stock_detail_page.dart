@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/pages/stock_detail/widgets/personal_information_detail_page.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 
 class StockDetailPage extends StatelessWidget {
@@ -26,7 +27,8 @@ class StockDetailPage extends StatelessWidget {
               children: [
                 // TODO: Refactor Buttons
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(BuyStockScreen.routeName),
                   child: Padding(
                     child: const Text("Kaufen"),
                     padding: EdgeInsets.all(8),
