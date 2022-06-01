@@ -52,7 +52,6 @@ class BackendService with ChangeNotifier {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'origin': '${window.location.origin}',
       if (token != null) 'Authorization': 'Bearer $token',
       if (headerParameters != null) ...headerParameters,
     };
