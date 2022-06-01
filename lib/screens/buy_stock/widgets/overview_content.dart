@@ -21,7 +21,6 @@ class OverviewContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               left: 18.0,
-              right: 18.0,
             ),
             child: Column(
               children: [
@@ -35,27 +34,33 @@ class OverviewContent extends StatelessWidget {
                     .map(
                       (item) => Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                item[0].toString(),
-                                style: theme.textTheme.bodyText1,
-                              ),
-                              Text(
-                                item[1].toString(),
-                                style: theme.textTheme.bodyText1,
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              right: 18.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  item[0].toString(),
+                                  style: theme.textTheme.bodyText1,
+                                ),
+                                Text(
+                                  item[1].toString(),
+                                  style: theme.textTheme.bodyText1,
+                                ),
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               vertical: 10.0,
                             ),
                             child: Divider(
-                              color: UiTheme.primaryGradientStart,
+                              color:
+                                  UiTheme.primaryGradientEnd.withOpacity(0.5),
                               height: 3,
-                              thickness: 2,
+                              thickness: 1,
                             ),
                           ),
                         ],
