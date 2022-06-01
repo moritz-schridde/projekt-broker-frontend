@@ -7,6 +7,8 @@ part of 'depot.dart';
 // **************************************************************************
 
 abstract class _$DepotCWProxy {
+  Depot budget(double budget);
+
   Depot stocks(List<OwnedStock> stocks);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Depot(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -16,6 +18,7 @@ abstract class _$DepotCWProxy {
   /// Depot(...).copyWith(id: 12, name: "My name")
   /// ````
   Depot call({
+    double? budget,
     List<OwnedStock>? stocks,
   });
 }
@@ -25,6 +28,9 @@ class _$DepotCWProxyImpl implements _$DepotCWProxy {
   final Depot _value;
 
   const _$DepotCWProxyImpl(this._value);
+
+  @override
+  Depot budget(double budget) => this(budget: budget);
 
   @override
   Depot stocks(List<OwnedStock> stocks) => this(stocks: stocks);
@@ -38,9 +44,14 @@ class _$DepotCWProxyImpl implements _$DepotCWProxy {
   /// Depot(...).copyWith(id: 12, name: "My name")
   /// ````
   Depot call({
+    Object? budget = const $CopyWithPlaceholder(),
     Object? stocks = const $CopyWithPlaceholder(),
   }) {
     return Depot(
+      budget: budget == const $CopyWithPlaceholder() || budget == null
+          ? _value.budget
+          // ignore: cast_nullable_to_non_nullable
+          : budget as double,
       stocks: stocks == const $CopyWithPlaceholder() || stocks == null
           ? _value.stocks
           // ignore: cast_nullable_to_non_nullable
@@ -62,8 +73,10 @@ Depot _$DepotFromJson(Map<String, dynamic> json) => Depot(
       stocks: (json['stocks'] as List<dynamic>)
           .map((e) => OwnedStock.fromJson(e as Map<String, dynamic>))
           .toList(),
+      budget: (json['budget'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$DepotToJson(Depot instance) => <String, dynamic>{
       'stocks': instance.stocks,
+      'budget': instance.budget,
     };

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/src/provider.dart';
 
 class PortfolioOverviewCard extends StatelessWidget {
   const PortfolioOverviewCard({Key? key}) : super(key: key);
@@ -9,6 +12,8 @@ class PortfolioOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+//    return Consumer<PortfolioProvider>(
+//      builder: (context, portfolioProvider, child) =>
     final percent = 9.77;
     return Container(
       height: 260,
