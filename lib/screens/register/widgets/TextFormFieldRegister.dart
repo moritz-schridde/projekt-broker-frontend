@@ -16,8 +16,8 @@ class TextFormFieldRegister extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: TextFormField(
         validator: (value) {
-          if (value == null) {
-            return 'Please enter some text';
+          if (value == null || value.isEmpty) {
+            return 'Bitte füllen Sie dieses Felder aus';
           }
           return null;
         },

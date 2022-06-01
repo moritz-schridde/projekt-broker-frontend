@@ -100,8 +100,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         print(val),
                       },
                       validator: (date) {
-                        if (date == null) {
-                          return 'Please choose a date';
+                        if (date == null || date.isEmpty) {
+                          return 'Please enter some text';
                         }
                         return null;
                       },
@@ -133,10 +133,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         print('On Saved: $number');
                       },
                       validator: (val) {
-                        if (val != null) {
-                          return "Bitte ergänzen Sie eine Telefonnummer";
+                        if (val == null || val.isEmpty) {
+                          return 'Please enter some text';
                         }
-                        ;
                         return null;
                       },
                       initialValue: PhoneNumber(isoCode: 'DE'),
@@ -149,10 +148,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: TextFormField(
                       validator: (value) {
                         RegExp regExp = new RegExp('\d{5}');
-                        if (value == null) {
-                          return 'Please enter some text';
+                        if (value == null || value.isEmpty) {
+                          return 'Bitte füllen Sie dieses Feld aus';
                         } else if (!regExp.hasMatch(value)) {
-                          return 'Please enter a valid PLZ';
+                          return 'Bitte tragen Sie eine valide, fünfstellige Postleitzahl ein';
                         }
                         return null;
                       },
