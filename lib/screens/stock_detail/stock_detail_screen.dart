@@ -19,9 +19,9 @@ class StockDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Scaffold(
-      appBar: PreferredSize(
-        child: MainTopNavigationBar(title: "Trading"),
-        preferredSize: Size.fromHeight(40),
+      appBar: MainTopNavigationBar.appBar(
+        context: context,
+        title: "Trading",
       ),
       body: Consumer<StockDetailScreenProvider>(
         builder: (context, stockDetailScreenProvider, _) => Center(

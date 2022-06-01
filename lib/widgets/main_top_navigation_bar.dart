@@ -12,8 +12,10 @@ class MainTopNavigationBar extends StatelessWidget {
     required this.title,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  static AppBar appBar({
+    required BuildContext context,
+    required String title,
+  }) {
     final theme = Theme.of(context);
     return AppBar(
       primary: true,
@@ -23,6 +25,7 @@ class MainTopNavigationBar extends StatelessWidget {
           color: UiTheme.primaryColor,
         ),
       ),
+      centerTitle: false,
       elevation: 0,
       backgroundColor: theme.scaffoldBackgroundColor,
       leading: Navigator.of(context).canPop()
@@ -30,6 +33,14 @@ class MainTopNavigationBar extends StatelessWidget {
               color: UiTheme.primaryColor,
             )
           : null,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return appBar(
+      context: context,
+      title: title,
     );
   }
 }

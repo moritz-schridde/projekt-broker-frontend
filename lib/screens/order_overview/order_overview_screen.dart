@@ -12,9 +12,9 @@ class OrderOverviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: PreferredSize(
-        child: MainTopNavigationBar(title: "Meine Orders"),
-        preferredSize: Size.fromHeight(40),
+      appBar: MainTopNavigationBar.appBar(
+        context: context,
+        title: "Meine Orders",
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

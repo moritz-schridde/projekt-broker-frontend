@@ -22,12 +22,10 @@ class BuyStockScreen extends StatelessWidget {
     var theme = Theme.of(context);
     return Consumer2<BuyStockProvider, PortfolioProvider>(
       builder: (context, buyStockProvider, portfolioProvider, _) => Scaffold(
-        appBar: PreferredSize(
-          child: MainTopNavigationBar(
-            title:
-                "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})",
-          ),
-          preferredSize: Size.fromHeight(40),
+        appBar: MainTopNavigationBar.appBar(
+          context: context,
+          title:
+              "Aktien ${buyStockProvider.mode == BuyStockMode.buy ? 'kaufen' : 'verkaufen'} (${buyStockProvider.stock.shortName})",
         ),
         body: Center(
           child: Column(

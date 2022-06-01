@@ -10,9 +10,9 @@ class StockSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        child: MainTopNavigationBar(title: "Suche"),
-        preferredSize: Size.fromHeight(40),
+      appBar: MainTopNavigationBar.appBar(
+        context: context,
+        title: "Suche",
       ),
       body: Column(
         children: [
