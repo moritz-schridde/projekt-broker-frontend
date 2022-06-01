@@ -20,7 +20,9 @@ class HomeScreen extends StatelessWidget {
             body: Center(
               child: Column(
                 children: [
-                  PortfolioOverviewCard(),
+                  PortfolioOverviewCard(
+                    depot: portfolioProvider.depot,
+                  ),
                   SizedBox(
                     height: 15,
                   ),

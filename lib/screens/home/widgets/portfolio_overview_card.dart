@@ -7,8 +7,14 @@ import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
+import '../../../models/depot.dart';
+
 class PortfolioOverviewCard extends StatelessWidget {
-  const PortfolioOverviewCard({Key? key}) : super(key: key);
+  final Depot depot;
+  PortfolioOverviewCard({
+    Key? key,
+    required this.depot,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +85,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                                   name: 'euro',
                                   symbol: '€',
                                   decimalDigits: 2)
-                              .format(3600.89),
+                              .format(depot.total + depot.budget),
                           style: theme.textTheme.headline5
                               ?.copyWith(color: Colors.white),
                         ),
@@ -113,7 +119,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                                       name: 'euro',
                                       symbol: '€',
                                       decimalDigits: 2)
-                                  .format(2600.75),
+                                  .format(depot.total),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
                             ),
@@ -145,7 +151,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                                       name: 'euro',
                                       symbol: '€',
                                       decimalDigits: 2)
-                                  .format(1600.75),
+                                  .format(depot.budget),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
                             ),

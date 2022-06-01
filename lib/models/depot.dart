@@ -15,9 +15,9 @@ class Depot {
 
   get total {
     double total = 0;
-    while (stocks.iterator.moveNext()) {
-      total +=
-          stocks.iterator.current.amount * stocks.iterator.current.stock.price;
+    Iterator StockIterator = stocks.iterator;
+    while (StockIterator.moveNext()) {
+      total += StockIterator.current.amount * StockIterator.current.stock.price;
     }
 
     return total;

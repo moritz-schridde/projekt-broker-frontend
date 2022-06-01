@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/models/owned_stock.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 
 import '../screens/stock_detail/stock_detail_screen.dart';
 
@@ -40,13 +42,15 @@ class StockOverviewCard extends StatelessWidget {
                   color: UiTheme.lightTheme.secondaryHeaderColor,
                 ),
                 child: Icon(
-                  Icons.euro_symbol,
+                  //Icons.euro_symbol,
+                  ownedStock.stock.icon,
                   color: UiTheme.lightTheme.primaryColor,
                 ),
               ),
               Column(
                 children: [
-                  Text("APL", style: theme.textTheme.headline6),
+                  Text(ownedStock.stock.shortName,
+                      style: theme.textTheme.headline6),
                   Text(
                     "+1,6%",
                     style: TextStyle(color: Colors.green),
@@ -60,8 +64,15 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("29.850,15€", style: theme.textTheme.headline6),
-                  Text("2,3"),
+                  Text(
+                      NumberFormat.currency(
+                              locale: 'de',
+                              name: 'euro',
+                              symbol: '€',
+                              decimalDigits: 2)
+                          .format(ownedStock.stock.price * ownedStock.amount),
+                      style: theme.textTheme.headline6),
+                  Text(ownedStock.amount.toString()),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.end,
               ),
