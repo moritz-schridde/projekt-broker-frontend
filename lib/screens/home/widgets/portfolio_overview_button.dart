@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_bottom_sheet_content.dart';
+import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_bottom_sheet_content_provider.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:provider/provider.dart';
 
@@ -15,15 +16,6 @@ class PortfolioOverviewButton extends StatelessWidget {
     final theme = Theme.of(context);
     return Consumer<PortfolioProvider>(
         builder: (context, portfolioProvider, _) {
-      List<List<String>> buttonContentPayIn = [
-        ["Betrag", "30€"],
-        ["Guthaben nach Einzahlung", "${portfolioProvider.budget! + 30}€"],
-      ];
-      List<List<String>> buttonContentPayOut = [
-        ["Betrag", "30€"],
-        ["Verfügbares Guthaben", "${portfolioProvider.budget}€"],
-        ["Guthaben nach Abbuchung", "${portfolioProvider.budget! - 30}€"],
-      ];
       return Column(
         children: [
           Expanded(
@@ -60,11 +52,18 @@ class PortfolioOverviewButton extends StatelessWidget {
                     isScrollControlled: true,
                     barrierColor: Colors.black45,
                     builder: (context) {
-                      return DraggableOverview(
-                        header: "Einzahlen",
-                        inizialSize: (400 / MediaQuery.of(context).size.height),
-                        child: PortfolioOverviewBottomSheetContent(
-                          contentList: buttonContentPayIn,
+                      return ChangeNotifierProvider<
+                          PortfolioOverviewBottomSheetContentProvider>(
+                        create: (context) =>
+                            PortfolioOverviewBottomSheetContentProvider(
+                          portfolioProvider: portfolioProvider,
+                          type: BuyType.buyIn,
+                        ),
+                        child: DraggableOverview(
+                          header: "Einzahlen",
+                          inizialSize:
+                              (400 / MediaQuery.of(context).size.height),
+                          child: PortfolioOverviewBottomSheetContent(),
                         ),
                       );
                     },
@@ -93,11 +92,18 @@ class PortfolioOverviewButton extends StatelessWidget {
                     isScrollControlled: true,
                     barrierColor: Colors.black45,
                     builder: (context) {
-                      return DraggableOverview(
-                        header: "Abbuchen",
-                        inizialSize: (400 / MediaQuery.of(context).size.height),
-                        child: PortfolioOverviewBottomSheetContent(
-                          contentList: buttonContentPayOut,
+                      return ChangeNotifierProvider<
+                          PortfolioOverviewBottomSheetContentProvider>(
+                        create: (context) =>
+                            PortfolioOverviewBottomSheetContentProvider(
+                          portfolioProvider: portfolioProvider,
+                          type: BuyType.buyOut,
+                        ),
+                        child: DraggableOverview(
+                          header: "Einzahlen",
+                          inizialSize:
+                              (400 / MediaQuery.of(context).size.height),
+                          child: PortfolioOverviewBottomSheetContent(),
                         ),
                       );
                     },
