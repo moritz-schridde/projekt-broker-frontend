@@ -18,6 +18,8 @@ class NavigationProvider with ChangeNotifier {
 
   set currentRouteIndex(int currentRouteIndex) {
     _currentRouteIndex = currentRouteIndex;
-    notifyListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }

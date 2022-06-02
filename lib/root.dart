@@ -58,8 +58,7 @@ class Root extends StatelessWidget {
               // register Global Provider which are dependend on the currentUser here
               return MultiProvider(
                 providers: [
-                  Provider.value(value: false), // dummy provider
-                  ChangeNotifierProvider(
+                  ChangeNotifierProvider<PortfolioProvider>(
                     create: (context) =>
                         PortfolioProvider(mockProvider: _mockProvider),
                   ),
