@@ -74,13 +74,11 @@ abstract class AppRouter {
               child: StockDetailScreen(),
             );
           case BuyStockScreen.routeName:
-            return ChangeNotifierProvider(
-              create: (context) => BuyStockProvider(
-                mode: arguments["mode"],
-                stock: arguments["stock"], // TODO remove mock
-              ),
-              child: BuyStockScreen(),
-            );
+            context.read<BuyStockProvider>().init(
+                  mode: arguments["mode"],
+                  stock: arguments["stock"], // TODO remove mock
+                );
+            return BuyStockScreen();
           case BuyStockSuccess.routeName:
             return BuyStockSuccess();
 

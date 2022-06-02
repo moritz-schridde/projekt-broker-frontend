@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_failed.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
+import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_bottom_sheet_content_provider.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
-class OverviewContent extends StatelessWidget {
-  const OverviewContent({Key? key}) : super(key: key);
+class BuyStockOverviewContent extends StatelessWidget {
+  const BuyStockOverviewContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Consumer<PortfolioProvider>(
-      builder: (context, portfolioProvider, _) => Column(
+    return Consumer2<BuyStockProvider, PortfolioProvider>(
+      builder: (context, buyStockProvider, portfolioProvider, _) => Column(
         children: [
           //TODO Refector as other screen
           // POC
@@ -27,11 +29,42 @@ class OverviewContent extends StatelessWidget {
             child: Column(
               children: [
                 ...[
-                  ["Anzahl an Aktien", "30"],
-                  ["Geschätzter Kaufpreis", "2€"],
-                  ["Transaktionskosten", "1€"],
-                  ["Verfügbares Guthaben", portfolioProvider.budget],
-                  ["Geschätztes Restguthaben", (portfolioProvider.budget! - 2)],
+                  // general (both)
+                  [
+                    "Anzahl an Aktien",
+                    buyStockProvider.textEditControllerStock.text,
+                  ],
+                  [
+                    "Geschätzter ${buyStockProvider.mode == BuyType.buyIn ? "Kaufpreis" : "Verkaufspreis"}",
+                    buyStockProvider.textEditControllerMoney.text,
+                  ],
+                  [
+                    "Transaktionskosten",
+                    "1€",
+                  ],
+                  // buy only
+                  if (buyStockProvider.mode == BuyStockMode.buy) ...[
+                    [
+                      "Verfügbares Guthaben",
+                      portfolioProvider.budget,
+                    ],
+                    [
+                      "Geschätztes Restguthaben",
+                      ((portfolioProvider.budget ?? 0) +
+                          (double.tryParse(buyStockProvider
+                                  .textEditControllerMoney.text) ??
+                              0)),
+                    ],
+                  ],
+                  // sell only
+                  if (buyStockProvider.mode == BuyStockMode.sell)
+                    [
+                      "Geschätztes Guthaben nach Verkauf",
+                      ((portfolioProvider.budget ?? 0) -
+                          (double.tryParse(buyStockProvider
+                                  .textEditControllerMoney.text) ??
+                              0)),
+                    ],
                 ]
                     .map(
                       (item) => Column(
@@ -39,6 +72,8 @@ class OverviewContent extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(
                               right: 18.0,
+                              top: 10.0,
+                              bottom: 10.0,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,16 +122,22 @@ class OverviewContent extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.all(8.0),
+            margin: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 20.0,
+            ),
             child: RoundedButton(
               label: Text(
-                "Kaufen",
+                buyStockProvider.mode == BuyStockMode.buy
+                    ? "Kaufen"
+                    : "Verkaufen",
                 style: theme.textTheme.headline5?.copyWith(
                   color: UiTheme.textColorWhite,
                 ),
               ),
               width: double.infinity,
               onPressed: () {
+                //TODO backend call
                 Navigator.of(context).pushNamed(BuyStockSuccess.routeName);
                 // showDialog(
                 //   context: context,

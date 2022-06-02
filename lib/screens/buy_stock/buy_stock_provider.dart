@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 
 import '../../models/stock.dart';
 
@@ -8,19 +9,22 @@ enum BuyStockMode {
 }
 
 class BuyStockProvider with ChangeNotifier {
-  BuyStockMode mode;
+  late Stock stock;
+
+  late BuyStockMode mode;
+
   late TextEditingController textEditControllerMoney;
   late TextEditingController textEditControllerStock;
-  final Stock stock;
 
-  BuyStockProvider({
-    required this.mode,
-    required this.stock,
+  BuyStockProvider();
+
+  void init({
+    required Stock stock,
+    required BuyStockMode mode,
   }) {
-    init();
-  }
+    this.stock = stock;
+    this.mode = mode;
 
-  void init() {
     textEditControllerMoney = TextEditingController(
       text: stock.price.toStringAsFixed(2),
     );
