@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart' as FireFlutter;
+import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
+import 'package:projekt_broker_frontend/screens/profile/widgets/profile_premium.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
+import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/main_bottom_navigation_bar.dart';
 
@@ -11,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: MainTopNavigationBar.appBar(
         context: context,
@@ -18,6 +24,14 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: FireFlutter.ProfileScreen(
         providerConfigs: FirebaseAuthService.providerConfigurations,
+        children: [
+          ChangeNotifierProvider<ProfileProvider>(
+            create: (context) => ProfileProvider(
+              premium: true,
+            ),
+            child: ProfilePremium(),
+          ),
+        ],
       ),
       bottomNavigationBar: MainBottomNavigationBar(),
     );

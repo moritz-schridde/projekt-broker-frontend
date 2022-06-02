@@ -46,7 +46,6 @@ class PortfolioOverviewButton extends StatelessWidget {
                       Text("Einzahlen"),
                     ],
                   ),
-                  // TODO Einzahlen
                   onPressed: () => showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,

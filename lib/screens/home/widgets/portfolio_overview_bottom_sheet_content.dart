@@ -148,7 +148,7 @@ class PortfolioOverviewBottomSheetContent extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );
