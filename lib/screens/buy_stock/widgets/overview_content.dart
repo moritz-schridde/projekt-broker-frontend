@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_failed.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class OverviewContent extends StatelessWidget {
     return Consumer<PortfolioProvider>(
       builder: (context, portfolioProvider, _) => Column(
         children: [
+          //TODO Refector as other screen
           // POC
           //TODO save Stock estate in stock or somewhere else
           //TODO save amount of money from input
@@ -95,12 +97,13 @@ class OverviewContent extends StatelessWidget {
               ),
               width: double.infinity,
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return BuyStockFailed();
-                  },
-                );
+                Navigator.of(context).pushNamed(BuyStockSuccess.routeName);
+                // showDialog(
+                //   context: context,
+                //   builder: (_) {
+                //     return BuyStockFailed();
+                //   },
+                // );
               },
             ),
           ),

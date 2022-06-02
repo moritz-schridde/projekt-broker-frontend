@@ -24,7 +24,6 @@ class MainBottomNavigationBar extends StatelessWidget {
             context,
             NavigationProvider.routes[index],
           );
-          navigationProvider.currentRouteIndex = index;
         },
         items: [
           BottomNavigationBarItem(

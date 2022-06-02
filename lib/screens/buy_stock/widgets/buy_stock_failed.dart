@@ -46,7 +46,10 @@ class BuyStockFailed extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            SizedBox(
+              height: 15,
             ),
             TextButton(
               child: Text("Zurück zur Startseite"),
@@ -56,19 +59,6 @@ class BuyStockFailed extends StatelessWidget {
           ],
         )
       ],
-      // child: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     Icon(Icons.ac_unit),
-      //     Text(
-      //       "Order konnte nicht platziert werden",
-      //       style: theme.textTheme.headline4,
-      //       textAlign: TextAlign.center,
-      //     ),
-
-      //   ],
-      // ),
     );
   }
 }
