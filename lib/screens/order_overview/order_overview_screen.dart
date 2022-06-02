@@ -20,7 +20,19 @@ class OrderOverviewScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                  ),
+                  child: Divider(
+                    color: UiTheme.lightTheme.secondaryHeaderColor,
+                    height: 2,
+                    thickness: 1,
+                  ),
+                );
+              },
               itemCount: 9,
               shrinkWrap: true,
               itemBuilder: (context, index) {
