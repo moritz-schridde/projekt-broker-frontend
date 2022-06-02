@@ -5,10 +5,10 @@ enum BuyType { buyIn, buyOut }
 
 class PortfolioOverviewBottomSheetContentProvider with ChangeNotifier {
   PortfolioProvider portfolioProvider;
-  late TextEditingController textEditingController;
-
-  late List<List<String>> buttonContent;
   BuyType type;
+
+  late TextEditingController textEditingController;
+  late String label;
 
   PortfolioOverviewBottomSheetContentProvider({
     required this.portfolioProvider,
@@ -18,15 +18,33 @@ class PortfolioOverviewBottomSheetContentProvider with ChangeNotifier {
   }
 
   void init() {
-    buttonContent = [
-      ["Betrag", "30€"],
-      if (type == BuyType.buyIn)
-        ["Guthaben nach Einzahlung", "${portfolioProvider.budget! + 30}€"],
-      if (type == BuyType.buyOut) ...[
-        ["Verfügbares Guthaben", "${portfolioProvider.budget}€"],
-        ["Guthaben nach Abbuchung", "${portfolioProvider.budget! - 30}€"],
-      ]
-    ];
-    textEditingController = TextEditingController(text: "00,00");
+    textEditingController = TextEditingController();
+    label = type == BuyType.buyIn ? "Einzahlen" : "Abbuchen";
+  }
+
+  List<List<String>> get buttonContent => [
+        ["Betrag", "30€"],
+        if (type == BuyType.buyIn)
+          [
+            "Guthaben nach Einzahlung",
+            "${portfolioProvider.budget! + (double.tryParse(textEditingController.text) ?? 0)}€"
+          ],
+        if (type == BuyType.buyOut) ...[
+          ["Verfügbares Guthaben", "${portfolioProvider.budget}€"],
+          [
+            "Guthaben nach Abbuchung",
+            "${portfolioProvider.budget! - (double.tryParse(textEditingController.text) ?? 0)}€"
+          ],
+        ]
+      ];
+
+  set setBudgetLabel(String value) {
+    textEditingController.text = value;
+    notifyListeners();
+  }
+
+  void setNewPortfolioBudget() {
+    //TODO Backend call
+    notifyListeners();
   }
 }

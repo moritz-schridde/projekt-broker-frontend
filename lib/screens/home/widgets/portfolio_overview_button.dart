@@ -62,7 +62,7 @@ class PortfolioOverviewButton extends StatelessWidget {
                         child: DraggableOverview(
                           header: "Einzahlen",
                           inizialSize:
-                              (400 / MediaQuery.of(context).size.height),
+                              (300 / MediaQuery.of(context).size.height),
                           child: PortfolioOverviewBottomSheetContent(),
                         ),
                       );
@@ -100,9 +100,9 @@ class PortfolioOverviewButton extends StatelessWidget {
                           type: BuyType.buyOut,
                         ),
                         child: DraggableOverview(
-                          header: "Einzahlen",
+                          header: "Abbuchen",
                           inizialSize:
-                              (400 / MediaQuery.of(context).size.height),
+                              (350 / MediaQuery.of(context).size.height),
                           child: PortfolioOverviewBottomSheetContent(),
                         ),
                       );
