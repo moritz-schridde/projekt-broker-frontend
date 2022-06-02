@@ -23,15 +23,10 @@ class StockOverviewCard extends StatelessWidget {
       child: Card(
         elevation: 0,
         child: Container(
-          decoration: BoxDecoration(
-            border: Border.symmetric(
-              horizontal: BorderSide(
-                color: UiTheme.lightTheme.secondaryHeaderColor,
-              ),
-            ),
-          ),
           margin: EdgeInsets.all(8),
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(
+            horizontal: 8.0,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

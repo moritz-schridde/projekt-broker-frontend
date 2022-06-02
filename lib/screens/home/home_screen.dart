@@ -16,42 +16,54 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Consumer<PortfolioProvider>(
-      builder: ((context, portfolioProvider, child) => Scaffold(
-            body: Center(
-              child: Column(
-                children: [
-                  PortfolioOverviewCard(
-                    depot: portfolioProvider.depot,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: Text(
-                        "Meine Aktien",
-                        style: theme.textTheme.headline3,
-                      ),
-                      alignment: Alignment.centerLeft,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: portfolioProvider.stockCount,
-                      itemBuilder: (context, index) {
-                        return StockOverviewCard(
-                          ownedStock: portfolioProvider.depot.stocks[index],
-                        );
-                      },
-                    ),
-                  ),
-                ],
+      builder: (context, portfolioProvider, child) => Scaffold(
+        body: Center(
+          child: Column(
+            children: [
+              PortfolioOverviewCard(
+                depot: portfolioProvider.depot,
               ),
-            ),
-            bottomNavigationBar: MainBottomNavigationBar(),
-          )),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  child: Text(
+                    "Meine Aktien",
+                    style: theme.textTheme.headline3,
+                  ),
+                  alignment: Alignment.centerLeft,
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                      ),
+                      child: Divider(
+                        color: UiTheme.lightTheme.secondaryHeaderColor,
+                        height: 2,
+                        thickness: 1,
+                      ),
+                    );
+                  },
+                  shrinkWrap: true,
+                  itemCount: portfolioProvider.stockCount ?? 0,
+                  itemBuilder: (context, index) {
+                    return StockOverviewCard(
+                      ownedStock: portfolioProvider.depot.stocks[index],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: MainBottomNavigationBar(),
+      ),
     );
   }
 }
