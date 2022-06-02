@@ -9,44 +9,66 @@ class BuyStockFailed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(20),
-        color: UiTheme.textColorWhite,
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
       ),
-      margin: EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: (MediaQuery.of(context).size.height / 6),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(Icons.ac_unit),
+          CircleAvatar(
+            radius: 40,
+            backgroundColor: UiTheme.primaryColor,
+            child: Icon(
+              Icons.cancel,
+              color: Colors.white,
+              size: 60,
+            ),
+          ),
           Text(
             "Order konnte nicht platziert werden",
             style: theme.textTheme.headline4,
             textAlign: TextAlign.center,
           ),
-          RoundedButton(
-            label: Text(
-              "Erneut versuchen",
-              style: theme.textTheme.headline5?.copyWith(
-                color: UiTheme.textColorWhite,
-              ),
-            ),
-            width: double.infinity,
-            onPressed: () {},
-          ),
-          TextButton(
-            child: Text("Zurück zur Startseite"),
-            onPressed: () =>
-                Navigator.of(context).popUntil((route) => route.isFirst),
-          ),
         ],
       ),
+      actionsAlignment: MainAxisAlignment.center,
+      actions: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RoundedButton(
+              label: Text(
+                "Erneut versuchen",
+                style: theme.textTheme.headline5?.copyWith(
+                  color: UiTheme.textColorWhite,
+                ),
+              ),
+              width: double.infinity,
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Text("Zurück zur Startseite"),
+              onPressed: () =>
+                  Navigator.of(context).popUntil((route) => route.isFirst),
+            ),
+          ],
+        )
+      ],
+      // child: Column(
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     Icon(Icons.ac_unit),
+      //     Text(
+      //       "Order konnte nicht platziert werden",
+      //       style: theme.textTheme.headline4,
+      //       textAlign: TextAlign.center,
+      //     ),
+
+      //   ],
+      // ),
     );
   }
 }
