@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/widgets/order_overview_card.dart';
@@ -19,6 +22,44 @@ class OrderOverviewScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(
+              horizontal: 18.0,
+              vertical: 10.0,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.5,
+                style: BorderStyle.solid,
+                color: UiTheme.primaryColor,
+              ),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Aktienname, Abkürzung, etc.",
+                suffixIcon: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 10.0,
+                  ),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: UiTheme.primaryColor,
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) {
