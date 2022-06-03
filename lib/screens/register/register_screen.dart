@@ -1,5 +1,5 @@
+import 'package:checkbox_formfield/checkbox_list_tile_formfield.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +22,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   int _index = 0;
-  bool ischeckedGeschaeftsbed = false;
-  bool ischeckedNotification = false;
   String countryValue = "";
 
   var maskFormatterIBAN = new MaskTextInputFormatter(
@@ -77,17 +75,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               content: Column(
                 children: [
                   TextFormFieldRegister(
-                    labelText: "Vorname",
+                    labelText: "Vorname *",
                   ),
                   TextFormFieldRegister(
-                    labelText: "Nachname",
+                    labelText: "Nachname *",
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: DateTimePicker(
                       initialValue: '',
-                      decoration:
-                          InputDecoration(border: OutlineInputBorder(), labelText: 'Geburtsdatum'),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Geburtsdatum *'),
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now(),
                       locale: const Locale('de', 'DE'),
@@ -98,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       validator: (date) {
                         if (date == null || date.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         }
                         return null;
                       },
@@ -106,7 +106,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: InternationalPhoneNumberInput(
                       onInputChanged: (PhoneNumber number) {
                         print(number.phoneNumber);
@@ -118,40 +119,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                       ),
                       ignoreBlank: false,
-                      hintText: "Telefonnummer",
+                      hintText: "Telefonnummer *",
                       autoValidateMode: AutovalidateMode.disabled,
                       selectorTextStyle: TextStyle(color: Colors.black),
                       formatInput: false,
-                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                      keyboardType: TextInputType.numberWithOptions(
+                          signed: true, decimal: true),
                       inputBorder: OutlineInputBorder(),
                       onSaved: (PhoneNumber number) {
                         print('On Saved: $number');
                       },
                       validator: (val) {
                         if (val == null || val.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         }
                         return null;
                       },
                       initialValue: PhoneNumber(isoCode: 'DE'),
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Straße + Hausnr."),
+                  TextFormFieldRegister(labelText: "Straße + Hausnr. *"),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: TextFormField(
                       validator: (value) {
                         RegExp regExp = new RegExp('\d{5}');
                         if (value == null || value.isEmpty) {
-                          return 'Bitte füllen Sie dieses Feld aus';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         } else if (!regExp.hasMatch(value)) {
-                          return 'Bitte tragen Sie eine valide, fünfstellige Postleitzahl ein';
+                          return 'Bitte tragen Sie eine valide, fünfstellige Postleitzahl ein!';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'PLZ',
+                        labelText: 'PLZ *',
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
@@ -160,9 +163,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ], // Only numbers can be entered
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Ort"),
+                  TextFormFieldRegister(labelText: "Ort *"),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     padding: EdgeInsets.symmetric(vertical: 4),
                     decoration: BoxDecoration(
                         border: Border.all(
@@ -170,7 +174,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         borderRadius: BorderRadius.circular(4)),
                     child: CountryCodePicker(
-                      onChanged: print,
+                      onChanged: ((value) =>
+                          countryValue = value.toCountryStringOnly()),
                       // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                       initialSelection: 'DE',
                       favorite: ['+49', 'DE'],
@@ -202,8 +207,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: theme.textTheme.bodyText1,
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Vorname"),
-                  TextFormFieldRegister(labelText: "Nachname"),
+                  TextFormFieldRegister(labelText: "Vorname *"),
+                  TextFormFieldRegister(labelText: "Nachname *"),
                   TextFormFieldRegister(
                     labelText: "Steueridentifikationsnummer",
                     inputFormatter: maskFormatterSteuerId,
@@ -215,8 +220,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: theme.textTheme.bodyText1,
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "IBAN", inputFormatter: maskFormatterIBAN),
-                  TextFormFieldRegister(labelText: "BIC"),
+                  TextFormFieldRegister(
+                      labelText: "IBAN *", inputFormatter: maskFormatterIBAN),
+                  TextFormFieldRegister(labelText: "BIC *"),
                 ],
               ),
             ),
@@ -231,29 +237,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 content: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      child: CheckboxListTile(
-                        value: ischeckedGeschaeftsbed,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: CheckboxListTileFormField(
                         activeColor: UiTheme.primaryColor,
                         title: Text(
                             "Ich habe die allgemeinen Geschäftsbedingungen und Datenschutzrichtlinien zur Kenntnis genommen und stimme diesen zu. *"),
-                        onChanged: (bool? value) {
-                          setState(() {
-                            ischeckedGeschaeftsbed = value!;
-                          });
+                        validator: (value) {
+                          if (value == false) {
+                            return 'Bitte bestätigen Sie die Geschäftsbedingungen und Datenschutzrichtlinien!';
+                          }
+                          return null;
                         },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      child: CheckboxListTile(
-                        value: ischeckedNotification,
-                        title: Text("Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
-                        onChanged: (bool? value) {
-                          setState(() {
-                            ischeckedNotification = value!;
-                          });
-                        },
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: CheckboxListTileFormField(
+                        activeColor: UiTheme.primaryColor,
+                        title: Text(
+                            "Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
                       ),
                     )
                   ],

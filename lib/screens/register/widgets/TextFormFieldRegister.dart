@@ -17,7 +17,7 @@ class TextFormFieldRegister extends StatelessWidget {
       child: TextFormField(
         validator: (value) {
           if (value == null) {
-            return 'Please enter some text';
+            return 'Bitte füllen Sie dieses Feld aus!';
           }
           return null;
         },

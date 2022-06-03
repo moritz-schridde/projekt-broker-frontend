@@ -3,6 +3,7 @@ import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
+import 'package:projekt_broker_frontend/screens/register/register_screen.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -35,6 +36,8 @@ abstract class AppRouter {
             return LoadingScreen();
           case CrashScreen.routeName:
             return CrashScreen();
+          case RegisterScreen.routeName:
+            return RegisterScreen();
         }
 
         // read Providers here
@@ -61,7 +64,9 @@ abstract class AppRouter {
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
-                stock: context.read<MockProvider>().dummyStock, // TODO remove stock
+                stock: context
+                    .read<MockProvider>()
+                    .dummyStock, // TODO remove stock
               ),
               child: StockDetailScreen(),
             );

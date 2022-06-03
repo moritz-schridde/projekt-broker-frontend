@@ -44,13 +44,12 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   date_time_picker: ^2.1.0
   mask_text_input_formatter: ^2.3.0
-  country_picker: ^2.0.15
   country_code_picker: ^2.0.2
-  # iban_form_field: ^0.2.2
   json_annotation: ^4.4.0
   copy_with_extension: ^4.0.0
   res_builder: ^1.1.2
   google_fonts: ^3.0.1
+  checkbox_formfield: ^0.2.0
 
 dev_dependencies:
   flutter_test:
