@@ -26,6 +26,13 @@ class ProfileScreen extends StatelessWidget {
         providerConfigs: FirebaseAuthService.providerConfigurations,
         children: [
           ProfilePremium(),
+          OutlinedButton(
+            onPressed: () => context
+                .read<FirebaseAuthService>()
+                .getBearerToken()
+                .then(print),
+            child: Text("log Bearer"),
+          ),
         ],
       ),
       bottomNavigationBar: MainBottomNavigationBar(),
