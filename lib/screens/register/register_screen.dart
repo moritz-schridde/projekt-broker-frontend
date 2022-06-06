@@ -1,5 +1,5 @@
+import 'package:checkbox_formfield/checkbox_list_tile_formfield.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,8 +25,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   int _index = 0;
-  bool ischeckedGeschaeftsbed = false;
-  bool ischeckedNotification = false;
   String countryValue = "";
 
   processRegister() {
@@ -138,8 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: DateTimePicker(
                       initialValue: '',
-                      decoration:
-                          InputDecoration(border: OutlineInputBorder(), labelText: 'Geburtsdatum'),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(), labelText: 'Geburtsdatum *'),
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now(),
                       locale: const Locale('de', 'DE'),
@@ -150,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       validator: (date) {
                         if (date == null || date.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         }
                         return null;
                       },
@@ -172,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                       ),
                       ignoreBlank: false,
-                      hintText: "Telefonnummer",
+                      hintText: "Telefonnummer *",
                       autoValidateMode: AutovalidateMode.disabled,
                       selectorTextStyle: TextStyle(color: Colors.black),
                       formatInput: false,
@@ -182,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //     .updateUserInfo((p0) => p0.copyWith.phone(value.phoneNumber!)),
                       validator: (val) {
                         if (val == null || val.isEmpty) {
-                          return 'Please enter some text';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         }
                         return null;
                       },
@@ -200,9 +198,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: (value) {
                         RegExp regExp = new RegExp('\d{5}');
                         if (value == null || value.isEmpty) {
-                          return 'Bitte füllen Sie dieses Feld aus';
+                          return 'Bitte füllen Sie dieses Feld aus!';
                         } else if (!regExp.hasMatch(value)) {
-                          return 'Bitte tragen Sie eine valide, fünfstellige Postleitzahl ein';
+                          return 'Bitte tragen Sie eine valide, fünfstellige Postleitzahl ein!';
                         }
                         return null;
                       },
@@ -210,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //     registerProvider.updateUserInfo((p0) => p0.copyWith.postalcode(value!)),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'PLZ',
+                        labelText: 'PLZ *',
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
@@ -310,28 +308,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      child: CheckboxListTile(
-                        value: ischeckedGeschaeftsbed,
+                      child: CheckboxListTileFormField(
                         activeColor: UiTheme.primaryColor,
                         title: Text(
                             "Ich habe die allgemeinen Geschäftsbedingungen und Datenschutzrichtlinien zur Kenntnis genommen und stimme diesen zu. *"),
-                        onChanged: (bool? value) {
-                          setState(() {
-                            ischeckedGeschaeftsbed = value!;
-                          });
+                        validator: (value) {
+                          if (value == false) {
+                            return 'Bitte bestätigen Sie die Geschäftsbedingungen und Datenschutzrichtlinien!';
+                          }
+                          return null;
                         },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      child: CheckboxListTile(
-                        value: ischeckedNotification,
+                      child: CheckboxListTileFormField(
+                        activeColor: UiTheme.primaryColor,
                         title: Text("Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
-                        onChanged: (bool? value) {
-                          setState(() {
-                            ischeckedNotification = value!;
-                          });
-                        },
                       ),
                     )
                   ],
