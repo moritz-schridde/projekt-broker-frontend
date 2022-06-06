@@ -6,9 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/models/bank_account.dart';
+import 'package:projekt_broker_frontend/models/user_info.dart';
+import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/TextFormFieldRegister.dart';
 
@@ -26,11 +29,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool ischeckedNotification = false;
   String countryValue = "";
 
-  var maskFormatterIBAN = new MaskTextInputFormatter(
+  processRegister() {
+    if (_formKey.currentState!.validate()) {
+      print("register validated");
+    } else {
+      print("register");
+    }
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  var maskFormatterIBAN = MaskTextInputFormatter(
     mask: "XX## #### #### #### #### ##",
     filter: {"#": RegExp(r'[0-9]'), "X": RegExp(r'[A-Z]')},
   );
-  var maskFormatterSteuerId = new MaskTextInputFormatter(
+  var maskFormatterSteuerId = MaskTextInputFormatter(
     mask: "## ### ### ###",
     filter: {"#": RegExp(r'[0-9]')},
   );
@@ -39,12 +52,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
+    // return Consumer<RegisterProvider>(builder: (context, registerProvider, _) {
+    //   final userInfo = registerProvider.userInfo;
+    TextStyle headingStyle = TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrieren'),
       ),
       body: Form(
+        key: _formKey,
         child: Stepper(
+          controlsBuilder: (context, ControlsDetails controls) {
+            return Container(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  if (_index != 0)
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: theme.backgroundColor,
+                      ),
+                      onPressed: controls.onStepCancel,
+                      child: Text(
+                        "Zurück",
+                        style: TextStyle(color: theme.primaryColor),
+                      ),
+                    ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: UiTheme.primaryColor,
+                    ),
+                    onPressed: controls.onStepContinue,
+                    child: Text(_index == 2 ? "Abschicken" : "Weiter"),
+                  ),
+                ],
+              ),
+            );
+          },
           currentStep: _index,
           onStepCancel: () {
             if (_index > 0) {
@@ -59,6 +105,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _index += 1;
               });
             }
+            if (_index == 2) {
+              processRegister();
+            }
           },
           onStepTapped: (int index) {
             setState(() {
@@ -67,20 +116,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
           },
           steps: <Step>[
             Step(
-              title: const Text(
+              isActive: _index == 0,
+              state: _index > 1 ? StepState.complete : StepState.indexed,
+              title: Text(
                 'Persönliches',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: headingStyle,
               ),
               content: Column(
                 children: [
                   TextFormFieldRegister(
                     labelText: "Vorname",
+                    // onSaved: (value) =>
+                    //     registerProvider.updateUserInfo((p0) => p0.copyWith.name(value!)),
                   ),
                   TextFormFieldRegister(
                     labelText: "Nachname",
+                    // onSaved: (value) =>
+                    //     registerProvider.updateUserInfo((p0) => p0.copyWith.surname(value!)),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -102,7 +154,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         return null;
                       },
-                      onSaved: (val) => print(val),
+                      // onSaved: (value) {
+                      //   registerProvider.updateUserInfo((p0) => p0.copyWith.birthDay(value!));
+                      //},
                     ),
                   ),
                   Padding(
@@ -124,9 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       formatInput: false,
                       keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                       inputBorder: OutlineInputBorder(),
-                      onSaved: (PhoneNumber number) {
-                        print('On Saved: $number');
-                      },
+                      // onSaved: (value) => registerProvider
+                      //     .updateUserInfo((p0) => p0.copyWith.phone(value.phoneNumber!)),
                       validator: (val) {
                         if (val == null || val.isEmpty) {
                           return 'Please enter some text';
@@ -136,7 +189,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       initialValue: PhoneNumber(isoCode: 'DE'),
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Straße + Hausnr."),
+                  TextFormFieldRegister(
+                    labelText: "Straße + Hausnr.",
+                    // onSaved: (value) =>
+                    //     registerProvider.updateUserInfo((p0) => p0.copyWith.street(value!)),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: TextFormField(
@@ -149,6 +206,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         return null;
                       },
+                      // onSaved: (value) =>
+                      //     registerProvider.updateUserInfo((p0) => p0.copyWith.postalcode(value!)),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'PLZ',
@@ -160,7 +219,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ], // Only numbers can be entered
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Ort"),
+                  TextFormFieldRegister(
+                    labelText: "Ort",
+                    // onSaved: (value) =>
+                    //     registerProvider.updateUserInfo((p0) => p0.copyWith.city(value!)),
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     padding: EdgeInsets.symmetric(vertical: 4),
@@ -170,15 +233,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         borderRadius: BorderRadius.circular(4)),
                     child: CountryCodePicker(
-                      onChanged: print,
-                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                      // onChanged: (value) =>
+                      //     registerProvider.updateUserInfo((p0) => p0.copyWith.country(value.name!)),
                       initialSelection: 'DE',
                       favorite: ['+49', 'DE'],
-                      // optional. Shows only country name and flag
                       showCountryOnly: true,
-                      // optional. Shows only country name and flag when popup is closed.
                       showOnlyCountryWhenClosed: true,
-                      // optional. aligns the flag and the Text left
                       alignLeft: true,
                     ),
                   ),
@@ -188,11 +248,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Step(
               title: Text(
                 'Bankverbindung',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: headingStyle,
               ),
+              isActive: _index == 1,
               content: Column(
                 children: [
                   Padding(
@@ -202,11 +260,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: theme.textTheme.bodyText1,
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "Vorname"),
-                  TextFormFieldRegister(labelText: "Nachname"),
+                  TextFormFieldRegister(
+                    labelText: "Vorname",
+
+                    //initialValue: registerProvider.userInfo.name,
+                    // onSaved: (value) =>
+                    // registerProvider.updateBankAccount((p0) => p0.copyWith.name(value!)),
+                  ),
+                  TextFormFieldRegister(
+                    labelText: "Nachname",
+                    //initialValue: registerProvider.userInfo.name,
+                    // onSaved: (value) =>
+                    // registerProvider.updateBankAccount((p0) => p0.copyWith.surname(value!)),
+                  ),
                   TextFormFieldRegister(
                     labelText: "Steueridentifikationsnummer",
                     inputFormatter: maskFormatterSteuerId,
+                    // onSaved: (value) =>
+                    // registerProvider.updateBankAccount((p0) => p0.copyWith.taxNumber(value!)),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
@@ -215,19 +286,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: theme.textTheme.bodyText1,
                     ),
                   ),
-                  TextFormFieldRegister(labelText: "IBAN", inputFormatter: maskFormatterIBAN),
-                  TextFormFieldRegister(labelText: "BIC"),
+                  TextFormFieldRegister(
+                    labelText: "IBAN",
+                    inputFormatter: maskFormatterIBAN,
+                    // onSaved: (value) =>
+                    // registerProvider.updateBankAccount((p0) => p0.copyWith.iban(value!)),
+                  ),
+                  TextFormFieldRegister(
+                    labelText: "BIC",
+                    // onSaved: (value) =>
+                    // registerProvider.updateBankAccount((p0) => p0.copyWith.bic(value!)),
+                  ),
                 ],
               ),
             ),
             Step(
                 title: Text(
                   'Registrierung abschließen',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: headingStyle,
                 ),
+                isActive: _index == 2,
                 content: Column(
                   children: [
                     Padding(
@@ -263,5 +341,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       bottomNavigationBar: MainBottomNavigationBar(),
     );
+    //   });
   }
 }

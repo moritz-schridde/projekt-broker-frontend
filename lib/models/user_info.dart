@@ -1,6 +1,4 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:flutter/material.dart';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_info.g.dart';
@@ -36,8 +34,7 @@ class UserInfo {
     required this.birthYear,
   });
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) =>
-      _$UserInfoFromJson(json);
+  factory UserInfo.fromJson(Map<String, dynamic> json) => _$UserInfoFromJson(json);
 
   get toJson => _$UserInfoToJson(this);
 }

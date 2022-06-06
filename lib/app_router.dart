@@ -3,6 +3,7 @@ import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
+import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -12,6 +13,7 @@ import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/register/register_screen.dart';
 import 'screens/stock_detail/stock_detail_screen.dart';
 import 'screens/stock_detail/stock_detail_screen_provider.dart';
 
@@ -58,6 +60,15 @@ abstract class AppRouter {
             return StockSearchScreen();
           case ProfileScreen.routeName:
             return ProfileScreen();
+          case RegisterScreen.routeName:
+            return ChangeNotifierProvider(
+              create: (context) => RegisterProvider(
+                context.read<RegisterProvider>().bankAccount,
+                context.read<RegisterProvider>().userInfo,
+              ),
+              child: RegisterScreen(),
+            );
+
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
