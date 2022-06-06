@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
 import 'package:projekt_broker_frontend/services/backend_service.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
@@ -57,10 +58,12 @@ class Root extends StatelessWidget {
               // register Global Provider which are dependend on the currentUser here
               return MultiProvider(
                 providers: [
-                  Provider.value(value: false), // dummy provider
-                  ChangeNotifierProvider(
+                  ChangeNotifierProvider<PortfolioProvider>(
                     create: (context) =>
                         PortfolioProvider(mockProvider: _mockProvider),
+                  ),
+                  ChangeNotifierProvider<BuyStockProvider>(
+                    create: (context) => BuyStockProvider(),
                   )
                 ],
                 child: app!,

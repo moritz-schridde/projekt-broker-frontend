@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
+import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
 import 'package:projekt_broker_frontend/screens/register/register_screen.dart';
+import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -43,12 +45,13 @@ abstract class AppRouter {
         }
 
         // read Providers here
-
+        final navigationProvider = context.read<NavigationProvider>();
         //
 
         // Auth required routes
         switch (routeSettings.name) {
           case HomeScreen.routeName:
+            navigationProvider.currentRouteIndex = 0;
             return MultiProvider(
               providers: [
                 Provider.value(value: false), // dummy provider
@@ -58,10 +61,13 @@ abstract class AppRouter {
               },
             );
           case OrderOverviewScreen.routeName:
+            navigationProvider.currentRouteIndex = 1;
             return OrderOverviewScreen();
           case StockSearchScreen.routeName:
+            navigationProvider.currentRouteIndex = 2;
             return StockSearchScreen();
           case ProfileScreen.routeName:
+            navigationProvider.currentRouteIndex = 3;
             return ProfileScreen();
           case RegisterScreen.routeName:
             return ChangeNotifierProvider(
@@ -80,13 +86,13 @@ abstract class AppRouter {
               child: StockDetailScreen(),
             );
           case BuyStockScreen.routeName:
-            return ChangeNotifierProvider(
-              create: (context) => BuyStockProvider(
-                mode: arguments["mode"],
-                stock: arguments["stock"], // TODO remove mock
-              ),
-              child: BuyStockScreen(),
-            );
+            context.read<BuyStockProvider>().init(
+                  mode: arguments["mode"],
+                  stock: arguments["stock"], // TODO remove mock
+                );
+            return BuyStockScreen();
+          case BuyStockSuccess.routeName:
+            return BuyStockSuccess();
 
           default:
             return const CrashScreen();

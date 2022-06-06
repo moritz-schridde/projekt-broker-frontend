@@ -72,9 +72,9 @@ class DraggableOverview extends StatelessWidget {
                       vertical: 10.0,
                     ),
                     child: Divider(
-                      color: UiTheme.primaryGradientStart,
+                      color: UiTheme.primaryGradientEnd.withOpacity(0.5),
                       height: 3,
-                      thickness: 2,
+                      thickness: 1,
                     ),
                   ),
                   child,
