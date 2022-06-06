@@ -23,4 +23,6 @@ class OrderDetail {
       _$OrderDetailFromJson(json);
 
   get toJson => _$OrderDetailToJson(this);
+
+  double get stockPrice => this.value / this.amount;
 }

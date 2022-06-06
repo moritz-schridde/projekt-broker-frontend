@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
+import 'package:projekt_broker_frontend/provider/order_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
@@ -43,6 +44,7 @@ abstract class AppRouter {
 
         // read Providers here
         final navigationProvider = context.read<NavigationProvider>();
+        final orderProvider = context.read<OrderProvider>();
         //
 
         // Auth required routes
@@ -60,7 +62,9 @@ abstract class AppRouter {
           case OrderOverviewScreen.routeName:
             navigationProvider.currentRouteIndex = 1;
             return ChangeNotifierProvider<OrderOverviewProvider>(
-              create: (context) => OrderOverviewProvider(),
+              create: (context) => OrderOverviewProvider(
+                orderProvider: orderProvider,
+              ),
               child: OrderOverviewScreen(),
             );
           case StockSearchScreen.routeName:

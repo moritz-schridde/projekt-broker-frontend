@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/models/order.dart';
 import 'package:projekt_broker_frontend/screens/stock_detail/stock_detail_screen.dart';
 
 class OrderOverviewCard extends StatelessWidget {
-  const OrderOverviewCard({Key? key}) : super(key: key);
+  final Order order;
+
+  const OrderOverviewCard({
+    Key? key,
+    required this.order,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +41,15 @@ class OrderOverviewCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "APL",
+                    "${order.info.stock.shortName}",
                     style: theme.textTheme.headline6,
                   ),
                   Text(
-                    "Menge: 13",
+                    "Menge: ${order.info.amount}",
                     style: theme.textTheme.bodyText2,
                   ),
                   Text(
-                    "Preis: 168,54€",
+                    "Preis: ${order.info.value / order.info.amount}€",
                     style: theme.textTheme.bodyText2,
                   ),
                 ],
@@ -52,7 +58,7 @@ class OrderOverviewCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "Orderwert: 795,10€",
+                    "Orderwert: ${order.info.value}€",
                     style: theme.textTheme.headline6,
                   ),
                   Text(
