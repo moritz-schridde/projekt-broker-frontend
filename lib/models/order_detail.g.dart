@@ -9,6 +9,8 @@ part of 'order_detail.dart';
 abstract class _$OrderDetailCWProxy {
   OrderDetail amount(int amount);
 
+  OrderDetail stock(Stock stock);
+
   OrderDetail value(double value);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `OrderDetail(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -19,6 +21,7 @@ abstract class _$OrderDetailCWProxy {
   /// ````
   OrderDetail call({
     int? amount,
+    Stock? stock,
     double? value,
   });
 }
@@ -33,6 +36,9 @@ class _$OrderDetailCWProxyImpl implements _$OrderDetailCWProxy {
   OrderDetail amount(int amount) => this(amount: amount);
 
   @override
+  OrderDetail stock(Stock stock) => this(stock: stock);
+
+  @override
   OrderDetail value(double value) => this(value: value);
 
   @override
@@ -45,6 +51,7 @@ class _$OrderDetailCWProxyImpl implements _$OrderDetailCWProxy {
   /// ````
   OrderDetail call({
     Object? amount = const $CopyWithPlaceholder(),
+    Object? stock = const $CopyWithPlaceholder(),
     Object? value = const $CopyWithPlaceholder(),
   }) {
     return OrderDetail(
@@ -52,6 +59,10 @@ class _$OrderDetailCWProxyImpl implements _$OrderDetailCWProxy {
           ? _value.amount
           // ignore: cast_nullable_to_non_nullable
           : amount as int,
+      stock: stock == const $CopyWithPlaceholder() || stock == null
+          ? _value.stock
+          // ignore: cast_nullable_to_non_nullable
+          : stock as Stock,
       value: value == const $CopyWithPlaceholder() || value == null
           ? _value.value
           // ignore: cast_nullable_to_non_nullable
@@ -70,12 +81,14 @@ extension $OrderDetailCopyWith on OrderDetail {
 // **************************************************************************
 
 OrderDetail _$OrderDetailFromJson(Map<String, dynamic> json) => OrderDetail(
+      stock: Stock.fromJson(json['stock'] as Map<String, dynamic>),
       value: (json['value'] as num).toDouble(),
       amount: json['amount'] as int,
     );
 
 Map<String, dynamic> _$OrderDetailToJson(OrderDetail instance) =>
     <String, dynamic>{
+      'stock': instance.stock,
       'value': instance.value,
       'amount': instance.amount,
     };
