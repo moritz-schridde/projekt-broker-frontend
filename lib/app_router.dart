@@ -6,6 +6,7 @@ import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dar
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
 import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
+import 'package:projekt_broker_frontend/screens/order_overview/order_overview_provider.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -58,7 +59,10 @@ abstract class AppRouter {
             );
           case OrderOverviewScreen.routeName:
             navigationProvider.currentRouteIndex = 1;
-            return OrderOverviewScreen();
+            return ChangeNotifierProvider<OrderOverviewProvider>(
+              create: (context) => OrderOverviewProvider(),
+              child: OrderOverviewScreen(),
+            );
           case StockSearchScreen.routeName:
             navigationProvider.currentRouteIndex = 2;
             return StockSearchScreen();
