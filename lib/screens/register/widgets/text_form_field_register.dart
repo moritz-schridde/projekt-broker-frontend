@@ -7,7 +7,7 @@ class TextFormFieldRegister extends StatelessWidget {
   String? initialValue;
   MaskTextInputFormatter? inputFormatter;
   TextFormFieldRegister({
-    required String this.labelText,
+    required this.labelText,
     this.inputFormatter,
     // required this.onSaved,
     this.initialValue,

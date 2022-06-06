@@ -1,19 +1,14 @@
 import 'package:checkbox_formfield/checkbox_list_tile_formfield.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
-import 'package:projekt_broker_frontend/models/bank_account.dart';
-import 'package:projekt_broker_frontend/models/user_info.dart';
-import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
-import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
-import 'package:provider/provider.dart';
-
-import 'widgets/TextFormFieldRegister.dart';
+import 'widgets/text_form_field_register.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/register";
@@ -29,9 +24,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   processRegister() {
     if (_formKey.currentState!.validate()) {
-      print("register validated");
+      if (kDebugMode) {
+        print("register validated");
+      }
     } else {
-      print("register");
+      if (kDebugMode) {
+        print("register");
+      }
     }
   }
 
@@ -143,9 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       locale: const Locale('de', 'DE'),
                       dateLabelText: 'Geburtsdatum',
                       dateMask: 'dd.MM.yyyy',
-                      onChanged: (val) => {
-                        print(val),
-                      },
+                      onChanged: (val) => {},
                       validator: (date) {
                         if (date == null || date.isEmpty) {
                           return 'Bitte füllen Sie dieses Feld aus!';
@@ -160,12 +157,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: InternationalPhoneNumberInput(
-                      onInputChanged: (PhoneNumber number) {
-                        print(number.phoneNumber);
-                      },
-                      onInputValidated: (bool value) {
-                        print(value);
-                      },
+                      onInputChanged: (PhoneNumber number) {},
+                      onInputValidated: (bool value) {},
                       selectorConfig: SelectorConfig(
                         selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
                       ),
@@ -196,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     child: TextFormField(
                       validator: (value) {
-                        RegExp regExp = new RegExp('\d{5}');
+                        RegExp regExp = RegExp('\d{5}');
                         if (value == null || value.isEmpty) {
                           return 'Bitte füllen Sie dieses Feld aus!';
                         } else if (!regExp.hasMatch(value)) {
