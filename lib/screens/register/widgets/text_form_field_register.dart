@@ -3,13 +3,13 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class TextFormFieldRegister extends StatelessWidget {
   final String labelText;
-  // final Function(String?) onSaved;
+  final Function(String?) onSaved;
   String? initialValue;
   MaskTextInputFormatter? inputFormatter;
   TextFormFieldRegister({
     required this.labelText,
     this.inputFormatter,
-    // required this.onSaved,
+    required this.onSaved,
     this.initialValue,
     Key? key,
   }) : super(key: key);
@@ -26,7 +26,7 @@ class TextFormFieldRegister extends StatelessWidget {
           return null;
         },
         initialValue: initialValue,
-        // onSaved: onSaved,
+        onSaved: onSaved,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: labelText,

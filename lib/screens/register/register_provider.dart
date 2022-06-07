@@ -6,31 +6,29 @@ class RegisterProvider with ChangeNotifier {
   late UserInfo userInfo;
   late BankAccount bankAccount;
 
-  RegisterProvider(userInfo, bankAccount) {
-    this.userInfo = userInfo ??
-        UserInfo(
-          name: "New Name",
-          surname: "New Surname",
-          email: "New Email",
-          phone: "New Phone",
-          street: "New Street",
-          number: "New Number",
-          postalcode: "New Postalcode",
-          city: "New City",
-          country: "New Country",
-          birthDay: "New BirthDay",
-          birthMonth: "New BirthMonth",
-          birthYear: "New BirthYear",
-        );
-    this.bankAccount = bankAccount ??
-        BankAccount(
-          kontoId: "New KontoId",
-          name: "New Name",
-          surname: "New Surname",
-          taxNumber: "New TaxNumber",
-          iban: "New Iban",
-          bic: "New Bic",
-        );
+  RegisterProvider() {
+    this.userInfo = UserInfo(
+      name: "New Name",
+      surname: "New Surname",
+      email: "New Email",
+      phone: "New Phone",
+      street: "New Street",
+      number: "New Number",
+      postalcode: "New Postalcode",
+      city: "New City",
+      country: "New Country",
+      birthDay: "New BirthDay",
+      birthMonth: "New BirthMonth",
+      birthYear: "New BirthYear",
+    );
+    this.bankAccount = BankAccount(
+      kontoId: "New KontoId",
+      name: "New Name",
+      surname: "New Surname",
+      taxNumber: "New TaxNumber",
+      iban: "New Iban",
+      bic: "New Bic",
+    );
   }
 
   void updateUserInfo(UserInfo Function(UserInfo) updateUser) {

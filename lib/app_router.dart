@@ -71,10 +71,7 @@ abstract class AppRouter {
             return ProfileScreen();
           case RegisterScreen.routeName:
             return ChangeNotifierProvider(
-              create: (context) => RegisterProvider(
-                context.read<RegisterProvider>().bankAccount,
-                context.read<RegisterProvider>().userInfo,
-              ),
+              create: (context) => RegisterProvider(),
               child: RegisterScreen(),
             );
 
