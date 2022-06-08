@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'firebase_auth_service.dart';
 import 'package:http/http.dart' as http;
 
-import 'dart:html';
+//import 'dart:html';
 
 enum RequestType {
   GET,
@@ -61,13 +61,11 @@ class BackendService with ChangeNotifier {
       switch (requestType) {
         case RequestType.POST:
           print("posting to ${url.toString()}");
-          response =
-              await http.post(url, headers: headers, body: json.encode(body));
+          response = await http.post(url, headers: headers, body: json.encode(body));
           break;
         case RequestType.PUT:
           print("putting to ${url.toString()}");
-          response =
-              await http.put(url, headers: headers, body: json.encode(body));
+          response = await http.put(url, headers: headers, body: json.encode(body));
           break;
         case RequestType.DELETE:
           print("deleting from ${url.toString()}");

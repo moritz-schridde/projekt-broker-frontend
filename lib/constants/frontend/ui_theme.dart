@@ -15,8 +15,7 @@ class UiTheme {
   static final secondaryGradientEnd = Color.fromRGBO(138, 43, 226, 0.7);
   static final labelTextLight = Color(0xFFB9C1D9);
 
-  static final primaryColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.purple);
+  static final primaryColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
   static final _textTheme = GoogleFonts.abelTextTheme(
     TextTheme(

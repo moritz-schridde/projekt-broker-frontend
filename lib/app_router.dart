@@ -5,6 +5,8 @@ import 'package:projekt_broker_frontend/provider/order_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
+import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
+import 'package:projekt_broker_frontend/screens/register/register_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
 import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/order_overview_provider.dart';
@@ -17,6 +19,7 @@ import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/register/register_screen.dart';
 import 'screens/stock_detail/stock_detail_screen.dart';
 import 'screens/stock_detail/stock_detail_screen_provider.dart';
 
@@ -40,6 +43,11 @@ abstract class AppRouter {
             return LoadingScreen();
           case CrashScreen.routeName:
             return CrashScreen();
+          case RegisterScreen.routeName:
+            return ChangeNotifierProvider(
+              create: (context) => RegisterProvider(),
+              child: RegisterScreen(),
+            );
         }
 
         // read Providers here
@@ -81,9 +89,7 @@ abstract class AppRouter {
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
-                stock: context
-                    .read<MockProvider>()
-                    .dummyStock, // TODO remove stock
+                stock: context.read<MockProvider>().dummyStock, // TODO remove stock
               ),
               child: StockDetailScreen(),
             );
