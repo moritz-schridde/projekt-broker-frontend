@@ -41,7 +41,10 @@ abstract class AppRouter {
           case CrashScreen.routeName:
             return CrashScreen();
           case RegisterScreen.routeName:
-            return RegisterScreen();
+            return ChangeNotifierProvider(
+              create: (context) => RegisterProvider(),
+              child: RegisterScreen(),
+            );
         }
 
         // read Providers here
