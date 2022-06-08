@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
+import 'package:projekt_broker_frontend/provider/order_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/register/register_provider.dart';
 import 'package:projekt_broker_frontend/screens/register/register_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
+import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
+import 'package:projekt_broker_frontend/screens/order_overview/order_overview_provider.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -49,6 +52,7 @@ abstract class AppRouter {
 
         // read Providers here
         final navigationProvider = context.read<NavigationProvider>();
+        final orderProvider = context.read<OrderProvider>();
         //
 
         // Auth required routes
@@ -65,19 +69,23 @@ abstract class AppRouter {
             );
           case OrderOverviewScreen.routeName:
             navigationProvider.currentRouteIndex = 1;
-            return OrderOverviewScreen();
+            return ChangeNotifierProvider<OrderOverviewProvider>(
+              create: (context) => OrderOverviewProvider(
+                orderProvider: orderProvider,
+              ),
+              child: OrderOverviewScreen(),
+            );
           case StockSearchScreen.routeName:
             navigationProvider.currentRouteIndex = 2;
             return StockSearchScreen();
           case ProfileScreen.routeName:
             navigationProvider.currentRouteIndex = 3;
-            return ProfileScreen();
-          case RegisterScreen.routeName:
-            return ChangeNotifierProvider(
-              create: (context) => RegisterProvider(),
-              child: RegisterScreen(),
+            return ChangeNotifierProvider<ProfileProvider>(
+              create: (context) => ProfileProvider(
+                premium: true,
+              ),
+              child: ProfileScreen(),
             );
-
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(

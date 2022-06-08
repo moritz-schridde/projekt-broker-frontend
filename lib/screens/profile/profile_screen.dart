@@ -25,11 +25,13 @@ class ProfileScreen extends StatelessWidget {
       body: FireFlutter.ProfileScreen(
         providerConfigs: FirebaseAuthService.providerConfigurations,
         children: [
-          ChangeNotifierProvider<ProfileProvider>(
-            create: (context) => ProfileProvider(
-              premium: true,
-            ),
-            child: ProfilePremium(),
+          ProfilePremium(),
+          OutlinedButton(
+            onPressed: () => context
+                .read<FirebaseAuthService>()
+                .getBearerToken()
+                .then(print),
+            child: Text("log Bearer"),
           ),
         ],
       ),
