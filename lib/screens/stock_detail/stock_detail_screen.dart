@@ -3,6 +3,7 @@ import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_detail/stock_detail_screen_provider.dart';
+import 'package:projekt_broker_frontend/screens/stock_detail/widgets/stock_chart.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
@@ -31,10 +32,7 @@ class StockDetailScreen extends StatelessWidget {
               Placeholder(
                 fallbackHeight: 150,
               ),
-              // TODO: Placholder vor Chart
-              Placeholder(
-                fallbackHeight: 150,
-              ),
+              StockChart(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

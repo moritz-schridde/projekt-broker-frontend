@@ -45,6 +45,7 @@ dependencies:
   copy_with_extension: ^4.0.0
   res_builder: ^1.1.2
   google_fonts: ^3.0.1
+  fl_chart: ^0.51.0
 
 dev_dependencies:
   flutter_test:

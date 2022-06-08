@@ -9,9 +9,11 @@ class UiTheme {
   static final primarySuccess = Color.fromRGBO(10, 180, 68, 0.75);
   static final primaryFailure = Color.fromRGBO(250, 18, 18, 0.75);
   static final primaryGradientStart = Color(0xFFB689DF);
+  static final primaryGradientStartLight = Color.fromARGB(255, 226, 207, 243);
   static final primaryGradientEnd = Color(0xFF8A2BE2);
   static final secondaryGradientStart = Color.fromRGBO(236, 251, 246, 0);
   static final secondaryGradientEnd = Color.fromRGBO(138, 43, 226, 0.7);
+  static final labelTextLight = Color(0xFFB9C1D9);
 
   static final primaryColorScheme =
       ColorScheme.fromSwatch(primarySwatch: Colors.purple);
