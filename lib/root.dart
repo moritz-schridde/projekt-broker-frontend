@@ -11,6 +11,7 @@ import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
+import 'provider/user_info_provider.dart';
 
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
@@ -25,13 +26,12 @@ class Root extends StatelessWidget {
           create: (context) => FirebaseAuthService(),
         ),
         ChangeNotifierProvider<BackendService>(
-          create: (context) => BackendService(
-              firebaseAuthService: context.read<FirebaseAuthService>()),
+          create: (context) =>
+              BackendService(firebaseAuthService: context.read<FirebaseAuthService>()),
         ),
         // TODO use Model to broadcast currentUser
         StreamProvider<User?>(
-          create: (context) =>
-              context.read<FirebaseAuthService>().authStateChanges,
+          create: (context) => context.read<FirebaseAuthService>().authStateChanges,
           initialData: null,
         ),
         ChangeNotifierProvider<MockProvider>(
@@ -61,16 +61,21 @@ class Root extends StatelessWidget {
               return MultiProvider(
                 providers: [
                   ChangeNotifierProvider<PortfolioProvider>(
-                    create: (context) =>
-                        PortfolioProvider(mockProvider: _mockProvider),
+                    create: (context) => PortfolioProvider(mockProvider: _mockProvider),
                   ),
                   ChangeNotifierProvider<BuyStockProvider>(
                     create: (context) => BuyStockProvider(),
                   ),
-                  ChangeNotifierProvider(
+                  ChangeNotifierProvider<OrderProvider>(
                     create: (context) => OrderProvider(
                       mockProvider: _mockProvider,
                       backendService: _backendService,
+                    ),
+                  ),
+                  ChangeNotifierProvider<UserInfoProvider>(
+                    create: (context) => UserInfoProvider(
+                      backendService: _backendService,
+                      mockProvider: _mockProvider,
                     ),
                   ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/models/bank_account.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/order_provider.dart';
@@ -18,7 +19,7 @@ import 'package:projekt_broker_frontend/screens/order_overview/order_overview_sc
 import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
-
+import 'provider/user_info_provider.dart';
 import 'screens/register/register_screen.dart';
 import 'screens/stock_detail/stock_detail_screen.dart';
 import 'screens/stock_detail/stock_detail_screen_provider.dart';
@@ -53,7 +54,7 @@ abstract class AppRouter {
         // read Providers here
         final navigationProvider = context.read<NavigationProvider>();
         final orderProvider = context.read<OrderProvider>();
-        //
+        final userInfoProvider = context.read<UserInfoProvider>();
 
         // Auth required routes
         switch (routeSettings.name) {
@@ -82,6 +83,7 @@ abstract class AppRouter {
             navigationProvider.currentRouteIndex = 3;
             return ChangeNotifierProvider<ProfileProvider>(
               create: (context) => ProfileProvider(
+                userInfoProvider: userInfoProvider,
                 premium: true,
               ),
               child: ProfileScreen(),

@@ -113,16 +113,14 @@ class ProfilePremium extends StatelessWidget {
                           child: RoundedButton(
                             width: double.infinity,
                             label: Text(
-                              profileProvider.premiumButtonLabel
-                                  .replaceFirst("k", "K"),
+                              profileProvider.premiumButtonLabel.replaceFirst("k", "K"),
                               style: theme.textTheme.headline5?.copyWith(
                                 color: UiTheme.textColorWhite,
                               ),
                             ),
                             onPressed: () {
                               //TODO check if CheckBox is checked
-                              profileProvider.setPremiumStatus =
-                                  !profileProvider.premium;
+                              profileProvider.setPremiumStatus = !profileProvider.premium;
                               Navigator.of(context).pop();
                             },
                           ),

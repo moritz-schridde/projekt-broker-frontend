@@ -1,6 +1,8 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'bank_account.dart';
+
 part 'user_info.g.dart';
 
 @JsonSerializable()
@@ -18,6 +20,7 @@ class UserInfo {
   final String birthDay;
   final String birthMonth;
   final String birthYear;
+  final BankAccount bankAccount;
 
   UserInfo({
     required this.name,
@@ -32,6 +35,7 @@ class UserInfo {
     required this.birthDay,
     required this.birthMonth,
     required this.birthYear,
+    required this.bankAccount,
   });
 
   factory UserInfo.fromJson(Map<String, dynamic> json) => _$UserInfoFromJson(json);

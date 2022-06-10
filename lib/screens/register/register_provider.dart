@@ -26,7 +26,9 @@ class RegisterProvider with ChangeNotifier {
       birthDay: "New BirthDay",
       birthMonth: "New BirthMonth",
       birthYear: "New BirthYear",
+      bankAccount: bankAccount,
     );
+
     bankAccount = BankAccount(
       kontoId: "New KontoId",
       name: "New Name",

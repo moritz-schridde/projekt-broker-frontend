@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/models/owned_stock.dart';
 import 'package:projekt_broker_frontend/models/stock.dart';
 
+import '../models/bank_account.dart';
 import '../models/depot.dart';
 import '../models/order.dart';
 import '../models/order_detail.dart';
+import '../models/user_info.dart';
 
 class MockProvider with ChangeNotifier {
   bool initialized = false;
@@ -31,6 +33,29 @@ class MockProvider with ChangeNotifier {
     shortName: "TWT",
     icon: Icons.airplane_ticket,
     price: 5,
+  );
+
+  UserInfo userInfo = UserInfo(
+    name: "Max",
+    surname: "Mustermann",
+    email: "test@mail.com",
+    phone: "0123456789",
+    street: "Teststrasse",
+    number: "1",
+    postalcode: "12345",
+    city: "Teststadt",
+    country: "Testland",
+    birthDay: "01",
+    birthMonth: "01",
+    birthYear: "2000",
+    bankAccount: BankAccount(
+      kontoId: "1",
+      name: "Max",
+      surname: "Mustermann",
+      taxNumber: "23",
+      iban: "DE22 2222 2222 2222 2222 22",
+      bic: "2222222",
+    ),
   );
 
   late List<OwnedStock> myStocks;

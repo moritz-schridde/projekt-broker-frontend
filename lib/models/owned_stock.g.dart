@@ -74,8 +74,7 @@ OwnedStock _$OwnedStockFromJson(Map<String, dynamic> json) => OwnedStock(
       amount: (json['amount'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$OwnedStockToJson(OwnedStock instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$OwnedStockToJson(OwnedStock instance) => <String, dynamic>{
       'stock': instance.stock,
       'amount': instance.amount,
     };
