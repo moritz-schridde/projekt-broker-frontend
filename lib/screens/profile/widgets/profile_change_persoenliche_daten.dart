@@ -1,9 +1,19 @@
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/screens/profile/widgets/edit_profile_form_field.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
-class ProfileChangeKontaktdaten extends StatelessWidget {
-  const ProfileChangeKontaktdaten({Key? key}) : super(key: key);
+class ProfileChangePersoenlicheDaten extends StatelessWidget {
+  ProfileChangePersoenlicheDaten({Key? key}) : super(key: key);
+
+  var maskFormatterPlz = MaskTextInputFormatter(
+    mask: "#####",
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +22,7 @@ class ProfileChangeKontaktdaten extends StatelessWidget {
     return SimpleDialog(
       title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          "Kontaktdaten",
+          "Persönliche Daten",
           style: theme.textTheme.headline6!.copyWith(color: theme.primaryColor),
         ),
         IconButton(
@@ -27,11 +37,20 @@ class ProfileChangeKontaktdaten extends StatelessWidget {
             padding: const EdgeInsets.all(25),
             child: Column(
               children: [
-                EditProfileFormField(labelText: "Vorname", initialValue: "Max"),
                 EditProfileFormField(
-                    labelText: "Nachname", initialValue: "Mustermann"),
+                    labelText: "Straße + Hausnummer",
+                    initialValue: "Musterstraße 1"),
                 EditProfileFormField(
-                    labelText: "Telefonnummer", initialValue: "0123456789"),
+                    labelText: "Postleitzahl",
+                    initialValue: "12345",
+                    inputFormatter: maskFormatterPlz),
+                EditProfileFormField(
+                    labelText: "Stadt", initialValue: "Musterstadt"),
+                EditProfileFormField(
+                    labelText: "Land", initialValue: "Musterland"),
+                EditProfileFormField(
+                    labelText: "Staatsangehörigkeit",
+                    initialValue: "Deutschland"),
                 Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: RoundedButton(

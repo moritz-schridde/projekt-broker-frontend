@@ -3,6 +3,8 @@ import 'package:flutterfire_ui/auth.dart' as FireFlutter;
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
 import 'package:projekt_broker_frontend/screens/profile/widgets/profile_change_kontaktdaten.dart';
+import 'package:projekt_broker_frontend/screens/profile/widgets/profile_change_konto_depo.dart';
+import 'package:projekt_broker_frontend/screens/profile/widgets/profile_change_persoenliche_daten.dart';
 import 'package:projekt_broker_frontend/screens/profile/widgets/profile_premium.dart';
 import 'package:projekt_broker_frontend/services/firebase_auth_service.dart';
 import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
@@ -17,13 +19,27 @@ class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile';
   const ProfileScreen({Key? key}) : super(key: key);
 
+  openKontaktdatenPopup(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ProfileChangeKontaktdaten());
+  }
+
+  openPersoenlicheDatenPopup(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ProfileChangePersoenlicheDaten());
+  }
+
+  openKontoDepotPopup(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ProfileChangeKontoDepot());
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    openKontaktdatenPopup() {
-      //showDialog(context: context, builder: (BuildContext context) => ProfileChangeKontaktdaten());
-    }
 
     return Consumer2<ProfileProvider, UserInfoProvider>(
       builder: (context, profileProvider, userInfoProvider, _) => Scaffold(
@@ -35,7 +51,10 @@ class ProfileScreen extends StatelessWidget {
           providerConfigs: FirebaseAuthService.providerConfigurations,
           children: [
             OutlinedButton(
-              onPressed: () => context.read<FirebaseAuthService>().getBearerToken().then(print),
+              onPressed: () => context
+                  .read<FirebaseAuthService>()
+                  .getBearerToken()
+                  .then(print),
               child: Text("log Bearer"),
             ),
             Container(
@@ -45,14 +64,15 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Kontaktdaten",
-                    style: theme.textTheme.headline6!.copyWith(color: theme.primaryColor),
+                    style: theme.textTheme.headline6!
+                        .copyWith(color: theme.primaryColor),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.edit_outlined,
                       color: theme.primaryColor,
                     ),
-                    onPressed: openKontaktdatenPopup(),
+                    onPressed: () => openKontaktdatenPopup(context),
                   ),
                 ],
               ),
@@ -80,14 +100,15 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Persönliche Daten",
-                    style: theme.textTheme.headline6!.copyWith(color: theme.primaryColor),
+                    style: theme.textTheme.headline6!
+                        .copyWith(color: theme.primaryColor),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.edit_outlined,
                       color: theme.primaryColor,
                     ),
-                    onPressed: () => print("Persönliche Daten"),
+                    onPressed: () => openPersoenlicheDatenPopup(context),
                   ),
                 ],
               ),
@@ -120,14 +141,15 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Konten & Depot",
-                    style: theme.textTheme.headline6!.copyWith(color: theme.primaryColor),
+                    style: theme.textTheme.headline6!
+                        .copyWith(color: theme.primaryColor),
                   ),
                   IconButton(
                     icon: Icon(
                       Icons.edit_outlined,
                       color: theme.primaryColor,
                     ),
-                    onPressed: () => print("Konten & Depot"),
+                    onPressed: () => openKontoDepotPopup(context),
                   ),
                 ],
               ),

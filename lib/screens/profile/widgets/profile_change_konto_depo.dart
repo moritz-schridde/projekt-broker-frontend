@@ -1,9 +1,18 @@
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:projekt_broker_frontend/screens/profile/widgets/edit_profile_form_field.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
-class ProfileChangeKontaktdaten extends StatelessWidget {
-  const ProfileChangeKontaktdaten({Key? key}) : super(key: key);
+import 'edit_profile_form_field.dart';
+
+class ProfileChangeKontoDepot extends StatelessWidget {
+  ProfileChangeKontoDepot({Key? key}) : super(key: key);
+
+  var maskFormatterIBAN = MaskTextInputFormatter(
+    mask: "XX## #### #### #### #### ##",
+    filter: {"#": RegExp(r'[0-9]'), "X": RegExp(r'[A-Z]')},
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +21,7 @@ class ProfileChangeKontaktdaten extends StatelessWidget {
     return SimpleDialog(
       title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          "Kontaktdaten",
+          "Konto & Depot",
           style: theme.textTheme.headline6!.copyWith(color: theme.primaryColor),
         ),
         IconButton(
@@ -27,11 +36,19 @@ class ProfileChangeKontaktdaten extends StatelessWidget {
             padding: const EdgeInsets.all(25),
             child: Column(
               children: [
-                EditProfileFormField(labelText: "Vorname", initialValue: "Max"),
                 EditProfileFormField(
-                    labelText: "Nachname", initialValue: "Mustermann"),
+                  labelText: "Verknüpftes Konto IBAN",
+                  initialValue: "DE00 0000 0000 0000 0000 00",
+                  inputFormatter: maskFormatterIBAN,
+                ),
                 EditProfileFormField(
-                    labelText: "Telefonnummer", initialValue: "0123456789"),
+                    labelText: "Verknüpftes Konto Kontoinhaber Vorname",
+                    initialValue: "Max"),
+                EditProfileFormField(
+                    labelText: "Verknüpftes Konto Kontoinhaber Nachname",
+                    initialValue: "Mustermann"),
+                EditProfileFormField(
+                    labelText: "Verknüpftes Konto BIC", initialValue: "XYZ"),
                 Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: RoundedButton(
