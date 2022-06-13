@@ -14,6 +14,11 @@ class UserInfoProvider with ChangeNotifier {
     required this.mockProvider,
   });
 
+  void updateUserInfo(UserInfo Function(UserInfo) updateUser) {
+    _userInfo = updateUser(userInfo!);
+    notifyListeners();
+  }
+
   UserInfo? get userInfo {
     _userInfo ??= mockProvider.userInfo; // TODO access backend
     return _userInfo;

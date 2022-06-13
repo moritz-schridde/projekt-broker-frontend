@@ -4,13 +4,13 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 class EditProfileFormField extends StatelessWidget {
   String labelText = "";
   String initialValue = "";
-  // final Function(String?) onSaved;
+  final Function(String?) onSaved;
   MaskTextInputFormatter? inputFormatter;
   EditProfileFormField({
     required this.labelText,
     required this.initialValue,
     this.inputFormatter,
-    // required this.onSaved,
+    required this.onSaved,
     Key? key,
   }) : super(key: key);
 
@@ -24,8 +24,7 @@ class EditProfileFormField extends StatelessWidget {
         border: InputBorder.none,
       ),
       initialValue: initialValue,
-      // onSaved: onSaved,
-      cursorHeight: 0.5,
+      onSaved: onSaved,
       style: theme.textTheme.bodyText2!.copyWith(height: 2),
       validator: (value) {
         if (labelText == "Postleitzahl") {
