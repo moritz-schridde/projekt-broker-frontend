@@ -63,7 +63,8 @@ class _$UserInfoCWProxyImpl implements _$UserInfoCWProxy {
   const _$UserInfoCWProxyImpl(this._value);
 
   @override
-  UserInfo bankAccount(BankAccount bankAccount) => this(bankAccount: bankAccount);
+  UserInfo bankAccount(BankAccount bankAccount) =>
+      this(bankAccount: bankAccount);
 
   @override
   UserInfo birthDay(String birthDay) => this(birthDay: birthDay);
@@ -125,18 +126,20 @@ class _$UserInfoCWProxyImpl implements _$UserInfoCWProxy {
     Object? surname = const $CopyWithPlaceholder(),
   }) {
     return UserInfo(
-      bankAccount: bankAccount == const $CopyWithPlaceholder() || bankAccount == null
-          ? _value.bankAccount
-          // ignore: cast_nullable_to_non_nullable
-          : bankAccount as BankAccount,
+      bankAccount:
+          bankAccount == const $CopyWithPlaceholder() || bankAccount == null
+              ? _value.bankAccount
+              // ignore: cast_nullable_to_non_nullable
+              : bankAccount as BankAccount,
       birthDay: birthDay == const $CopyWithPlaceholder() || birthDay == null
           ? _value.birthDay
           // ignore: cast_nullable_to_non_nullable
           : birthDay as String,
-      birthMonth: birthMonth == const $CopyWithPlaceholder() || birthMonth == null
-          ? _value.birthMonth
-          // ignore: cast_nullable_to_non_nullable
-          : birthMonth as String,
+      birthMonth:
+          birthMonth == const $CopyWithPlaceholder() || birthMonth == null
+              ? _value.birthMonth
+              // ignore: cast_nullable_to_non_nullable
+              : birthMonth as String,
       birthYear: birthYear == const $CopyWithPlaceholder() || birthYear == null
           ? _value.birthYear
           // ignore: cast_nullable_to_non_nullable
@@ -165,10 +168,11 @@ class _$UserInfoCWProxyImpl implements _$UserInfoCWProxy {
           ? _value.phone
           // ignore: cast_nullable_to_non_nullable
           : phone as String,
-      postalcode: postalcode == const $CopyWithPlaceholder() || postalcode == null
-          ? _value.postalcode
-          // ignore: cast_nullable_to_non_nullable
-          : postalcode as String,
+      postalcode:
+          postalcode == const $CopyWithPlaceholder() || postalcode == null
+              ? _value.postalcode
+              // ignore: cast_nullable_to_non_nullable
+              : postalcode as String,
       street: street == const $CopyWithPlaceholder() || street == null
           ? _value.street
           // ignore: cast_nullable_to_non_nullable
@@ -203,7 +207,8 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
       birthDay: json['birthDay'] as String,
       birthMonth: json['birthMonth'] as String,
       birthYear: json['birthYear'] as String,
-      bankAccount: BankAccount.fromJson(json['bankAccount'] as Map<String, dynamic>),
+      bankAccount:
+          BankAccount.fromJson(json['bankAccount'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{

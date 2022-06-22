@@ -70,15 +70,27 @@ class MockProvider with ChangeNotifier {
 
   Future loadMockData() async {
     myStocks = [
-      OwnedStock(stock: dummyStock, amount: 3),
-      OwnedStock(stock: dummyStock2, amount: 1),
-      OwnedStock(stock: dummyStock3, amount: 2.5),
+      OwnedStock(
+        stock: dummyStock,
+        amount: 3,
+        purchasePrice: 700,
+      ),
+      OwnedStock(
+        stock: dummyStock2,
+        amount: 1,
+        purchasePrice: 2500,
+      ),
+      OwnedStock(
+        stock: dummyStock3,
+        amount: 2.5,
+        purchasePrice: 12,
+      ),
     ];
 
     myOrders = [
       Order(
-        orderId: "1",
-        doing: Doing.buy,
+        orderId: 1,
+        type: OrderType.BUY,
         info: OrderDetail(
           stock: dummyStock,
           value: 750,
@@ -86,8 +98,8 @@ class MockProvider with ChangeNotifier {
         ),
       ),
       Order(
-        orderId: "2",
-        doing: Doing.sell,
+        orderId: 2,
+        type: OrderType.SELL,
         info: OrderDetail(
           stock: dummyStock2,
           value: 3000,
@@ -95,8 +107,8 @@ class MockProvider with ChangeNotifier {
         ),
       ),
       Order(
-        orderId: "3",
-        doing: Doing.buy,
+        orderId: 3,
+        type: OrderType.BUY,
         info: OrderDetail(
           stock: dummyStock3,
           value: 5,

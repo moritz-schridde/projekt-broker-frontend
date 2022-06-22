@@ -14,9 +14,15 @@ enum RequestType {
 }
 
 class BackendService with ChangeNotifier {
+  // static final baseUrl = Uri(
+  //   scheme: "http",
+  //   host: "api.trade-empire.karottenkameraden.de",
+  //   port: 8080,
+  //   path: "",
+  // );
   static final baseUrl = Uri(
     scheme: "http",
-    host: "api.trade-empire.karottenkameraden.de",
+    host: "localhost",
     port: 8080,
     path: "",
   );
@@ -61,11 +67,13 @@ class BackendService with ChangeNotifier {
       switch (requestType) {
         case RequestType.POST:
           print("posting to ${url.toString()}");
-          response = await http.post(url, headers: headers, body: json.encode(body));
+          response =
+              await http.post(url, headers: headers, body: json.encode(body));
           break;
         case RequestType.PUT:
           print("putting to ${url.toString()}");
-          response = await http.put(url, headers: headers, body: json.encode(body));
+          response =
+              await http.put(url, headers: headers, body: json.encode(body));
           break;
         case RequestType.DELETE:
           print("deleting from ${url.toString()}");

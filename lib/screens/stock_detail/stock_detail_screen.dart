@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/models/owned_stock.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_detail/stock_detail_screen_provider.dart';
@@ -7,14 +9,20 @@ import 'package:projekt_broker_frontend/screens/stock_detail/widgets/stock_chart
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
+import 'package:projekt_broker_frontend/widgets/stock_search_card.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/stock.dart';
 import 'widgets/personal_information_detail_page.dart';
 
 class StockDetailScreen extends StatelessWidget {
   static const routeName = "/stock_detail";
+  Stock stock;
 
-  const StockDetailScreen({Key? key}) : super(key: key);
+  StockDetailScreen({
+    Key? key,
+    required this.stock,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,59 +32,60 @@ class StockDetailScreen extends StatelessWidget {
         context: context,
         title: "Trading",
       ),
-      body: Consumer<StockDetailScreenProvider>(
-        builder: (context, stockDetailScreenProvider, _) => Center(
-          child: Column(
-            children: [
-              //TODO: Placeholder for Stock
-              Placeholder(
-                fallbackHeight: 150,
-              ),
-              StockChart(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  RoundedButton(
-                    onPressed: () => Navigator.of(context).pushNamed(
-                      BuyStockScreen.routeName,
-                      arguments: {
-                        "mode": BuyStockMode.buy,
-                        "stock": stockDetailScreenProvider.stock,
-                      },
-                    ),
-                    label: Text(
-                      "Kaufen",
-                      style: theme.textTheme.headline6?.copyWith(
-                        fontSize: 18,
-                        color: UiTheme.textColorWhite,
+      body: Consumer2<StockDetailScreenProvider, PortfolioProvider>(
+        builder: (context, stockDetailScreenProvider, portfolioProvider, _) {
+          final ownedStock = portfolioProvider.tryGetOwnedStock(stock);
+
+          return Center(
+            child: Column(
+              children: [
+                IgnorePointer(child: StockSearchCard(stock: stock)),
+                StockChart(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    RoundedButton(
+                      onPressed: () => Navigator.of(context).pushNamed(
+                        BuyStockScreen.routeName,
+                        arguments: {
+                          "mode": BuyStockMode.buy,
+                          "stock": stockDetailScreenProvider.stock,
+                        },
                       ),
-                    ),
-                    width: 150,
-                  ),
-                  RoundedButton(
-                    onPressed: () => Navigator.of(context).pushNamed(
-                      BuyStockScreen.routeName,
-                      arguments: {
-                        "mode": BuyStockMode.sell,
-                        "stock": stockDetailScreenProvider.stock,
-                      },
-                    ),
-                    label: Text(
-                      "Verkaufen",
-                      style: theme.textTheme.headline6?.copyWith(
-                        fontSize: 18,
-                        color: UiTheme.textColorWhite,
+                      label: Text(
+                        "Kaufen",
+                        style: theme.textTheme.headline6?.copyWith(
+                          fontSize: 18,
+                          color: UiTheme.textColorWhite,
+                        ),
                       ),
+                      width: 150,
                     ),
-                    width: 150,
-                  ),
-                ],
-              ),
-              // TODO: Placholder Performance and count
-              PersonalInformationDetail(),
-            ],
-          ),
-        ),
+                    RoundedButton(
+                      onPressed: () => Navigator.of(context).pushNamed(
+                        BuyStockScreen.routeName,
+                        arguments: {
+                          "mode": BuyStockMode.sell,
+                          "stock": stockDetailScreenProvider.stock,
+                        },
+                      ),
+                      label: Text(
+                        "Verkaufen",
+                        style: theme.textTheme.headline6?.copyWith(
+                          fontSize: 18,
+                          color: UiTheme.textColorWhite,
+                        ),
+                      ),
+                      width: 150,
+                    ),
+                  ],
+                ),
+                if (ownedStock != null)
+                  PersonalInformationDetail(ownedStock: ownedStock),
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: MainBottomNavigationBar(),
     );

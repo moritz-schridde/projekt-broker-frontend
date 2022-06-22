@@ -3,6 +3,7 @@ import 'package:projekt_broker_frontend/models/bank_account.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/order_provider.dart';
+import 'package:projekt_broker_frontend/provider/stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_screen.dart';
@@ -23,6 +24,7 @@ import 'provider/user_info_provider.dart';
 import 'screens/register/register_screen.dart';
 import 'screens/stock_detail/stock_detail_screen.dart';
 import 'screens/stock_detail/stock_detail_screen_provider.dart';
+import 'screens/stock_search/stock_search_screen_provider.dart';
 
 abstract class AppRouter {
   static MaterialPageRoute generateRoute(RouteSettings routeSettings) {
@@ -32,8 +34,7 @@ abstract class AppRouter {
     } catch (e) {
       arguments = {};
     }
-    print("Navigating to ${routeSettings.name}");
-    return MaterialPageRoute(
+    return CustomMaterialPageRoute(
       settings: routeSettings,
       builder: (context) {
         // Non auth required routes
@@ -55,6 +56,7 @@ abstract class AppRouter {
         final navigationProvider = context.read<NavigationProvider>();
         final orderProvider = context.read<OrderProvider>();
         final userInfoProvider = context.read<UserInfoProvider>();
+        final stockProvider = context.read<StockProvider>();
 
         // Auth required routes
         switch (routeSettings.name) {
@@ -78,7 +80,12 @@ abstract class AppRouter {
             );
           case StockSearchScreen.routeName:
             navigationProvider.currentRouteIndex = 2;
-            return StockSearchScreen();
+            return ChangeNotifierProvider<StockSearchScreenProvider>(
+              create: (_) => StockSearchScreenProvider(
+                stockProvider: stockProvider,
+              ),
+              child: StockSearchScreen(),
+            );
           case ProfileScreen.routeName:
             navigationProvider.currentRouteIndex = 3;
             return ChangeNotifierProvider<ProfileProvider>(
@@ -91,9 +98,13 @@ abstract class AppRouter {
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
-                stock: context.read<MockProvider>().dummyStock, // TODO remove stock
+                stock: context
+                    .read<MockProvider>()
+                    .dummyStock, // TODO remove stock
               ),
-              child: StockDetailScreen(),
+              child: StockDetailScreen(
+                stock: arguments["stock"],
+              ),
             );
           case BuyStockScreen.routeName:
             context.read<BuyStockProvider>().init(
@@ -109,5 +120,30 @@ abstract class AppRouter {
         }
       },
     );
+  }
+}
+
+class CustomMaterialPageRoute<T> extends MaterialPageRoute<T> {
+  CustomMaterialPageRoute({
+    required WidgetBuilder builder,
+    required RouteSettings settings,
+  }) : super(
+          builder: builder,
+          settings: settings,
+        );
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    // ? remove?
+    return new FadeTransition(
+      opacity: animation,
+      child: child,
+    );
+    // return child;
   }
 }

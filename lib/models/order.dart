@@ -7,22 +7,35 @@ import 'package:projekt_broker_frontend/models/order_detail.dart';
 part 'order.g.dart';
 
 @JsonEnum()
-enum Doing {
-  buy,
-  sell,
+enum OrderType {
+  BUY,
+  SELL,
+}
+
+@JsonEnum()
+enum OrderState {
+  CLOSED,
+  OPEN,
+  PENDING,
 }
 
 @JsonSerializable()
 @CopyWith()
 class Order {
-  final String orderId;
-  final Doing doing;
+  final int orderId;
+  @JsonKey(name: "offerType")
+  final OrderType type;
+  @JsonKey(name: "offerState")
+  final OrderState? state;
   final OrderDetail info;
+  final DateTime? timestamp;
 
   Order({
     required this.orderId,
-    required this.doing,
+    required this.type,
     required this.info,
+    this.state,
+    this.timestamp,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);

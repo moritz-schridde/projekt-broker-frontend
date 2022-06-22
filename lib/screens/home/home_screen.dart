@@ -17,56 +17,67 @@ class HomeScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Consumer<PortfolioProvider>(
       builder: (context, portfolioProvider, child) => Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              PortfolioOverviewCard(
-                depot: portfolioProvider.depot,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Meine Aktien",
-                    style: theme.textTheme.headline3,
+        body: Builder(builder: (context) {
+          final depot = portfolioProvider.depot;
+
+          if (depot == null) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          return Center(
+            child: Column(
+              children: [
+                PortfolioOverviewCard(
+                  depot: portfolioProvider.depot!,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Meine Aktien",
+                      style: theme.textTheme.headline3?.copyWith(
+                        color: theme.primaryColor,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                      ),
-                      child: Divider(
-                        color: UiTheme.lightTheme.secondaryHeaderColor,
-                        height: 2,
-                        thickness: 1,
-                      ),
-                    );
-                  },
-                  shrinkWrap: true,
-                  itemCount: portfolioProvider.stockCount ?? 0,
-                  itemBuilder: (context, index) {
-                    return StockOverviewCard(
-                      ownedStock: portfolioProvider.depot.stocks[index],
-                    );
-                  },
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                        ),
+                        child: Divider(
+                          color: UiTheme.lightTheme.secondaryHeaderColor,
+                          height: 2,
+                          thickness: 1,
+                        ),
+                      );
+                    },
+                    shrinkWrap: true,
+                    itemCount: portfolioProvider.stockCount ?? 0,
+                    itemBuilder: (context, index) {
+                      return StockOverviewCard(
+                        ownedStock: portfolioProvider.depot!.stocks[index],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              TextButton(
-                child: const Text("registrieren"),
-                onPressed: () => Navigator.pushNamed(context, RegisterScreen.routeName),
-                // eigentliche Routing wie in app.dart 25-30
-              )
-            ],
-          ),
-        ),
+                TextButton(
+                  child: const Text("registrieren"),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, RegisterScreen.routeName),
+                  // eigentliche Routing wie in app.dart 25-30
+                )
+              ],
+            ),
+          );
+        }),
         bottomNavigationBar: MainBottomNavigationBar(),
       ),
     );

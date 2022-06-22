@@ -6,26 +6,21 @@ import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/models/owned_stock.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 
-import '../screens/stock_detail/stock_detail_screen.dart';
+import '../../../models/stock.dart';
+import '../../stock_detail/stock_detail_screen.dart';
 
-class StockOverviewCard extends StatelessWidget {
-  OwnedStock ownedStock;
-  StockOverviewCard({
+class StockSearchCard extends StatelessWidget {
+  Stock stock;
+  StockSearchCard({
     Key? key,
-    required this.ownedStock,
+    required this.stock,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final percent =
-        ((ownedStock.stock.price / ownedStock.purchasePrice - 1) * 100);
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        StockDetailScreen.routeName,
-        arguments: {"stock": ownedStock.stock},
-      ),
+      onTap: () => Navigator.pushNamed(context, StockDetailScreen.routeName),
       child: Card(
         elevation: 0,
         child: Container(
@@ -46,24 +41,16 @@ class StockOverviewCard extends StatelessWidget {
                     ),
                     child: Icon(
                       //Icons.euro_symbol,
-                      ownedStock.stock.icon,
+                      stock.icon,
                       color: UiTheme.lightTheme.primaryColor,
                     ),
                   ),
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Text(ownedStock.stock.shortName,
-                        style: theme.textTheme.headline6),
-                    Text(
-                      '${percent >= 0 ? '+' : ''}${percent.toStringAsFixed(2)}%', //TODO
-                      style: percent > 0
-                          ? TextStyle(color: Colors.green)
-                          : TextStyle(color: Colors.red),
-                    ),
-                  ],
+                child: Text(
+                  stock.shortName,
+                  style: theme.textTheme.headline6,
                 ),
               ),
               Expanded(
@@ -75,18 +62,17 @@ class StockOverviewCard extends StatelessWidget {
               ),
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                         NumberFormat.currency(
-                                locale: 'de',
-                                name: 'euro',
-                                symbol: '€',
-                                decimalDigits: 2)
-                            .format(ownedStock.stock.price * ownedStock.amount),
+                          locale: 'de',
+                          name: 'euro',
+                          symbol: '€',
+                          decimalDigits: 2,
+                        ).format(stock.price),
                         style: theme.textTheme.headline6),
-                    Text(ownedStock.amount.toString()),
                   ],
-                  crossAxisAlignment: CrossAxisAlignment.end,
                 ),
               ),
             ],

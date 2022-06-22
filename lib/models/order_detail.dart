@@ -9,8 +9,10 @@ part 'order_detail.g.dart';
 @JsonSerializable()
 @CopyWith()
 class OrderDetail {
+  @JsonKey(name: "share")
   final Stock stock;
   final double value;
+  @JsonKey(name: "count")
   final int amount;
 
   OrderDetail({

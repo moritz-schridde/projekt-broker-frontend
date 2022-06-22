@@ -9,6 +9,8 @@ part of 'owned_stock.dart';
 abstract class _$OwnedStockCWProxy {
   OwnedStock amount(double amount);
 
+  OwnedStock purchasePrice(double purchasePrice);
+
   OwnedStock stock(Stock stock);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `OwnedStock(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -19,6 +21,7 @@ abstract class _$OwnedStockCWProxy {
   /// ````
   OwnedStock call({
     double? amount,
+    double? purchasePrice,
     Stock? stock,
   });
 }
@@ -33,6 +36,10 @@ class _$OwnedStockCWProxyImpl implements _$OwnedStockCWProxy {
   OwnedStock amount(double amount) => this(amount: amount);
 
   @override
+  OwnedStock purchasePrice(double purchasePrice) =>
+      this(purchasePrice: purchasePrice);
+
+  @override
   OwnedStock stock(Stock stock) => this(stock: stock);
 
   @override
@@ -45,6 +52,7 @@ class _$OwnedStockCWProxyImpl implements _$OwnedStockCWProxy {
   /// ````
   OwnedStock call({
     Object? amount = const $CopyWithPlaceholder(),
+    Object? purchasePrice = const $CopyWithPlaceholder(),
     Object? stock = const $CopyWithPlaceholder(),
   }) {
     return OwnedStock(
@@ -52,6 +60,11 @@ class _$OwnedStockCWProxyImpl implements _$OwnedStockCWProxy {
           ? _value.amount
           // ignore: cast_nullable_to_non_nullable
           : amount as double,
+      purchasePrice:
+          purchasePrice == const $CopyWithPlaceholder() || purchasePrice == null
+              ? _value.purchasePrice
+              // ignore: cast_nullable_to_non_nullable
+              : purchasePrice as double,
       stock: stock == const $CopyWithPlaceholder() || stock == null
           ? _value.stock
           // ignore: cast_nullable_to_non_nullable
@@ -70,11 +83,14 @@ extension $OwnedStockCopyWith on OwnedStock {
 // **************************************************************************
 
 OwnedStock _$OwnedStockFromJson(Map<String, dynamic> json) => OwnedStock(
-      stock: Stock.fromJson(json['stock'] as Map<String, dynamic>),
+      stock: Stock.fromJson(json['share'] as Map<String, dynamic>),
       amount: (json['amount'] as num).toDouble(),
+      purchasePrice: (json['purchasePrice'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$OwnedStockToJson(OwnedStock instance) => <String, dynamic>{
-      'stock': instance.stock,
+Map<String, dynamic> _$OwnedStockToJson(OwnedStock instance) =>
+    <String, dynamic>{
+      'share': instance.stock,
       'amount': instance.amount,
+      'purchasePrice': instance.purchasePrice,
     };

@@ -8,12 +8,15 @@ part 'owned_stock.g.dart';
 @JsonSerializable()
 @CopyWith()
 class OwnedStock {
+  @JsonKey(name: "share")
   final Stock stock;
   final double amount;
+  final double purchasePrice;
 
   OwnedStock({
     required this.stock,
     required this.amount,
+    required this.purchasePrice,
   });
 
   factory OwnedStock.fromJson(Map<String, dynamic> json) =>

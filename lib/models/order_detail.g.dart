@@ -81,14 +81,14 @@ extension $OrderDetailCopyWith on OrderDetail {
 // **************************************************************************
 
 OrderDetail _$OrderDetailFromJson(Map<String, dynamic> json) => OrderDetail(
-      stock: Stock.fromJson(json['stock'] as Map<String, dynamic>),
+      stock: Stock.fromJson(json['share'] as Map<String, dynamic>),
       value: (json['value'] as num).toDouble(),
-      amount: json['amount'] as int,
+      amount: json['count'] as int,
     );
 
 Map<String, dynamic> _$OrderDetailToJson(OrderDetail instance) =>
     <String, dynamic>{
-      'stock': instance.stock,
+      'share': instance.stock,
       'value': instance.value,
-      'amount': instance.amount,
+      'count': instance.amount,
     };

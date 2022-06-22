@@ -51,6 +51,7 @@ dependencies:
   google_fonts: ^3.0.1
   checkbox_formfield: ^0.2.0
   fl_chart: ^0.51.0
+  material_design_icons_flutter: ^5.0.6595
 
 dev_dependencies:
   flutter_test:

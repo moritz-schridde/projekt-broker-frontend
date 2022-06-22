@@ -17,7 +17,16 @@ class OrderProvider with ChangeNotifier {
   });
 
   List<Order>? get orders {
-    _orders ??= mockProvider.myOrders;
+    if (_orders == null) {
+      backendService
+          .callBackend<Order>(
+            requestType: RequestType.GET,
+            endpoint: "order",
+            jsonParser: (json) => Order.fromJson(json),
+          )
+          .then((orders) => _orders = orders)
+          .then((_) => notifyListeners());
+    }
     return _orders;
   }
 }

@@ -1,29 +1,55 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/models/owned_stock.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
+import 'package:projekt_broker_frontend/services/backend_service.dart';
 
 import '../models/depot.dart';
+import '../models/stock.dart';
 
 class PortfolioProvider with ChangeNotifier {
   final MockProvider mockProvider;
+  final BackendService backendService;
 
-  double? _budget;
-  int? _stockCount;
+  Depot? _depot;
+
+  PortfolioProvider({
+    required this.mockProvider,
+    required this.backendService,
+  });
+
+  Depot? get depot {
+    if (_depot == null) {
+      backendService
+          .callBackend<Depot>(
+            requestType: RequestType.GET,
+            endpoint: "depot",
+            jsonParser: (json) => Depot.fromJson(json),
+          )
+          .then((depot) => _depot = depot)
+          .then((_) => notifyListeners());
+    }
+
+    return _depot;
+    // return mockProvider.depot;
+  }
 
   double? get budget {
-    _budget ??= mockProvider.depot.budget;
-    return _budget;
+    return _depot?.budget;
   }
 
   int? get stockCount {
-    _stockCount ??= mockProvider.depot.stocks.length;
-    return _stockCount;
+    return _depot?.stocks.length;
   }
 
-  Depot get depot {
-    return mockProvider.depot;
+  OwnedStock? tryGetOwnedStock(Stock stock) {
+    try {
+      return _depot?.stocks.firstWhere(
+        (ownedStock) => ownedStock.stock.shareId == stock.shareId,
+      );
+    } catch (e) {
+      return null;
+    }
   }
-
-  PortfolioProvider({required this.mockProvider});
 }

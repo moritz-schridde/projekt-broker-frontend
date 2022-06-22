@@ -7,11 +7,15 @@ part of 'order.dart';
 // **************************************************************************
 
 abstract class _$OrderCWProxy {
-  Order doing(Doing doing);
-
   Order info(OrderDetail info);
 
-  Order orderId(String orderId);
+  Order orderId(int orderId);
+
+  Order state(OrderState? state);
+
+  Order timestamp(DateTime? timestamp);
+
+  Order type(OrderType type);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Order(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -20,9 +24,11 @@ abstract class _$OrderCWProxy {
   /// Order(...).copyWith(id: 12, name: "My name")
   /// ````
   Order call({
-    Doing? doing,
     OrderDetail? info,
-    String? orderId,
+    int? orderId,
+    OrderState? state,
+    DateTime? timestamp,
+    OrderType? type,
   });
 }
 
@@ -33,13 +39,19 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
   const _$OrderCWProxyImpl(this._value);
 
   @override
-  Order doing(Doing doing) => this(doing: doing);
-
-  @override
   Order info(OrderDetail info) => this(info: info);
 
   @override
-  Order orderId(String orderId) => this(orderId: orderId);
+  Order orderId(int orderId) => this(orderId: orderId);
+
+  @override
+  Order state(OrderState? state) => this(state: state);
+
+  @override
+  Order timestamp(DateTime? timestamp) => this(timestamp: timestamp);
+
+  @override
+  Order type(OrderType type) => this(type: type);
 
   @override
 
@@ -50,15 +62,13 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
   /// Order(...).copyWith(id: 12, name: "My name")
   /// ````
   Order call({
-    Object? doing = const $CopyWithPlaceholder(),
     Object? info = const $CopyWithPlaceholder(),
     Object? orderId = const $CopyWithPlaceholder(),
+    Object? state = const $CopyWithPlaceholder(),
+    Object? timestamp = const $CopyWithPlaceholder(),
+    Object? type = const $CopyWithPlaceholder(),
   }) {
     return Order(
-      doing: doing == const $CopyWithPlaceholder() || doing == null
-          ? _value.doing
-          // ignore: cast_nullable_to_non_nullable
-          : doing as Doing,
       info: info == const $CopyWithPlaceholder() || info == null
           ? _value.info
           // ignore: cast_nullable_to_non_nullable
@@ -66,7 +76,19 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
       orderId: orderId == const $CopyWithPlaceholder() || orderId == null
           ? _value.orderId
           // ignore: cast_nullable_to_non_nullable
-          : orderId as String,
+          : orderId as int,
+      state: state == const $CopyWithPlaceholder()
+          ? _value.state
+          // ignore: cast_nullable_to_non_nullable
+          : state as OrderState?,
+      timestamp: timestamp == const $CopyWithPlaceholder()
+          ? _value.timestamp
+          // ignore: cast_nullable_to_non_nullable
+          : timestamp as DateTime?,
+      type: type == const $CopyWithPlaceholder() || type == null
+          ? _value.type
+          // ignore: cast_nullable_to_non_nullable
+          : type as OrderType,
     );
   }
 }
@@ -81,18 +103,30 @@ extension $OrderCopyWith on Order {
 // **************************************************************************
 
 Order _$OrderFromJson(Map<String, dynamic> json) => Order(
-      orderId: json['orderId'] as String,
-      doing: $enumDecode(_$DoingEnumMap, json['doing']),
+      orderId: json['orderId'] as int,
+      type: $enumDecode(_$OrderTypeEnumMap, json['offerType']),
       info: OrderDetail.fromJson(json['info'] as Map<String, dynamic>),
+      state: $enumDecodeNullable(_$OrderStateEnumMap, json['offerState']),
+      timestamp: json['timestamp'] == null
+          ? null
+          : DateTime.parse(json['timestamp'] as String),
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'orderId': instance.orderId,
-      'doing': _$DoingEnumMap[instance.doing],
+      'offerType': _$OrderTypeEnumMap[instance.type],
+      'offerState': _$OrderStateEnumMap[instance.state],
       'info': instance.info,
+      'timestamp': instance.timestamp?.toIso8601String(),
     };
 
-const _$DoingEnumMap = {
-  Doing.buy: 'buy',
-  Doing.sell: 'sell',
+const _$OrderTypeEnumMap = {
+  OrderType.BUY: 'BUY',
+  OrderType.SELL: 'SELL',
+};
+
+const _$OrderStateEnumMap = {
+  OrderState.CLOSED: 'CLOSED',
+  OrderState.OPEN: 'OPEN',
+  OrderState.PENDING: 'PENDING',
 };

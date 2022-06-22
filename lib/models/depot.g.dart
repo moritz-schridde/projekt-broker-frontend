@@ -70,13 +70,13 @@ extension $DepotCopyWith on Depot {
 // **************************************************************************
 
 Depot _$DepotFromJson(Map<String, dynamic> json) => Depot(
-      stocks: (json['stocks'] as List<dynamic>)
+      stocks: (json['shares'] as List<dynamic>)
           .map((e) => OwnedStock.fromJson(e as Map<String, dynamic>))
           .toList(),
       budget: (json['budget'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$DepotToJson(Depot instance) => <String, dynamic>{
-      'stocks': instance.stocks,
+      'shares': instance.stocks,
       'budget': instance.budget,
     };

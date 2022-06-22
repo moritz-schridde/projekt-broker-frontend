@@ -8,12 +8,13 @@ part 'depot.g.dart';
 @JsonSerializable()
 @CopyWith()
 class Depot {
+  @JsonKey(name: "shares")
   final List<OwnedStock> stocks;
   final double budget;
 
   Depot({required this.stocks, required this.budget});
 
-  get total {
+  double get investedTotal {
     double total = 0;
     Iterator StockIterator = stocks.iterator;
     while (StockIterator.moveNext()) {
@@ -22,6 +23,12 @@ class Depot {
 
     return total;
   }
+
+  double get purchasePriceTotal => stocks.fold<double>(
+        0,
+        (value, ownedStock) =>
+            value + (ownedStock.purchasePrice * ownedStock.amount),
+      );
 
   factory Depot.fromJson(Map<String, dynamic> json) => _$DepotFromJson(json);
 

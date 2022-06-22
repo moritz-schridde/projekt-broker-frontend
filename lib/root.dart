@@ -4,6 +4,7 @@ import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/order_provider.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
+import 'package:projekt_broker_frontend/provider/stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
 import 'package:projekt_broker_frontend/services/backend_service.dart';
@@ -26,12 +27,13 @@ class Root extends StatelessWidget {
           create: (context) => FirebaseAuthService(),
         ),
         ChangeNotifierProvider<BackendService>(
-          create: (context) =>
-              BackendService(firebaseAuthService: context.read<FirebaseAuthService>()),
+          create: (context) => BackendService(
+              firebaseAuthService: context.read<FirebaseAuthService>()),
         ),
         // TODO use Model to broadcast currentUser
         StreamProvider<User?>(
-          create: (context) => context.read<FirebaseAuthService>().authStateChanges,
+          create: (context) =>
+              context.read<FirebaseAuthService>().authStateChanges,
           initialData: null,
         ),
         ChangeNotifierProvider<MockProvider>(
@@ -61,10 +63,18 @@ class Root extends StatelessWidget {
               return MultiProvider(
                 providers: [
                   ChangeNotifierProvider<PortfolioProvider>(
-                    create: (context) => PortfolioProvider(mockProvider: _mockProvider),
+                    create: (context) => PortfolioProvider(
+                      mockProvider: _mockProvider,
+                      backendService: _backendService,
+                    ),
                   ),
                   ChangeNotifierProvider<BuyStockProvider>(
                     create: (context) => BuyStockProvider(),
+                  ),
+                  ChangeNotifierProvider<StockProvider>(
+                    create: (context) => StockProvider(
+                      backendService: _backendService,
+                    ),
                   ),
                   ChangeNotifierProvider<OrderProvider>(
                     create: (context) => OrderProvider(

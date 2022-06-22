@@ -21,7 +21,9 @@ class PortfolioOverviewCard extends StatelessWidget {
     final theme = Theme.of(context);
 //    return Consumer<PortfolioProvider>(
 //      builder: (context, portfolioProvider, child) =>
-    final percent = 9.77;
+
+    final percent =
+        ((depot.investedTotal / depot.purchasePriceTotal - 1) * 100);
     return Container(
       height: 260,
       child: Stack(
@@ -85,7 +87,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                                   name: 'euro',
                                   symbol: '€',
                                   decimalDigits: 2)
-                              .format(depot.total + depot.budget),
+                              .format(depot.investedTotal + depot.budget),
                           style: theme.textTheme.headline5
                               ?.copyWith(color: Colors.white),
                         ),
@@ -93,7 +95,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                           width: 10,
                         ),
                         Text(
-                          '+$percent%',
+                          '${percent > 0 ? '+' : ''}${percent.toStringAsFixed(2)}%',
                           style: theme.textTheme.bodyText2
                               ?.copyWith(color: Colors.white),
                         ),
@@ -119,7 +121,7 @@ class PortfolioOverviewCard extends StatelessWidget {
                                       name: 'euro',
                                       symbol: '€',
                                       decimalDigits: 2)
-                                  .format(depot.total),
+                                  .format(depot.investedTotal),
                               style: theme.textTheme.bodyText1
                                   ?.copyWith(color: Colors.white, fontSize: 18),
                             ),

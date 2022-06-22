@@ -122,7 +122,8 @@ BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
       bic: json['bic'] as String,
     );
 
-Map<String, dynamic> _$BankAccountToJson(BankAccount instance) => <String, dynamic>{
+Map<String, dynamic> _$BankAccountToJson(BankAccount instance) =>
+    <String, dynamic>{
       'kontoId': instance.kontoId,
       'name': instance.name,
       'surname': instance.surname,

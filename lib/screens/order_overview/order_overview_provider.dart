@@ -64,7 +64,7 @@ class OrderOverviewProvider with ChangeNotifier {
     OrderOverviewSortOption(
       sortType: SortType.asc,
       sortCategory: SortCategory.aktienpreis,
-      sortFunction: (a, b) => b.info.value.compareTo(a.info.value),
+      sortFunction: (a, b) => b.info.stockPrice.compareTo(a.info.stockPrice),
     ),
   ];
 
@@ -75,6 +75,13 @@ class OrderOverviewProvider with ChangeNotifier {
   void init() {
     _orders = null;
     formKey = GlobalKey<FormState>();
+    orderProvider.addListener(notifyListeners);
+  }
+
+  @override
+  void dispose() {
+    orderProvider.removeListener(notifyListeners);
+    super.dispose();
   }
 
   List<Order>? get orders {
