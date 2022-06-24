@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/constants/frontend/ui_assets.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/order_provider.dart';
@@ -23,6 +24,11 @@ class Root extends StatelessWidget {
     // Provider which are essential for the app
     return MultiProvider(
       providers: [
+        FutureProvider<bool>(
+          create: (_) => Future.wait(<Future>[UiAssets.init(context)])
+              .then<bool>((_) => true),
+          initialData: false,
+        ),
         ChangeNotifierProvider<FirebaseAuthService>(
           create: (context) => FirebaseAuthService(),
         ),
@@ -44,7 +50,8 @@ class Root extends StatelessWidget {
         ),
       ],
       builder: (context, _) {
-        if (!context.watch<MockProvider>().initialized) {
+        if (!context.watch<MockProvider>().initialized ||
+            !context.watch<bool>()) {
           return MaterialApp(home: LoadingScreen());
         }
 

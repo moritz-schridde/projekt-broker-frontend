@@ -15,14 +15,15 @@ class UiTheme {
   static final secondaryGradientEnd = Color.fromRGBO(138, 43, 226, 0.7);
   static final labelTextLight = Color(0xFFB9C1D9);
 
-  static final primaryColorScheme = ColorScheme.fromSwatch(primarySwatch: Colors.purple);
+  static final primaryColorScheme =
+      ColorScheme.fromSwatch(primarySwatch: Colors.purple);
 
   static final _textTheme = GoogleFonts.abelTextTheme(
     TextTheme(
       headline1: TextStyle(
         color: textColorBlack,
-        fontSize: 40.0,
-        fontWeight: FontWeight.w900,
+        fontSize: 59.0,
+        fontWeight: FontWeight.w400,
         letterSpacing: 3,
       ),
       headline2: TextStyle(
