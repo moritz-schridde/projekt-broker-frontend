@@ -100,7 +100,7 @@ abstract class AppRouter {
             return ChangeNotifierProvider<ProfileProvider>(
               create: (context) => ProfileProvider(
                 userInfoProvider: userInfoProvider,
-                premium: true,
+                premium: false,
               ),
               child: ProfileScreen(),
             );
