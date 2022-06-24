@@ -5,7 +5,7 @@ import 'bank_account.dart';
 
 part 'user_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith()
 class UserInfo {
   final String name;
@@ -20,7 +20,7 @@ class UserInfo {
   final String birthDay;
   final String birthMonth;
   final String birthYear;
-  final BankAccount bankAccount;
+  final BankAccount? bankAccount;
 
   UserInfo({
     required this.name,
@@ -38,7 +38,8 @@ class UserInfo {
     required this.bankAccount,
   });
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) => _$UserInfoFromJson(json);
+  factory UserInfo.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoFromJson(json);
 
   get toJson => _$UserInfoToJson(this);
 }

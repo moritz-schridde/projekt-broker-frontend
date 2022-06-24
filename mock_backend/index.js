@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const { checkIfAuthenticated } = require('./auth')
 
 app.use(cors({ credentials: true, origin: true }))
 
@@ -125,6 +126,68 @@ app.get('/share', (req, res) => {
         ]
     );
 });
+
+const knownUsers = [];
+
+app.get('/user', checkIfAuthenticated, (req, res) => {
+    userAuthId = req.authId
+    if (!knownUsers.includes(userAuthId)) {
+        // res.send(
+        //     {
+        //         // birthDay: 0,
+        //         // birthMonth: 0,
+        //         // birthYear: 0,
+        //         // city: "",
+        //         // country: "",
+        //         // email: "",
+        //         // houseNumber: "",
+        //         // name: "",
+        //         // password: "",
+        //         // phoneNumber: 0,
+        //         // postalCode: "",
+        //         // street: "",
+        //         // surname: "",
+        //         // taxnumber: "",
+        //         // userId: ""
+        //     }
+        // )
+        res.status(404).send() // ?
+    } else {
+        res.status(200).send(
+            {
+                birthDay: "6",
+                birthMonth: "5",
+                birthYear: "2001",
+                city: "weizentown",
+                country: "DE",
+                email: "hans@peter.tv",
+                number: "01",
+                name: "johann gerste",
+                password: "1233451",
+                phone: "0021654654231",
+                postalcode: "012345",
+                street: "getreideweg",
+                surname: "dinkel",
+                taxnumber: "1",
+                userId: userAuthId
+            }
+        )
+
+    }
+
+    // 'Authorization': 'Bearer $token',
+})
+
+app.post('/user', checkIfAuthenticated, (req, res) => {
+    userAuthId = req.authId
+    knownUsers.push(userAuthId)
+    res.status(200).send({ userAuthId: userAuthId })
+})
+
+app.get('/info', checkIfAuthenticated, (req, res) => {
+    userAuthId = req.authId
+    res.status(200).send({ userAuthId: userAuthId })
+})
 
 
 // start server on port 8080

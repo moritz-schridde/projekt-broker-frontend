@@ -124,7 +124,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             ProfileLabeledText(
               label: "Steuernummer",
-              value: userInfoProvider.userInfo?.bankAccount.taxNumber ?? "N/A",
+              value: userInfoProvider.userInfo?.bankAccount?.taxNumber ?? "N/A",
             ),
             ProfileLabeledText(
                 label: "Geburtsdatum",
@@ -156,15 +156,15 @@ class ProfileScreen extends StatelessWidget {
             ),
             ProfileLabeledText(
               label: "Verknüpftes Konto",
-              value: userInfoProvider.userInfo?.bankAccount.iban ?? "N/A",
+              value: userInfoProvider.userInfo?.bankAccount?.iban ?? "N/A",
             ),
             ProfileLabeledText(
               label: "Verechnungskonto",
-              value: userInfoProvider.userInfo?.bankAccount.iban ?? "N/A",
+              value: userInfoProvider.userInfo?.bankAccount?.iban ?? "N/A",
             ),
             ProfileLabeledText(
               label: "Wertpapierdepot",
-              value: userInfoProvider.userInfo?.bankAccount.kontoId ?? "N/A",
+              value: userInfoProvider.userInfo?.bankAccount?.kontoId ?? "N/A",
             ),
             ProfilePremium(),
           ],

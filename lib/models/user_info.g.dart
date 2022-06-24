@@ -7,7 +7,7 @@ part of 'user_info.dart';
 // **************************************************************************
 
 abstract class _$UserInfoCWProxy {
-  UserInfo bankAccount(BankAccount bankAccount);
+  UserInfo bankAccount(BankAccount? bankAccount);
 
   UserInfo birthDay(String birthDay);
 
@@ -63,7 +63,7 @@ class _$UserInfoCWProxyImpl implements _$UserInfoCWProxy {
   const _$UserInfoCWProxyImpl(this._value);
 
   @override
-  UserInfo bankAccount(BankAccount bankAccount) =>
+  UserInfo bankAccount(BankAccount? bankAccount) =>
       this(bankAccount: bankAccount);
 
   @override
@@ -126,11 +126,10 @@ class _$UserInfoCWProxyImpl implements _$UserInfoCWProxy {
     Object? surname = const $CopyWithPlaceholder(),
   }) {
     return UserInfo(
-      bankAccount:
-          bankAccount == const $CopyWithPlaceholder() || bankAccount == null
-              ? _value.bankAccount
-              // ignore: cast_nullable_to_non_nullable
-              : bankAccount as BankAccount,
+      bankAccount: bankAccount == const $CopyWithPlaceholder()
+          ? _value.bankAccount
+          // ignore: cast_nullable_to_non_nullable
+          : bankAccount as BankAccount?,
       birthDay: birthDay == const $CopyWithPlaceholder() || birthDay == null
           ? _value.birthDay
           // ignore: cast_nullable_to_non_nullable
@@ -207,8 +206,9 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
       birthDay: json['birthDay'] as String,
       birthMonth: json['birthMonth'] as String,
       birthYear: json['birthYear'] as String,
-      bankAccount:
-          BankAccount.fromJson(json['bankAccount'] as Map<String, dynamic>),
+      bankAccount: json['bankAccount'] == null
+          ? null
+          : BankAccount.fromJson(json['bankAccount'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
@@ -224,5 +224,5 @@ Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'birthDay': instance.birthDay,
       'birthMonth': instance.birthMonth,
       'birthYear': instance.birthYear,
-      'bankAccount': instance.bankAccount,
+      'bankAccount': instance.bankAccount?.toJson,
     };

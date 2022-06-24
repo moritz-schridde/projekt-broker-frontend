@@ -12,6 +12,8 @@ import 'package:projekt_broker_frontend/screens/register/register_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/widgets/buy_stock_success.dart';
 import 'package:projekt_broker_frontend/screens/profile/profile_provider.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/order_overview_provider.dart';
+import 'package:projekt_broker_frontend/screens/wrapper/wrapper_screen.dart';
+import 'package:projekt_broker_frontend/services/backend_service.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:projekt_broker_frontend/screens/crash/crash_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
@@ -34,9 +36,12 @@ abstract class AppRouter {
     } catch (e) {
       arguments = {};
     }
+
     return CustomMaterialPageRoute(
       settings: routeSettings,
       builder: (context) {
+        final _backendService = context.read<BackendService>();
+
         // Non auth required routes
         switch (routeSettings.name) {
           case AuthScreen.routeName:
@@ -47,7 +52,9 @@ abstract class AppRouter {
             return CrashScreen();
           case RegisterScreen.routeName:
             return ChangeNotifierProvider(
-              create: (context) => RegisterProvider(),
+              create: (context) => RegisterProvider(
+                backendService: _backendService,
+              ),
               child: RegisterScreen(),
             );
         }
@@ -60,6 +67,8 @@ abstract class AppRouter {
 
         // Auth required routes
         switch (routeSettings.name) {
+          case WrapperScreen.routeName:
+            return WrapperScreen();
           case HomeScreen.routeName:
             navigationProvider.currentRouteIndex = 0;
             return MultiProvider(

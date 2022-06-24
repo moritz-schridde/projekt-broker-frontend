@@ -68,12 +68,6 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                TextButton(
-                  child: const Text("registrieren"),
-                  onPressed: () =>
-                      Navigator.pushNamed(context, RegisterScreen.routeName),
-                  // eigentliche Routing wie in app.dart 25-30
-                )
               ],
             ),
           );

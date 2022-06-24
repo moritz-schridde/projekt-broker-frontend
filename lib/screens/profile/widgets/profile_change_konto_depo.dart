@@ -55,7 +55,7 @@ class ProfileChangeKontoDepot extends StatelessWidget {
                   EditProfileFormField(
                     labelText: "Verknüpftes Konto IBAN",
                     initialValue:
-                        userInfoProvider.userInfo?.bankAccount.iban ?? "N/A",
+                        userInfoProvider.userInfo?.bankAccount?.iban ?? "N/A",
                     inputFormatter: maskFormatterIBAN,
                     onSaved: (value) => userInfoProvider
                         .updateUserInfo((p0) => p0.copyWith.name(value ?? "")),
@@ -63,21 +63,22 @@ class ProfileChangeKontoDepot extends StatelessWidget {
                   EditProfileFormField(
                     labelText: "Verknüpftes Konto Kontoinhaber Vorname",
                     initialValue:
-                        userInfoProvider.userInfo?.bankAccount.name ?? "N/A",
+                        userInfoProvider.userInfo?.bankAccount?.name ?? "N/A",
                     onSaved: (value) => userInfoProvider
                         .updateUserInfo((p0) => p0.copyWith.name(value ?? "")),
                   ),
                   EditProfileFormField(
                     labelText: "Verknüpftes Konto Kontoinhaber Nachname",
                     initialValue:
-                        userInfoProvider.userInfo?.bankAccount.surname ?? "N/A",
+                        userInfoProvider.userInfo?.bankAccount?.surname ??
+                            "N/A",
                     onSaved: (value) => userInfoProvider
                         .updateUserInfo((p0) => p0.copyWith.name(value ?? "")),
                   ),
                   EditProfileFormField(
                     labelText: "Verknüpftes Konto BIC",
                     initialValue:
-                        userInfoProvider.userInfo?.bankAccount.bic ?? "N/A",
+                        userInfoProvider.userInfo?.bankAccount?.bic ?? "N/A",
                     onSaved: (value) => userInfoProvider
                         .updateUserInfo((p0) => p0.copyWith.name(value ?? "")),
                   ),

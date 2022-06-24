@@ -28,7 +28,8 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    TextStyle headingStyle = TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600);
+    TextStyle headingStyle =
+        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +60,8 @@ class RegisterScreen extends StatelessWidget {
                       primary: UiTheme.primaryColor,
                     ),
                     onPressed: controls.onStepContinue,
-                    child: Text(registerProvider.index == 2 ? "Abschicken" : "Weiter"),
+                    child: Text(
+                        registerProvider.index == 2 ? "Abschicken" : "Weiter"),
                   ),
                 ],
               ),
@@ -70,7 +72,7 @@ class RegisterScreen extends StatelessWidget {
             },
             onStepContinue: () {
               print("onStepContinue");
-              registerProvider.nextStep();
+              registerProvider.nextStep(context);
             },
             onStepTapped: (int index) {
               registerProvider.index = index;
@@ -78,7 +80,9 @@ class RegisterScreen extends StatelessWidget {
             steps: <Step>[
               Step(
                 isActive: registerProvider.index >= 0,
-                state: registerProvider.index > 0 ? StepState.complete : StepState.indexed,
+                state: registerProvider.index > 0
+                    ? StepState.complete
+                    : StepState.indexed,
                 title: Text(
                   'Persönliches',
                   style: headingStyle,
@@ -89,20 +93,22 @@ class RegisterScreen extends StatelessWidget {
                     children: [
                       TextFormFieldRegister(
                         labelText: "Vorname *",
-                        onSaved: (value) =>
-                            registerProvider.updateUserInfo((p0) => p0.copyWith.name(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                            (p0) => p0.copyWith.name(value ?? "")),
                       ),
                       TextFormFieldRegister(
                         labelText: "Nachname *",
-                        onSaved: (value) => registerProvider
-                            .updateUserInfo((p0) => p0.copyWith.surname(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                            (p0) => p0.copyWith.surname(value ?? "")),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         child: DateTimePicker(
                           initialValue: '',
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(), labelText: 'Geburtsdatum *'),
+                              border: OutlineInputBorder(),
+                              labelText: 'Geburtsdatum *'),
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           locale: const Locale('de', 'DE'),
@@ -116,7 +122,8 @@ class RegisterScreen extends StatelessWidget {
                             return null;
                           },
                           onSaved: (value) {
-                            final date = DateTime.tryParse(value ?? "") ?? DateTime.now();
+                            final date = DateTime.tryParse(value ?? "") ??
+                                DateTime.now();
                             registerProvider.updateUserInfo(
                               (p0) => p0.copyWith(
                                 birthDay: date.day.toString(),
@@ -128,7 +135,8 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         child: InternationalPhoneNumberInput(
                           onInputChanged: (PhoneNumber number) {},
                           onInputValidated: (bool value) {},
@@ -140,11 +148,12 @@ class RegisterScreen extends StatelessWidget {
                           autoValidateMode: AutovalidateMode.disabled,
                           selectorTextStyle: TextStyle(color: Colors.black),
                           formatInput: false,
-                          keyboardType:
-                              TextInputType.numberWithOptions(signed: true, decimal: true),
+                          keyboardType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
                           inputBorder: OutlineInputBorder(),
-                          onSaved: (value) => registerProvider
-                              .updateUserInfo((p0) => p0.copyWith.phone(value.phoneNumber ?? "")),
+                          onSaved: (value) => registerProvider.updateUserInfo(
+                              (p0) =>
+                                  p0.copyWith.phone(value.phoneNumber ?? "")),
                           validator: (val) {
                             if (val == null || val.isEmpty) {
                               return 'Bitte füllen Sie dieses Feld aus!';
@@ -156,11 +165,12 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       TextFormFieldRegister(
                         labelText: "Straße + Hausnr. *",
-                        onSaved: (value) => registerProvider
-                            .updateUserInfo((p0) => p0.copyWith.street(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                            (p0) => p0.copyWith.street(value ?? "")),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         child: TextFormField(
                           validator: (value) {
                             RegExp regExp = RegExp('\\d{5}');
@@ -171,8 +181,8 @@ class RegisterScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                          onSaved: (value) => registerProvider
-                              .updateUserInfo((p0) => p0.copyWith.postalcode(value!)),
+                          onSaved: (value) => registerProvider.updateUserInfo(
+                              (p0) => p0.copyWith.postalcode(value!)),
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'PLZ *',
@@ -186,11 +196,12 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       TextFormFieldRegister(
                         labelText: "Ort *",
-                        onSaved: (value) =>
-                            registerProvider.updateUserInfo((p0) => p0.copyWith.city(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                            (p0) => p0.copyWith.city(value ?? "")),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         padding: EdgeInsets.symmetric(vertical: 4),
                         decoration: BoxDecoration(
                             border: Border.all(
@@ -198,8 +209,8 @@ class RegisterScreen extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(4)),
                         child: CountryCodePicker(
-                          onChanged: (value) => registerProvider
-                              .updateUserInfo((p0) => p0.copyWith.country(value.name ?? "")),
+                          onChanged: (value) => registerProvider.updateUserInfo(
+                              (p0) => p0.copyWith.country(value.name ?? "")),
                           initialSelection: 'DE',
                           favorite: ['+49', 'DE'],
                           showCountryOnly: true,
@@ -217,7 +228,9 @@ class RegisterScreen extends StatelessWidget {
                   style: headingStyle,
                 ),
                 isActive: registerProvider.index >= 1,
-                state: registerProvider.index > 1 ? StepState.complete : StepState.indexed,
+                state: registerProvider.index > 1
+                    ? StepState.complete
+                    : StepState.indexed,
                 content: Form(
                   key: registerProvider.formKeys[1],
                   child: Column(
@@ -232,20 +245,29 @@ class RegisterScreen extends StatelessWidget {
                       TextFormFieldRegister(
                         labelText: "Vorname",
                         // initialValue: registerProvider.userInfo.name,
-                        onSaved: (value) => registerProvider
-                            .updateBankAccount((p0) => p0.copyWith.name(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                          (p0) => p0.copyWith.bankAccount(
+                            p0.bankAccount!.copyWith.name(value ?? ""),
+                          ),
+                        ),
                       ),
                       TextFormFieldRegister(
                         labelText: "Nachname",
                         // initialValue: registerProvider.userInfo.name,
-                        onSaved: (value) => registerProvider
-                            .updateBankAccount((p0) => p0.copyWith.surname(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                          (p0) => p0.copyWith.bankAccount(
+                            p0.bankAccount!.copyWith.surname(value ?? ""),
+                          ),
+                        ),
                       ),
                       TextFormFieldRegister(
                         labelText: "Steueridentifikationsnummer",
                         inputFormatter: maskFormatterSteuerId,
-                        onSaved: (value) => registerProvider
-                            .updateBankAccount((p0) => p0.copyWith.taxNumber(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                          (p0) => p0.copyWith.bankAccount(
+                            p0.bankAccount!.copyWith.taxNumber(value ?? ""),
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8),
@@ -257,13 +279,19 @@ class RegisterScreen extends StatelessWidget {
                       TextFormFieldRegister(
                         labelText: "IBAN",
                         inputFormatter: maskFormatterIBAN,
-                        onSaved: (value) => registerProvider
-                            .updateBankAccount((p0) => p0.copyWith.iban(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                          (p0) => p0.copyWith.bankAccount(
+                            p0.bankAccount!.copyWith.iban(value ?? ""),
+                          ),
+                        ),
                       ),
                       TextFormFieldRegister(
                         labelText: "BIC",
-                        onSaved: (value) => registerProvider
-                            .updateBankAccount((p0) => p0.copyWith.bic(value ?? "")),
+                        onSaved: (value) => registerProvider.updateUserInfo(
+                          (p0) => p0.copyWith.bankAccount(
+                            p0.bankAccount!.copyWith.bic(value ?? ""),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -280,7 +308,8 @@ class RegisterScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         child: CheckboxListTileFormField(
                           activeColor: UiTheme.primaryColor,
                           title: Text(
@@ -294,10 +323,12 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 8),
                         child: CheckboxListTileFormField(
                           activeColor: UiTheme.primaryColor,
-                          title: Text("Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
+                          title: Text(
+                              "Ich möchte Neuigkeiten und Angebote per E-Mail erhalten."),
                         ),
                       )
                     ],

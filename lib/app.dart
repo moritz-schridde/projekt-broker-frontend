@@ -4,6 +4,7 @@ import 'package:flutterfire_ui/i10n.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/loading/loading_screen.dart';
+import 'package:projekt_broker_frontend/screens/wrapper/wrapper_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'app_router.dart';
@@ -33,7 +34,7 @@ class App extends StatelessWidget {
             Navigator.pushReplacementNamed(
               context,
               context.read<User?>() != null
-                  ? HomeScreen.routeName
+                  ? WrapperScreen.routeName
                   : AuthScreen.routeName,
             );
           });

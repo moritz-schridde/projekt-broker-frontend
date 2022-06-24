@@ -93,6 +93,7 @@ class BackendService with ChangeNotifier {
     // Check for request error
     if (response.statusCode != 200) {
       print("http request failed: ${response.statusCode}");
+      throw Exception("http request failed: ${response.statusCode}");
     }
     print("response(${response.statusCode}): ${response.body}");
 

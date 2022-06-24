@@ -3,15 +3,35 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/models/bank_account.dart';
 import 'package:projekt_broker_frontend/models/user_info.dart';
+import 'package:projekt_broker_frontend/screens/wrapper/wrapper_screen.dart';
+import 'package:projekt_broker_frontend/services/backend_service.dart';
 
 class RegisterProvider with ChangeNotifier {
+  // deps
+  final BackendService backendService;
+
   late UserInfo userInfo;
   late BankAccount bankAccount;
   late List<GlobalKey<FormState>> formKeys;
   int _index = 0;
 
-  RegisterProvider() {
-    formKeys = [GlobalKey<FormState>(), GlobalKey<FormState>(), GlobalKey<FormState>()];
+  RegisterProvider({
+    required this.backendService,
+  }) {
+    formKeys = [
+      GlobalKey<FormState>(),
+      GlobalKey<FormState>(),
+      GlobalKey<FormState>()
+    ];
+
+    bankAccount = BankAccount(
+      kontoId: "New KontoId",
+      name: "New Name",
+      surname: "New Surname",
+      taxNumber: "New TaxNumber",
+      iban: "New Iban",
+      bic: "New Bic",
+    );
 
     userInfo = UserInfo(
       name: "New Name",
@@ -28,24 +48,10 @@ class RegisterProvider with ChangeNotifier {
       birthYear: "New BirthYear",
       bankAccount: bankAccount,
     );
-
-    bankAccount = BankAccount(
-      kontoId: "New KontoId",
-      name: "New Name",
-      surname: "New Surname",
-      taxNumber: "New TaxNumber",
-      iban: "New Iban",
-      bic: "New Bic",
-    );
   }
 
   void updateUserInfo(UserInfo Function(UserInfo) updateUser) {
     userInfo = updateUser(userInfo);
-    notifyListeners();
-  }
-
-  void updateBankAccount(BankAccount Function(BankAccount) updateBankAccount) {
-    bankAccount = updateBankAccount(bankAccount);
     notifyListeners();
   }
 
@@ -62,7 +68,7 @@ class RegisterProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void nextStep() {
+  void nextStep(BuildContext context) {
     if (formKeys[index].currentState?.validate() ?? false) {
       print("validated");
       formKeys[index].currentState!.save();
@@ -74,7 +80,7 @@ class RegisterProvider with ChangeNotifier {
         print("$index is now current");
       } else {
         print("final step done");
-        _processRegister();
+        _processRegister(context);
       }
       notifyListeners();
       return;
@@ -82,11 +88,19 @@ class RegisterProvider with ChangeNotifier {
     print("validation failed");
   }
 
-  void _processRegister() {
+  void _processRegister(BuildContext context) async {
     print(bankAccount.toJson);
     print(userInfo.toJson);
 
     // TODO backend call
-    print("should call backend with data: ${bankAccount.toJson} and ${userInfo.toJson}");
+    print(
+        "calling backend with data: ${bankAccount.toJson} and ${userInfo.toJson}");
+    await backendService.callBackend(
+      requestType: RequestType.POST,
+      endpoint: "user",
+      body: userInfo.toJson,
+    );
+
+    Navigator.pushReplacementNamed(context, WrapperScreen.routeName);
   }
 }
