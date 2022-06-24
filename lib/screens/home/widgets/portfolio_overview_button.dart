@@ -5,6 +5,7 @@ import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_bottom_sheet_content.dart';
 import 'package:projekt_broker_frontend/screens/home/widgets/portfolio_overview_bottom_sheet_content_provider.dart';
+import 'package:projekt_broker_frontend/services/backend_service.dart';
 import 'package:projekt_broker_frontend/widgets/draggable_overview.dart';
 import 'package:provider/provider.dart';
 
@@ -55,13 +56,14 @@ class PortfolioOverviewButton extends StatelessWidget {
                           PortfolioOverviewBottomSheetContentProvider>(
                         create: (context) =>
                             PortfolioOverviewBottomSheetContentProvider(
+                          backendService: context.read<BackendService>(),
                           portfolioProvider: portfolioProvider,
                           type: BuyType.buyIn,
                         ),
                         child: DraggableOverview(
                           header: "Einzahlen",
                           inizialSize:
-                              (300 / MediaQuery.of(context).size.height),
+                              (330 / MediaQuery.of(context).size.height),
                           child: PortfolioOverviewBottomSheetContent(),
                         ),
                       );
@@ -95,6 +97,7 @@ class PortfolioOverviewButton extends StatelessWidget {
                           PortfolioOverviewBottomSheetContentProvider>(
                         create: (context) =>
                             PortfolioOverviewBottomSheetContentProvider(
+                          backendService: context.read<BackendService>(),
                           portfolioProvider: portfolioProvider,
                           type: BuyType.buyOut,
                         ),

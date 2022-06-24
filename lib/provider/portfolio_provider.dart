@@ -52,4 +52,11 @@ class PortfolioProvider with ChangeNotifier {
       return null;
     }
   }
+
+  void clearCache({bool notify = false}) {
+    _depot = null;
+    if (notify) {
+      notifyListeners();
+    }
+  }
 }

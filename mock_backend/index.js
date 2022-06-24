@@ -4,6 +4,8 @@ const app = express();
 const cors = require('cors');
 const { checkIfAuthenticated } = require('./auth')
 
+app.use(express.json());
+
 app.use(cors({ credentials: true, origin: true }))
 
 app.get('/depot', (req, res) => {
@@ -127,30 +129,11 @@ app.get('/share', (req, res) => {
     );
 });
 
-const knownUsers = [];
+const knownUsers = ["xI1U0SKQzQSfno09Q8KPf5vyPUE3", "S2waZwW6LZhhR1Ba6IP3ks0VwmF2"];
 
 app.get('/user', checkIfAuthenticated, (req, res) => {
     userAuthId = req.authId
     if (!knownUsers.includes(userAuthId)) {
-        // res.send(
-        //     {
-        //         // birthDay: 0,
-        //         // birthMonth: 0,
-        //         // birthYear: 0,
-        //         // city: "",
-        //         // country: "",
-        //         // email: "",
-        //         // houseNumber: "",
-        //         // name: "",
-        //         // password: "",
-        //         // phoneNumber: 0,
-        //         // postalCode: "",
-        //         // street: "",
-        //         // surname: "",
-        //         // taxnumber: "",
-        //         // userId: ""
-        //     }
-        // )
         res.status(404).send() // ?
     } else {
         res.status(200).send(
@@ -187,6 +170,18 @@ app.post('/user', checkIfAuthenticated, (req, res) => {
 app.get('/info', checkIfAuthenticated, (req, res) => {
     userAuthId = req.authId
     res.status(200).send({ userAuthId: userAuthId })
+})
+
+app.post('/user/bank/deposit', checkIfAuthenticated, (req, res) => {
+    userAuthId = req.authId
+    amount = req.body.amount
+    res.status(200).send({ amount: amount })
+})
+
+app.post('/user/bank/withdraw', checkIfAuthenticated, (req, res) => {
+    userAuthId = req.authId
+    amount = re.body.amount
+    res.status(200).send({ amount: amount })
 })
 
 

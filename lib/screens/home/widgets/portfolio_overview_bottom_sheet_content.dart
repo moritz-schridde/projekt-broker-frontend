@@ -135,8 +135,8 @@ class PortfolioOverviewBottomSheetContent extends StatelessWidget {
                               ],
                             ),
                           )
-                        : (() {
-                            portfolioOverviewBottomSheetContentProvider
+                        : (() async {
+                            await portfolioOverviewBottomSheetContentProvider
                                 .setNewPortfolioBudget();
                             Navigator.of(context).pop();
                           }).call();
