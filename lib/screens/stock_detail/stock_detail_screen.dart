@@ -36,53 +36,74 @@ class StockDetailScreen extends StatelessWidget {
         builder: (context, stockDetailScreenProvider, portfolioProvider, _) {
           final ownedStock = portfolioProvider.tryGetOwnedStock(stock);
 
-          return Center(
-            child: Column(
-              children: [
-                IgnorePointer(child: StockSearchCard(stock: stock)),
-                StockChart(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    RoundedButton(
-                      onPressed: () => Navigator.of(context).pushNamed(
-                        BuyStockScreen.routeName,
-                        arguments: {
-                          "mode": BuyStockMode.buy,
-                          "stock": stockDetailScreenProvider.stock,
-                        },
-                      ),
-                      label: Text(
-                        "Kaufen",
-                        style: theme.textTheme.headline6?.copyWith(
-                          fontSize: 18,
-                          color: UiTheme.textColorWhite,
-                        ),
-                      ),
-                      width: 150,
+          return SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  IgnorePointer(child: StockSearchCard(stock: stock)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25.0,
+                      vertical: 10.0,
                     ),
-                    RoundedButton(
-                      onPressed: () => Navigator.of(context).pushNamed(
-                        BuyStockScreen.routeName,
-                        arguments: {
-                          "mode": BuyStockMode.sell,
-                          "stock": stockDetailScreenProvider.stock,
-                        },
-                      ),
-                      label: Text(
-                        "Verkaufen",
-                        style: theme.textTheme.headline6?.copyWith(
-                          fontSize: 18,
-                          color: UiTheme.textColorWhite,
-                        ),
-                      ),
-                      width: 150,
+                    child: Divider(
+                      color: UiTheme.primaryGradientStartLight,
+                      thickness: 1,
                     ),
-                  ],
-                ),
-                if (ownedStock != null)
-                  PersonalInformationDetail(ownedStock: ownedStock),
-              ],
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  StockChart(),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      RoundedButton(
+                        onPressed: () => Navigator.of(context).pushNamed(
+                          BuyStockScreen.routeName,
+                          arguments: {
+                            "mode": BuyStockMode.buy,
+                            "stock": stockDetailScreenProvider.stock,
+                          },
+                        ),
+                        label: Text(
+                          "Kaufen",
+                          style: theme.textTheme.headline6?.copyWith(
+                            fontSize: 18,
+                            color: UiTheme.textColorWhite,
+                          ),
+                        ),
+                        width: 150,
+                      ),
+                      RoundedButton(
+                        onPressed: () => Navigator.of(context).pushNamed(
+                          BuyStockScreen.routeName,
+                          arguments: {
+                            "mode": BuyStockMode.sell,
+                            "stock": stockDetailScreenProvider.stock,
+                          },
+                        ),
+                        label: Text(
+                          "Verkaufen",
+                          style: theme.textTheme.headline6?.copyWith(
+                            fontSize: 18,
+                            color: UiTheme.textColorWhite,
+                          ),
+                        ),
+                        width: 150,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  if (ownedStock != null)
+                    PersonalInformationDetail(ownedStock: ownedStock),
+                ],
+              ),
             ),
           );
         },
