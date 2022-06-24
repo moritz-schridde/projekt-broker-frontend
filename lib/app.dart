@@ -25,7 +25,7 @@ class App extends StatelessWidget {
         Locale('en', ''),
         Locale('de', ''),
       ],
-      title: 'WertpapierHändl\'',
+      title: 'Trade Empire',
       theme: UiTheme.lightTheme,
       darkTheme: UiTheme.lightTheme, // disable dark theme
       home: Builder(
