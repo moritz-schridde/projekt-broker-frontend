@@ -16,6 +16,8 @@ class BuyStockProvider with ChangeNotifier {
   late TextEditingController textEditControllerMoney;
   late TextEditingController textEditControllerStock;
 
+  bool expertise = false;
+
   BuyStockProvider();
 
   void init({
@@ -43,6 +45,11 @@ class BuyStockProvider with ChangeNotifier {
   void setMoneyCount({required int stockCount}) {
     final result = stockCount * stock.price;
     textEditControllerMoney.text = result.toStringAsFixed(2);
+    notifyListeners();
+  }
+
+  void setExpertise({required bool? value}) {
+    expertise = value ?? false;
     notifyListeners();
   }
 }

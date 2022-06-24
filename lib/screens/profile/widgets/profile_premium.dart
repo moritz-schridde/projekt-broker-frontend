@@ -64,7 +64,9 @@ class ProfilePremium extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Monatliche Kosten",
+                                profileProvider.premium
+                                    ? "Monatlich entfallende Kosten"
+                                    : "Monatliche Kosten",
                                 style: theme.textTheme.bodyText1,
                               ),
                               Text(
@@ -98,10 +100,9 @@ class ProfilePremium extends StatelessWidget {
                                 ),
                               ),
                               Checkbox(
-                                value: false,
-                                //TODO save state of Checkbox
+                                value: profileProvider.premiumCheckBox,
                                 onChanged: (value) {},
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -113,14 +114,17 @@ class ProfilePremium extends StatelessWidget {
                           child: RoundedButton(
                             width: double.infinity,
                             label: Text(
-                              profileProvider.premiumButtonLabel.replaceFirst("k", "K"),
+                              profileProvider.premiumButtonLabel
+                                  .replaceFirst("k", "K"),
                               style: theme.textTheme.headline5?.copyWith(
                                 color: UiTheme.textColorWhite,
                               ),
                             ),
                             onPressed: () {
-                              //TODO check if CheckBox is checked
-                              profileProvider.setPremiumStatus = !profileProvider.premium;
+                              if (profileProvider.premiumCheckBox) {
+                                profileProvider.setPremiumStatus =
+                                    !profileProvider.premium;
+                              }
                               Navigator.of(context).pop();
                             },
                           ),

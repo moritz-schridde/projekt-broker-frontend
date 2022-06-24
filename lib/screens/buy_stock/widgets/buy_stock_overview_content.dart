@@ -35,35 +35,29 @@ class BuyStockOverviewContent extends StatelessWidget {
                     buyStockProvider.textEditControllerStock.text,
                   ],
                   [
-                    "Geschätzter ${buyStockProvider.mode == BuyType.buyIn ? "Kaufpreis" : "Verkaufspreis"}",
-                    buyStockProvider.textEditControllerMoney.text,
+                    "Geschätzter ${buyStockProvider.mode == BuyStockMode.buy ? "Kaufpreis" : "Verkaufspreis"}",
+                    "${buyStockProvider.textEditControllerMoney.text} €",
                   ],
                   [
                     "Transaktionskosten",
-                    "1€",
+                    "0,99 €",
                   ],
                   // buy only
                   if (buyStockProvider.mode == BuyStockMode.buy) ...[
                     [
                       "Verfügbares Guthaben",
-                      portfolioProvider.budget,
+                      "${portfolioProvider.budget} €",
                     ],
                     [
                       "Geschätztes Restguthaben",
-                      ((portfolioProvider.budget ?? 0) +
-                          (double.tryParse(buyStockProvider
-                                  .textEditControllerMoney.text) ??
-                              0)),
+                      "${((portfolioProvider.budget ?? 0) + (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
                     ],
                   ],
                   // sell only
                   if (buyStockProvider.mode == BuyStockMode.sell)
                     [
                       "Geschätztes Guthaben nach Verkauf",
-                      ((portfolioProvider.budget ?? 0) -
-                          (double.tryParse(buyStockProvider
-                                  .textEditControllerMoney.text) ??
-                              0)),
+                      "${((portfolioProvider.budget ?? 0) - (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
                     ],
                 ]
                     .map(
@@ -104,19 +98,26 @@ class BuyStockOverviewContent extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Meine Expertise ist nicht ausreichend",
-                      style: theme.textTheme.bodyText1,
-                    ),
-                    // TODO checkbox without statefull widget
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 18.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Meine Expertise ist nicht ausreichend",
+                        style: theme.textTheme.bodyText1,
+                      ),
+                      // TODO checkbox without statefull widget
+                      Checkbox(
+                        value: buyStockProvider.expertise,
+                        onChanged: (value) {
+                          buyStockProvider.setExpertise(value: value);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -137,14 +138,19 @@ class BuyStockOverviewContent extends StatelessWidget {
               ),
               width: double.infinity,
               onPressed: () {
-                //TODO backend call
-                Navigator.of(context).pushNamed(BuyStockSuccess.routeName);
-                // showDialog(
-                //   context: context,
-                //   builder: (_) {
-                //     return BuyStockFailed();
-                //   },
-                // );
+                if (buyStockProvider.expertise) {
+                  //TODO backend call
+                  //TODO validate
+                  buyStockProvider.setExpertise(value: false);
+                  Navigator.of(context).pushNamed(BuyStockSuccess.routeName);
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return BuyStockFailed();
+                    },
+                  );
+                }
               },
             ),
           ),

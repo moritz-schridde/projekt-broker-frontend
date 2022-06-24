@@ -106,7 +106,7 @@ class BuyStockScreen extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [0.1, 0.25, 0.5, 0.75]
+                children: [0.1, 0.25, 0.5, 0.75, 1.00]
                     .map(
                       (percentage) => OutlinedButton(
                         child: Text("${percentage * 100}%"),
@@ -135,8 +135,8 @@ class BuyStockScreen extends StatelessWidget {
                     )
                     .toList(),
               ),
-              const SizedBox(
-                height: 25,
+              Expanded(
+                child: Container(),
               ),
               Container(
                 margin: EdgeInsets.all(15),
@@ -168,6 +168,9 @@ class BuyStockScreen extends StatelessWidget {
                   width: double.infinity,
                 ),
               ),
+              SizedBox(
+                height: 20.0,
+              )
             ],
           ),
         ),

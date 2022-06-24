@@ -7,8 +7,9 @@ import 'package:projekt_broker_frontend/models/user_info.dart';
 import '../../provider/user_info_provider.dart';
 
 class ProfileProvider with ChangeNotifier {
-  final double premiumPrice = 3.00;
+  final double premiumPrice = 9.99;
   bool premium;
+  bool premiumCheckBox = true;
   late String premiumButtonLabel;
   late String premiumOverviewText;
   late UserInfo userInfo;
