@@ -53,15 +53,17 @@ class StockSearchCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  stock.shortName,
+                  stock.longName,
                   style: theme.textTheme.headline6,
                 ),
               ),
               Expanded(
-                child: Icon(
-                  Icons.show_chart_outlined,
-                  size: 40,
-                  color: UiTheme.lightTheme.primaryColor,
+                child: Text(
+                  stock.shortName,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headline6?.copyWith(
+                    color: theme.primaryColor,
+                  ),
                 ),
               ),
               Expanded(
