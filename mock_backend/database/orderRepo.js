@@ -1,12 +1,5 @@
-const { checkIfAuthenticated } = require('.auth')
-const { Router } = require('express')
-
-const router = Router()
-
-
-// a getter endpoint returning a list of all orders
-router.get('/order', (req, res) => {
-    res.send(
+const orders = {
+    "xI1U0SKQzQSfno09Q8KPf5vyPUE3":
         [
             {
                 orderId: 1,
@@ -60,7 +53,24 @@ router.get('/order', (req, res) => {
                 }
             }
         ]
-    );
-});
+}
 
-module.exports = Router
+const findOrdersByUserId = (userId) => {
+    console.log(orders[userId]);
+    if (orders[userId] == undefined) {
+        orders[userId] = []
+    }
+    console.log(orders[userId]);
+    return orders[userId]
+}
+
+const createOrder = (userId, order) => {
+    orders = findOrdersByUserId(userId);
+    orders.push(order)
+    return orders;
+}
+
+
+
+exports.findOrdersByUserId = findOrdersByUserId
+exports.createOrder = createOrder
