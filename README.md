@@ -43,6 +43,7 @@ Das Mock-Backend wird in dem Ordner "mock_backend/" gespeichert.
 In der Datei "pubspec.yaml" werden die Bibliotheken, die im Frontend verwendet werden, angegeben.
 
 ## Architektur
+![Broker Architecture](https://user-images.githubusercontent.com/40596710/175899938-16f0bff4-b74d-465f-a436-cc49ce5d61ba.jpg)
 
 Die Flutter-App wird zunächst über das Firebase Hosting der Google Cloud Platform lokal beim Client heruntergeladen. Danach authentifiziert sich der Nutzer über das Firebase Authentication-Verfahren und kann die App nutzen.
 Die App kommuniziert mit dem Backend über bereitgestellte API-Points.
