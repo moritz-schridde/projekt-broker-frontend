@@ -16,7 +16,7 @@ router.get('/', checkIfAuthenticated, (req, res) => {
     if (user) {
         res.status(200).send(user)
     } else {
-        res.status(404).send("We could find no user matching your auth credentials")
+        res.status(456).send("We could find no user matching your auth credentials")
     }
 })
 
