@@ -1,16 +1,48 @@
-# projekt-broker-frontend
+# Trade Empire Frontend
 
-A new Flutter project.
+Dieses Repository dient als Ablage für das Frontend des Projekts "Trade Empire" der Vorlesung "Projekt" an der DHBW Mannheim. Das Frontend wurde mit Flutter entwickelt.
 
-## Getting Started
+## Entwickler:
 
-This project is a starting point for a Flutter application.
+- Philip Herold
+- Nicklas Platz
+- Michael Kaiser
+- Levana Fallböhmer
+- Christian Leingang
+- Osama Aldyab
+- Nikolay Vasilev
+- Mert Beri
 
-A few resources to get you started if this is your first Flutter project:
+## Aufbau des Frontends:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Der Flutter-Quellcode befindet sich im Ordner "lib/".
+Darin befinden sich die Unterordner "constants/frontend", "converter", "models", "provider", "screens", "services" und "widgets".
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- "constants/frontend" beinhaltet allgemeine Vorgaben, wie beispielsweise das UI-Theme.
+- "converter" beinhaltet eine Datei zum Identifizieren der gewünschten Icons.
+- "models" enthält die Klassen, die die Strukturen verschiedener Objekte festlegt.
+- "provider" beinhaltet die State-Management-Klassen.
+- "screens" enthält die verschiedenen Seiten der Flutter-App.
+- "services" beinhaltet verschiedene Services, die die Anbindung an Firebase und das Backend ermöglichen
+- "widgets" beinhaltet alle Widgets, die auf mehreren verschiedenen Seiten verwendet werden.
+
+Und die Hauptseiten der Flutter-App sind:
+
+- "app.dart" enthält die Hauptklasse der Flutter-App, worin u.a. festgelegt wird, ob die App den Login-Prozess oder die Hauptseite für angemeldete Nutzer anzeigt.
+- "app_router.dart" dient dazu, dass die Seiten der Flutter-App mit den richtigen URLs angeschlossen werden.
+- "firebase_options.dart" enthält die Firebase-Optionen, die für die Anbindung an Firebase benötigt werden.
+- "main.dart" ist der Einstiegspunkt der Flutter-App.
+- "root.dart" enthält alle Provider, die zur Verwaltung des State-Managements der Flutter-App benötigt werden.
+
+Der "Screens"-Ordner ist dabei in noch weitere Unterordner untergliedert. Diese folgen alle dem gleichen Grundaufbau und spiegeln die einzelnen Seiten in der App wieder. Jeder Ordner besteht aus der Hauptseite (benannt: "_seitenname_\_screen.dart"), sowie einem Widget-Ordner. Dieser enthält weiter Widgets und Provider, welche nur auf diesem Screen genutzt werden.
+
+Die generierten Dateien für android/ios/web werden in den entsprechenden Ordnern "android/", "ios/" und "web/" abgelegt.
+
+Das Mock-Backend wird in dem Ordner "mock_backend/" gespeichert.
+
+In der Datei "pubspec.yaml" werden die Bibliotheken, die im Frontend verwendet werden, angegeben.
+
+## Architektur
+
+Die Flutter-App wird zunächst über das Firebase Hosting der Google Cloud Platform lokal beim Client heruntergeladen. Danach authentifiziert sich der Nutzer über das Firebase Authentication-Verfahren und kann die App nutzen.
+Die App kommuniziert mit dem Backend über bereitgestellte API-Points.
