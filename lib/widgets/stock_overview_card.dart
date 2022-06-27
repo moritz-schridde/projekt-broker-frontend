@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/models/owned_stock.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
+import 'package:projekt_broker_frontend/screens/stock_detail/widgets/stock_chart.dart';
 
 import '../screens/stock_detail/stock_detail_screen.dart';
 
@@ -72,6 +73,7 @@ class StockOverviewCard extends StatelessWidget {
                   size: 40,
                   color: UiTheme.lightTheme.primaryColor,
                 ),
+                // StockChart(),
               ),
               Expanded(
                 child: Column(

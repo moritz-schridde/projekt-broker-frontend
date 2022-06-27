@@ -114,6 +114,6 @@ Map<String, dynamic> _$StockToJson(Stock instance) => <String, dynamic>{
       'shareId': instance.shareId,
       'shortName': instance.shortName,
       'longName': instance.longName,
-      'iconId': "${instance.shareId}",
+      'iconId': const IconConverter().toJson(instance.icon),
       'price': instance.price,
     };

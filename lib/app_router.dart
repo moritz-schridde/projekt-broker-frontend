@@ -110,6 +110,7 @@ abstract class AppRouter {
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
+                backendService: _backendService,
                 portfolioProvider: portfolioProvider,
                 stock: arguments["stock"],
               ),

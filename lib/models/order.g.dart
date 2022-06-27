@@ -116,7 +116,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'orderId': instance.orderId,
       'offerType': _$OrderTypeEnumMap[instance.type],
       'offerState': _$OrderStateEnumMap[instance.state],
-      'info': instance.info.toJson,
+      'info': instance.info.toJson(),
       'timestamp': instance.timestamp?.toIso8601String(),
     };
 
