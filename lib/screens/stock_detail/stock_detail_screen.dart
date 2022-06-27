@@ -17,11 +17,9 @@ import 'widgets/personal_information_detail_page.dart';
 
 class StockDetailScreen extends StatelessWidget {
   static const routeName = "/stock_detail";
-  Stock stock;
 
   StockDetailScreen({
     Key? key,
-    required this.stock,
   });
 
   @override
@@ -32,15 +30,17 @@ class StockDetailScreen extends StatelessWidget {
         context: context,
         title: "Trading",
       ),
-      body: Consumer2<StockDetailScreenProvider, PortfolioProvider>(
-        builder: (context, stockDetailScreenProvider, portfolioProvider, _) {
-          final ownedStock = portfolioProvider.tryGetOwnedStock(stock);
-
+      body: Consumer<StockDetailScreenProvider>(
+        builder: (context, stockDetailScreenProvider, _) {
           return SingleChildScrollView(
             child: Center(
               child: Column(
                 children: [
-                  IgnorePointer(child: StockSearchCard(stock: stock)),
+                  IgnorePointer(
+                    child: StockSearchCard(
+                      stock: stockDetailScreenProvider.stock,
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 25.0,
@@ -79,13 +79,18 @@ class StockDetailScreen extends StatelessWidget {
                         width: 150,
                       ),
                       RoundedButton(
-                        onPressed: () => Navigator.of(context).pushNamed(
-                          BuyStockScreen.routeName,
-                          arguments: {
-                            "mode": BuyStockMode.sell,
-                            "stock": stockDetailScreenProvider.stock,
-                          },
-                        ),
+                        onPressed: stockDetailScreenProvider.ownedStock != null
+                            ? () => Navigator.of(context).pushNamed(
+                                  BuyStockScreen.routeName,
+                                  arguments: {
+                                    "mode": BuyStockMode.sell,
+                                    "stock": stockDetailScreenProvider.stock,
+                                    "amount": stockDetailScreenProvider
+                                        .ownedStock!.amount
+                                        .toInt(),
+                                  },
+                                )
+                            : null,
                         label: Text(
                           "Verkaufen",
                           style: theme.textTheme.headline6?.copyWith(
@@ -100,8 +105,10 @@ class StockDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 30.0,
                   ),
-                  if (ownedStock != null)
-                    PersonalInformationDetail(ownedStock: ownedStock),
+                  if (stockDetailScreenProvider.ownedStock != null)
+                    PersonalInformationDetail(
+                      ownedStock: stockDetailScreenProvider.ownedStock!,
+                    ),
                 ],
               ),
             ),

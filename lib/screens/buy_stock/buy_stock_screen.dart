@@ -97,9 +97,8 @@ class BuyStockScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              //TODO get Guthaben from backend
               Text(
-                "${buyStockProvider.mode == BuyStockMode.buy ? 'Verfügbares Guthaben: ${portfolioProvider.budget}€' : 'Verfügbare Aktien: ${portfolioProvider.stockCount}'}",
+                "${buyStockProvider.mode == BuyStockMode.buy ? 'Verfügbares Guthaben: ${portfolioProvider.budget}€' : 'Verfügbare Aktien: ${buyStockProvider.availableAmount}'}",
               ),
               const SizedBox(
                 height: 25,
@@ -126,10 +125,9 @@ class BuyStockScreen extends StatelessWidget {
                                         percentage),
                                   )
                                 : buyStockProvider.setStockCount(
-                                    money:
-                                        ((portfolioProvider.stockCount ?? 0) *
-                                                percentage) *
-                                            buyStockProvider.stock.price,
+                                    money: ((buyStockProvider.availableAmount) *
+                                            percentage) *
+                                        buyStockProvider.stock.price,
                                   ),
                       ),
                     )

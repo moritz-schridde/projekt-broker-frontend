@@ -19,10 +19,10 @@ enum OrderState {
   PENDING,
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith()
 class Order {
-  final int orderId;
+  final int? orderId;
   @JsonKey(name: "offerType")
   final OrderType type;
   @JsonKey(name: "offerState")
@@ -31,7 +31,7 @@ class Order {
   final DateTime? timestamp;
 
   Order({
-    required this.orderId,
+    this.orderId,
     required this.type,
     required this.info,
     this.state,

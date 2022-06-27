@@ -6,7 +6,7 @@ import 'package:projekt_broker_frontend/models/stock.dart';
 
 part 'order_detail.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith()
 class OrderDetail {
   @JsonKey(name: "share")

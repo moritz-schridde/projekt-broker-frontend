@@ -6,13 +6,11 @@ import 'mock_provider.dart';
 
 class OrderProvider with ChangeNotifier {
   // deps
-  final MockProvider mockProvider;
   final BackendService backendService;
 
   List<Order>? _orders;
 
   OrderProvider({
-    required this.mockProvider,
     required this.backendService,
   });
 
@@ -28,5 +26,12 @@ class OrderProvider with ChangeNotifier {
           .then((_) => notifyListeners());
     }
     return _orders;
+  }
+
+  void clearCache({bool notify = false}) {
+    _orders = null;
+    if (notify) {
+      notifyListeners();
+    }
   }
 }

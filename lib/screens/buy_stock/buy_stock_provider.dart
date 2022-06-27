@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:projekt_broker_frontend/models/order_detail.dart';
+import 'package:projekt_broker_frontend/provider/order_provider.dart';
 import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
+import 'package:projekt_broker_frontend/services/backend_service.dart';
 
+import '../../models/order.dart';
 import '../../models/stock.dart';
 
 enum BuyStockMode {
@@ -9,6 +13,10 @@ enum BuyStockMode {
 }
 
 class BuyStockProvider with ChangeNotifier {
+  // deps
+  BackendService backendService;
+  OrderProvider orderProvider;
+
   late Stock stock;
 
   late BuyStockMode mode;
@@ -16,13 +24,19 @@ class BuyStockProvider with ChangeNotifier {
   late TextEditingController textEditControllerMoney;
   late TextEditingController textEditControllerStock;
 
+  late int availableAmount;
+
   bool expertise = false;
 
-  BuyStockProvider();
+  BuyStockProvider({
+    required this.backendService,
+    required this.orderProvider,
+  });
 
   void init({
     required Stock stock,
     required BuyStockMode mode,
+    required int amount,
   }) {
     this.stock = stock;
     this.mode = mode;
@@ -31,8 +45,10 @@ class BuyStockProvider with ChangeNotifier {
       text: stock.price.toStringAsFixed(2),
     );
     textEditControllerStock = TextEditingController(
-      text: "1",
+      text: "$amount",
     );
+    setMoneyCount(stockCount: amount);
+    availableAmount = amount;
   }
 
   void setStockCount({required double money}) {
@@ -51,5 +67,23 @@ class BuyStockProvider with ChangeNotifier {
   void setExpertise({required bool? value}) {
     expertise = value ?? false;
     notifyListeners();
+  }
+
+  Future submit() async {
+    final order = Order(
+      info: OrderDetail(
+        stock: stock,
+        value: stock.price, // ! buying at the currently known price
+        amount: int.tryParse(textEditControllerStock.text) ?? 1,
+      ),
+      type: OrderType.values[mode.index],
+    );
+
+    await backendService.callBackend(
+      requestType: RequestType.POST,
+      endpoint: "order",
+      body: order.toJson,
+    );
+    orderProvider.clearCache(notify: true);
   }
 }

@@ -9,7 +9,7 @@ part of 'order.dart';
 abstract class _$OrderCWProxy {
   Order info(OrderDetail info);
 
-  Order orderId(int orderId);
+  Order orderId(int? orderId);
 
   Order state(OrderState? state);
 
@@ -42,7 +42,7 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
   Order info(OrderDetail info) => this(info: info);
 
   @override
-  Order orderId(int orderId) => this(orderId: orderId);
+  Order orderId(int? orderId) => this(orderId: orderId);
 
   @override
   Order state(OrderState? state) => this(state: state);
@@ -73,10 +73,10 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
           ? _value.info
           // ignore: cast_nullable_to_non_nullable
           : info as OrderDetail,
-      orderId: orderId == const $CopyWithPlaceholder() || orderId == null
+      orderId: orderId == const $CopyWithPlaceholder()
           ? _value.orderId
           // ignore: cast_nullable_to_non_nullable
-          : orderId as int,
+          : orderId as int?,
       state: state == const $CopyWithPlaceholder()
           ? _value.state
           // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ extension $OrderCopyWith on Order {
 // **************************************************************************
 
 Order _$OrderFromJson(Map<String, dynamic> json) => Order(
-      orderId: json['orderId'] as int,
+      orderId: json['orderId'] as int?,
       type: $enumDecode(_$OrderTypeEnumMap, json['offerType']),
       info: OrderDetail.fromJson(json['info'] as Map<String, dynamic>),
       state: $enumDecodeNullable(_$OrderStateEnumMap, json['offerState']),
@@ -116,7 +116,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'orderId': instance.orderId,
       'offerType': _$OrderTypeEnumMap[instance.type],
       'offerState': _$OrderStateEnumMap[instance.state],
-      'info': instance.info,
+      'info': instance.info.toJson,
       'timestamp': instance.timestamp?.toIso8601String(),
     };
 

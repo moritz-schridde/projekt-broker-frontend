@@ -71,12 +71,8 @@ class Root extends StatelessWidget {
                 providers: [
                   ChangeNotifierProvider<PortfolioProvider>(
                     create: (context) => PortfolioProvider(
-                      mockProvider: _mockProvider,
                       backendService: _backendService,
                     ),
-                  ),
-                  ChangeNotifierProvider<BuyStockProvider>(
-                    create: (context) => BuyStockProvider(),
                   ),
                   ChangeNotifierProvider<StockProvider>(
                     create: (context) => StockProvider(
@@ -85,7 +81,6 @@ class Root extends StatelessWidget {
                   ),
                   ChangeNotifierProvider<OrderProvider>(
                     create: (context) => OrderProvider(
-                      mockProvider: _mockProvider,
                       backendService: _backendService,
                     ),
                   ),
@@ -96,7 +91,21 @@ class Root extends StatelessWidget {
                     ),
                   ),
                 ],
-                child: app!,
+                builder: (context, _) {
+                  final _orderProvider = context.read<OrderProvider>();
+                  return MultiProvider(
+                    providers: [
+                      // register route specific provider which need to be in a global context here
+                      ChangeNotifierProvider<BuyStockProvider>(
+                        create: (context) => BuyStockProvider(
+                          backendService: _backendService,
+                          orderProvider: _orderProvider,
+                        ),
+                      ),
+                    ],
+                    child: app!,
+                  );
+                },
               );
             }
             return app!;

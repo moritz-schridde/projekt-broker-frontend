@@ -9,13 +9,11 @@ import '../models/depot.dart';
 import '../models/stock.dart';
 
 class PortfolioProvider with ChangeNotifier {
-  final MockProvider mockProvider;
   final BackendService backendService;
 
   Depot? _depot;
 
   PortfolioProvider({
-    required this.mockProvider,
     required this.backendService,
   });
 

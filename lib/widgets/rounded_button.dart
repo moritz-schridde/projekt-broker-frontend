@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 
 class RoundedButton extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
   final Widget label;
   final double? width;
   final double? height;
@@ -26,8 +26,14 @@ class RoundedButton extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            UiTheme.primaryGradientEnd,
-            UiTheme.primaryGradientStart,
+            if (onPressed != null) ...[
+              UiTheme.primaryGradientEnd,
+              UiTheme.primaryGradientStart,
+            ],
+            if (onPressed == null) ...[
+              Colors.black45,
+              Colors.black12,
+            ]
           ],
         ),
       ),

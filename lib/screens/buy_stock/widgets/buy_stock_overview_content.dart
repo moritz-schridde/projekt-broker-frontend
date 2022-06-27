@@ -137,11 +137,11 @@ class BuyStockOverviewContent extends StatelessWidget {
                 ),
               ),
               width: double.infinity,
-              onPressed: () {
+              onPressed: () async {
                 if (buyStockProvider.expertise) {
-                  //TODO backend call
-                  //TODO validate
-                  buyStockProvider.setExpertise(value: false);
+                  //? validate
+                  await buyStockProvider.submit();
+                  buyStockProvider.setExpertise(value: false); //?
                   Navigator.of(context).pushNamed(BuyStockSuccess.routeName);
                 } else {
                   showDialog(

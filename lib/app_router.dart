@@ -3,6 +3,7 @@ import 'package:projekt_broker_frontend/models/bank_account.dart';
 import 'package:projekt_broker_frontend/provider/mock_provider.dart';
 import 'package:projekt_broker_frontend/provider/navigation_provider.dart';
 import 'package:projekt_broker_frontend/provider/order_provider.dart';
+import 'package:projekt_broker_frontend/provider/portfolio_provider.dart';
 import 'package:projekt_broker_frontend/provider/stock_provider.dart';
 import 'package:projekt_broker_frontend/screens/auth/auth_screen.dart';
 import 'package:projekt_broker_frontend/screens/buy_stock/buy_stock_provider.dart';
@@ -22,6 +23,7 @@ import 'package:projekt_broker_frontend/screens/order_overview/order_overview_sc
 import 'package:projekt_broker_frontend/screens/profile/profile_screen.dart';
 import 'package:projekt_broker_frontend/screens/stock_search/stock_search_screen.dart';
 import 'package:provider/provider.dart';
+import 'provider/portfolio_provider.dart';
 import 'provider/user_info_provider.dart';
 import 'screens/register/register_screen.dart';
 import 'screens/stock_detail/stock_detail_screen.dart';
@@ -64,6 +66,7 @@ abstract class AppRouter {
         final orderProvider = context.read<OrderProvider>();
         final userInfoProvider = context.read<UserInfoProvider>();
         final stockProvider = context.read<StockProvider>();
+        final portfolioProvider = context.read<PortfolioProvider>();
 
         // Auth required routes
         switch (routeSettings.name) {
@@ -107,18 +110,16 @@ abstract class AppRouter {
           case StockDetailScreen.routeName:
             return ChangeNotifierProvider(
               create: (context) => StockDetailScreenProvider(
-                stock: context
-                    .read<MockProvider>()
-                    .dummyStock, // TODO remove stock
-              ),
-              child: StockDetailScreen(
+                portfolioProvider: portfolioProvider,
                 stock: arguments["stock"],
               ),
+              child: StockDetailScreen(),
             );
           case BuyStockScreen.routeName:
             context.read<BuyStockProvider>().init(
                   mode: arguments["mode"],
-                  stock: arguments["stock"], // TODO remove mock
+                  stock: arguments["stock"],
+                  amount: arguments["amount"] ?? 1,
                 );
             return BuyStockScreen();
           case BuyStockSuccess.routeName:

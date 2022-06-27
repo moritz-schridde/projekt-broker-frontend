@@ -38,9 +38,15 @@ class IconConverter implements JsonConverter<IconData, String> {
 
   @override
   String toJson(IconData iconData) {
-    return _translation.entries
-        .firstWhere((e) => e.value == iconData)
-        .key
-        .toString();
+    print("looking for: ${iconData.toString()}");
+    print("#####");
+    // return _translation.entries
+    //     .firstWhere((e) {
+    //       print(e.value.toString());
+    //       return e.value.toString() == iconData.toString();
+    //     })
+    //     .key
+    //     .toString();
+    return _translation[0].toString();
   }
 }

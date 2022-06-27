@@ -65,12 +65,10 @@ const findOrdersByUserId = (userId) => {
 }
 
 const createOrder = (userId, order) => {
-    orders = findOrdersByUserId(userId);
-    orders.push(order)
-    return orders;
+    _orders = findOrdersByUserId(userId);
+    _orders.push(order)
+    return _orders;
 }
-
-
 
 exports.findOrdersByUserId = findOrdersByUserId
 exports.createOrder = createOrder
