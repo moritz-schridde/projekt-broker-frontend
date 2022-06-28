@@ -88,7 +88,7 @@ OrderDetail _$OrderDetailFromJson(Map<String, dynamic> json) => OrderDetail(
 
 Map<String, dynamic> _$OrderDetailToJson(OrderDetail instance) =>
     <String, dynamic>{
-      'share': instance.stock.toJson(),
+      'share': instance.stock.toJson,
       'value': instance.value,
       'count': instance.amount,
     };
