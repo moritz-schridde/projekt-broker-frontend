@@ -3,12 +3,15 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/order_overview_provider.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/widgets/order_overview_card.dart';
 import 'package:projekt_broker_frontend/widgets/main_bottom_navigation_bar.dart';
 import 'package:projekt_broker_frontend/widgets/main_top_navigation_bar.dart';
 import 'package:provider/provider.dart';
+
+import '../../constants/frontend/ui_assets.dart';
 
 class OrderOverviewScreen extends StatelessWidget {
   static const routeName = "/order-overview";
@@ -158,7 +161,27 @@ class OrderOverviewScreen extends StatelessWidget {
                       );
                     }
                     if (orders.isEmpty) {
-                      return Text("Es gibt kein Orders!");
+                      return SingleChildScrollView(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Lottie.asset(
+                                "${UiAssets.baseLottieImg}/not-found.json",
+                                height: MediaQuery.of(context).size.height / 3,
+                              ),
+                              Text(
+                                "Wir konnten noch keine Orders finden...",
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.headline6?.copyWith(
+                                  color: theme.primaryColor,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
                     }
                     return ListView.separated(
                       separatorBuilder: (context, index) {

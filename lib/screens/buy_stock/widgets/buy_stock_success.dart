@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:projekt_broker_frontend/constants/frontend/ui_theme.dart';
+import 'package:projekt_broker_frontend/screens/home/home_screen.dart';
 import 'package:projekt_broker_frontend/screens/order_overview/order_overview_screen.dart';
 import 'package:projekt_broker_frontend/widgets/rounded_button.dart';
 
@@ -54,8 +55,9 @@ class BuyStockSuccess extends StatelessWidget {
                 ),
                 TextButton(
                   child: Text("Zurück zur Startseite"),
-                  onPressed: () =>
-                      Navigator.of(context).popUntil((route) => route.isFirst),
+                  onPressed: () => Navigator.of(context)
+                      .pushNamedAndRemoveUntil(
+                          HomeScreen.routeName, (route) => false),
                 ),
               ],
             )

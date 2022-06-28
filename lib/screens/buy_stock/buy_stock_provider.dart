@@ -70,11 +70,12 @@ class BuyStockProvider with ChangeNotifier {
   }
 
   Future submit() async {
+    final amount = int.tryParse(textEditControllerStock.text) ?? 1;
     final order = Order(
       info: OrderDetail(
         stock: stock,
-        value: stock.price, // ! buying at the currently known price
-        amount: int.tryParse(textEditControllerStock.text) ?? 1,
+        value: stock.price * amount, // ! buying at the currently known price
+        amount: amount,
       ),
       type: OrderType.values[mode.index],
     );

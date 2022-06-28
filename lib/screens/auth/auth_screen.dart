@@ -32,13 +32,15 @@ class AuthScreen extends StatelessWidget {
       child: SignInScreen(
         providerConfigs: FirebaseAuthService.providerConfigurations,
         headerBuilder: (context, constraints, shrinkOffset) =>
-            buildHeader(constraints, theme),
-        sideBuilder: (context, constraints) => buildHeader(constraints, theme),
+            buildHeader(constraints, theme, true),
+        sideBuilder: (context, constraints) =>
+            buildHeader(constraints, theme, false),
       ),
     );
   }
 
-  Widget buildHeader(BoxConstraints constraints, ThemeData theme) {
+  Widget buildHeader(
+      BoxConstraints constraints, ThemeData theme, bool vertical) {
     return ConstrainedBox(
       constraints: constraints,
       child: Row(
@@ -48,7 +50,7 @@ class AuthScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(60),
             child: Image.asset(
               "${UiAssets.basePathImg}/logo.png",
-              height: constraints.maxHeight * 0.9,
+              height: vertical ? constraints.maxHeight * 0.9 : null,
             ),
           ),
           SizedBox(width: 10),
