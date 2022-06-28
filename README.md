@@ -47,3 +47,11 @@ Das lokale node.js Backend wird in dem Ordner "mock_backend/" gespeichert. Diese
 
 Die Flutter-App wird zunächst über das Firebase Hosting der Google Cloud Platform lokal beim Client heruntergeladen. Danach authentifiziert sich der Nutzer über das Firebase Authentication-Verfahren und kann die App nutzen. Dabei erhält der Nutzer einen einzigartigen und individuellen bearer Token.
 Die App kommuniziert mit dem Backend über bereitgestellte API-Points. Der Nutzer wird im Backend anhand des bearer Tokens, welcher bei jedem http Request im Header mitgesendet wird, identifiziert. Diese Authentifizierung erfolgt mittels OAuth2 und OpenID Connect.
+
+
+## State-Management
+Das State-Management der Flutter App wird nicht klassisch durch Statefull Widgets sondern durch eine Bibliothek namens Provider gelöst. Mittels Provider können generische Objekte, welche keine Widgets sind, in den Widget-Tree aufgehangen werden.
+Die Provider speichern dynamische Daten, welche von den Widgets verwendet und dargestellt werden. Die Provider erhalten die Daten von diversen API Endpunkten und erstellen einen lokalen Cache, um Netzwerk-Anfragen zu minimieren.
+Andere Provider oder Widgets können über den BuildContext auf höhergelegene Provider im Widget-Tree und deren Daten zugreifen. Wenn sich diese Daten im Provider geändert haben oder neu geladen wurden, benachrichtigt dieser die entsprechenden anderen Provider oder Widgets. Daraufhin können diese aktualisiert werden und die neuen Daten verwenden und anzeigen.
+
+<img src="https://drive.google.com/uc?export=view&id=1PbWgr2_y906aX-Tj9_pksxRmLZUxGYqQ" alt="Flutter Architecture" width="300"/>
