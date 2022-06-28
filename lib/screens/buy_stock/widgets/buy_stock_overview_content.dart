@@ -50,14 +50,14 @@ class BuyStockOverviewContent extends StatelessWidget {
                     ],
                     [
                       "Geschätztes Restguthaben",
-                      "${((portfolioProvider.budget ?? 0) + (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
+                      "${((portfolioProvider.budget ?? 0) - (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
                     ],
                   ],
                   // sell only
                   if (buyStockProvider.mode == BuyStockMode.sell)
                     [
                       "Geschätztes Guthaben nach Verkauf",
-                      "${((portfolioProvider.budget ?? 0) - (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
+                      "${((portfolioProvider.budget ?? 0) + (double.tryParse(buyStockProvider.textEditControllerMoney.text) ?? 0))} €",
                     ],
                 ]
                     .map(
