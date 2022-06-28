@@ -37,9 +37,10 @@ class IconConverter implements JsonConverter<IconData, String> {
   }
 
   @override
+  @deprecated
   String toJson(IconData iconData) {
-    print("looking for: ${iconData.toString()}");
-    print("#####");
+    // print("looking for: ${iconData.toString()}");
+    // print("#####");
     // return _translation.entries
     //     .firstWhere((e) {
     //       print(e.value.toString());
