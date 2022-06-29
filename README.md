@@ -13,6 +13,21 @@ Dieses Repository dient als Ablage für das Frontend des Projekts "Trade Empire"
 - Nikolay Vasilev
 - Mert Beri
 
+## Quick Start
+Sind Flutter und Node.js installiert, kann die App und das Backend wie folgt lokal gestartet werden:
+
+Install:
+```bash
+flutter pub get
+cd mock_backend
+npm ci
+```
+Start:
+```bash
+flutter run --release -d chrome
+cd mock_backend && node .
+```
+
 ## Aufbau des Frontends:
 
 Der Flutter-Quellcode befindet sich im Ordner "lib/".
